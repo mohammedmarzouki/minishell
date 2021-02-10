@@ -6,7 +6,7 @@
 #    By: tjmari <tjmari@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/02/09 16:32:57 by tjmari            #+#    #+#              #
-#    Updated: 2021/02/09 17:29:10 by tjmari           ###   ########.fr        #
+#    Updated: 2021/02/10 10:34:08 by tjmari           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,8 @@ LIBFT = libft.a
 
 FLAGS = -Wall -Wextra -Werror
 
-SRCS = ./srcs/minishell.c
+SRCS = ./srcs/minishell.c \
+	./srcs/get_next_line.c
 
 OBJ = $(SRCS:.c=.o)
 
