@@ -6,7 +6,7 @@
 #    By: tjmari <tjmari@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/02/09 17:05:31 by tjmari            #+#    #+#              #
-#    Updated: 2021/02/09 17:10:01 by tjmari           ###   ########.fr        #
+#    Updated: 2021/02/11 17:19:41 by tjmari           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,21 +40,21 @@ $(NAME):
 	@gcc $(FLAGS) $(SRC)
 	@ar rc $(NAME) $(OBJ)
 	@ranlib $(NAME)
-	@echo "\033[1;32mLIBFT: ./libft.a made\n---------------------$(NC)"
+	@echo "$(GREEN)LIBFT: ./$(NAME) made\n---------------------$(NC)"
 
 bonus:
 	@gcc	$(FLAGS) $(SRCB)
 	@ar rc $(NAME) $(OBJB)
 	@ranlib $(NAME)
-	@echo "\033[1;32mLIBFT: ./libft.a _bonus made\n----------------------------$(NC)"
+	@echo "$(GREEN)LIBFT: ./$(NAME) _bonus made\n----------------------------$(NC)"
 
 clean:
 	@rm -f $(OBJ) $(OBJB)
-	@echo "\033[1;33mLIBFT: *.o deleted\n------------------$(NC)"
+	@echo "$(ORANGE)LIBFT: *.o deleted\n------------------$(NC)"
 
 fclean: clean
 	@rm -f $(NAME)
-	@echo "\033[1;31mLIBFT: ./libft.a deleted\n------------------------$(NC)"
+	@echo "$(RED)LIBFT: ./$(NAME) deleted\n------------------------$(NC)"
 
 re: fclean all
 
