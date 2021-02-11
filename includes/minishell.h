@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tjmari <tjmari@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mmarzouk <mmarzouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/09 16:31:49 by tjmari            #+#    #+#             */
-/*   Updated: 2021/02/10 14:24:02 by tjmari           ###   ########.fr       */
+/*   Updated: 2021/02/11 14:32:29 by mmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,23 @@
 # include <sys/errno.h> // errno(2)
 # include "../libft/libft.h"
 
-int		get_next_line(int fd, char **line);
+typedef struct s_tool
+{
+	int			cmd_i;
+}				t_tool;
+
+typedef	struct	s_cmd
+{
+	char		*cmd;
+	char		*flg;
+	char		*args;
+	char		*sep;
+}				t_cmd;
+
+t_cmd			*g_cmd;
+t_tool			g_tool;
+
+int				get_next_line(int fd, char **line);
+void			init_s_cmd(void);
 
 #endif
