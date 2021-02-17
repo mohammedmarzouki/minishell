@@ -6,7 +6,7 @@
 /*   By: tjmari <tjmari@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/09 16:31:49 by tjmari            #+#    #+#             */
-/*   Updated: 2021/02/11 17:21:06 by tjmari           ###   ########.fr       */
+/*   Updated: 2021/02/14 12:50:00 by tjmari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,19 @@ typedef	struct	s_cmd
 t_cmd			*g_cmd;
 t_tool			g_tool;
 
-int				get_next_line(int fd, char **line);
-void			init_s_cmd(void);
+/*
+** GENERAL
+*/
+void	ps1(void);
+
+/*
+** PARSING
+*/
+int		get_next_line(int fd, char **line);
+void	init_s_cmd(void);
+
+/*
+** EXECUTING
+*/
 
 #endif
