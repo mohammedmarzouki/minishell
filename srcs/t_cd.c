@@ -6,13 +6,13 @@
 /*   By: tjmari <tjmari@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/18 12:03:42 by tjmari            #+#    #+#             */
-/*   Updated: 2021/02/18 15:36:38 by tjmari           ###   ########.fr       */
+/*   Updated: 2021/02/18 17:34:34 by tjmari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void    ft_cd(void)
+void	ft_cd(void)
 {
 	if (chdir(g_cmd[0].args) != 0)
 		ft_putendl_fd(strerror(errno), 1);

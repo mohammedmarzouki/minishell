@@ -6,13 +6,13 @@
 /*   By: tjmari <tjmari@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/18 12:05:08 by tjmari            #+#    #+#             */
-/*   Updated: 2021/02/18 17:21:41 by tjmari           ###   ########.fr       */
+/*   Updated: 2021/02/18 17:36:29 by tjmari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void    ft_unset(void)
+void	ft_unset(void)
 {
-    return ;
+	return ;
 }

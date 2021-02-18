@@ -6,14 +6,14 @@
 /*   By: tjmari <tjmari@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/18 12:04:45 by tjmari            #+#    #+#             */
-/*   Updated: 2021/02/18 16:55:00 by tjmari           ###   ########.fr       */
+/*   Updated: 2021/02/18 17:37:59 by tjmari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void    ft_env(void)
+void	ft_env(void)
 {
-	while(*g_tool.envp)
-        ft_putendl_fd(*g_tool.envp++, 1);
+	while (*g_tool.envp)
+		ft_putendl_fd(*g_tool.envp++, 1);
 }

@@ -6,7 +6,7 @@
 /*   By: tjmari <tjmari@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/09 16:31:49 by tjmari            #+#    #+#             */
-/*   Updated: 2021/02/18 17:21:48 by tjmari           ###   ########.fr       */
+/*   Updated: 2021/02/18 17:37:39 by tjmari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,24 +46,24 @@ t_tool			g_tool;
 /*
 ** GENERAL
 */
-void	ps1(void);
+void			ps1(void);
 
 /*
 ** PARSING
 */
-int		get_next_line(int fd, char **line);
-void	init_s_cmd(void);
+int				get_next_line(int fd, char **line);
+void			init_s_cmd(void);
 
 /*
 ** EXECUTING
 */
-void	executing(void);
-void    ft_echo(void);
-void    ft_cd(void);
-void    ft_pwd(void);
-void    ft_export(void);
-void    ft_unset(void);
-void    ft_env(void);
-void    ft_exit(void);
+void			executing(void);
+void			ft_echo(void);
+void			ft_cd(void);
+void			ft_pwd(void);
+void			ft_export(void);
+void			ft_unset(void);
+void			ft_env(void);
+void			ft_exit(void);
 
 #endif
