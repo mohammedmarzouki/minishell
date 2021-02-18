@@ -1,18 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   u_prompt.c                                         :+:      :+:    :+:   */
+/*   t_env.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tjmari <tjmari@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/02/14 12:37:31 by tjmari            #+#    #+#             */
-/*   Updated: 2021/02/18 17:36:48 by tjmari           ###   ########.fr       */
+/*   Created: 2021/02/18 12:04:45 by tjmari            #+#    #+#             */
+/*   Updated: 2021/02/18 17:37:59 by tjmari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void	ps1(void)
+void	ft_env(void)
 {
-	ft_putstr_fd("\033[1;33mminishell$\033[0m ", 1);
+	while (*g_tool.envp)
+		ft_putendl_fd(*g_tool.envp++, 1);
 }

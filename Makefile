@@ -6,7 +6,7 @@
 #    By: tjmari <tjmari@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/02/09 16:32:57 by tjmari            #+#    #+#              #
-#    Updated: 2021/02/14 12:40:31 by tjmari           ###   ########.fr        #
+#    Updated: 2021/02/18 14:56:20 by tjmari           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,14 +20,17 @@ LIBFT = libft.a
 
 FLAGS = -Wall -Wextra -Werror
 
+INCLUDES = ./includes/minishell.h \
+
 SRCS = ./srcs/minishell.c \
 	./srcs/get_next_line.c ./srcs/u_prompt.c \
+	./srcs/t_echo.c ./srcs/t_cd.c ./srcs/t_pwd.c ./srcs/t_export.c ./srcs/t_unset.c ./srcs/t_env.c ./srcs/t_exit.c \
 
 OBJ = $(SRCS:.c=.o)
 
 all: $(NAME)
 
-$(NAME):
+$(NAME): $(INCLUDES) $(SRCS)
 	@make -C ./libft
 	@mv ./libft/$(LIBFT) ./
 	@echo "$(GREEN)MINISHELL: ./$(LIBFT) moved to $(NAME)\n---------------------------------------$(NC)"
@@ -35,6 +38,7 @@ $(NAME):
 	@echo "$(GREEN)MINISHELL: ./$(NAME) made\n---------------------------$(NC)"
 	@sleep 1
 	@clear
+	@./minishell
 
 san:
 	@make -C ./libft

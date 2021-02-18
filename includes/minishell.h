@@ -6,7 +6,7 @@
 /*   By: tjmari <tjmari@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/09 16:31:49 by tjmari            #+#    #+#             */
-/*   Updated: 2021/02/14 12:50:00 by tjmari           ###   ########.fr       */
+/*   Updated: 2021/02/18 17:37:39 by tjmari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,16 @@
 # include <signal.h> // signal(3), kill(2)
 # include <sys/stat.h> // stat(2), lstat(2), fstat(2)
 # include <dirent.h> // opendir(3), readdir(3), closedir(3)
-# include <stdio.h> // strerror(3)
+# include <stdio.h>
+# include <string.h> // strerror(3)
 # include <sys/errno.h> // errno(2)
 # include "../libft/libft.h"
 
 typedef	struct	s_tool
 {
 	int			cmd_i;
+	char		cwd[1024];
+	char		**envp;
 }				t_tool;
 
 typedef	struct	s_cmd
@@ -37,22 +40,30 @@ typedef	struct	s_cmd
 	char		*sep;
 }				t_cmd;
 
-t_cmd			*g_cmd;
+t_cmd			g_cmd[1];
 t_tool			g_tool;
 
 /*
 ** GENERAL
 */
-void	ps1(void);
+void			ps1(void);
 
 /*
 ** PARSING
 */
-int		get_next_line(int fd, char **line);
-void	init_s_cmd(void);
+int				get_next_line(int fd, char **line);
+void			init_s_cmd(void);
 
 /*
 ** EXECUTING
 */
+void			executing(void);
+void			ft_echo(void);
+void			ft_cd(void);
+void			ft_pwd(void);
+void			ft_export(void);
+void			ft_unset(void);
+void			ft_env(void);
+void			ft_exit(void);
 
 #endif
