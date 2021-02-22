@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tjmari <tjmari@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mmarzouk <mmarzouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/09 16:33:25 by tjmari            #+#    #+#             */
-/*   Updated: 2021/02/18 17:28:11 by tjmari           ###   ########.fr       */
+/*   Updated: 2021/02/22 12:02:01 by mmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,9 @@ void	tj_cmd(void)
 {
 	g_cmd[0].cmd = "exit";
 	g_cmd[0].args = "15";
-	g_cmd[0].flg = NULL;
 	g_cmd[0].sep = NULL;
+	g_cmd[0].red = NULL;
+	g_cmd[0].file = NULL;
 }
 
 void	executing(void)
@@ -46,13 +47,13 @@ int		main(int argc, char **argv, char **envp)
 	(void)argc;
 	(void)argv;
 	g_tool.envp = envp;
-	tj_cmd();
+	// tj_cmd();
 	while (1)
 	{
 		ps1();
 		get_next_line(0, &input);
-		// parsing();
-		executing();
+		parsing(input);
+		// executing();
 		free(input);
 	}
 	return (0);

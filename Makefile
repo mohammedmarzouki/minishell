@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tjmari <tjmari@student.42.fr>              +#+  +:+       +#+         #
+#    By: mmarzouk <mmarzouk@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/02/09 16:32:57 by tjmari            #+#    #+#              #
-#    Updated: 2021/02/18 14:56:20 by tjmari           ###   ########.fr        #
+#    Updated: 2021/02/22 12:01:22 by mmarzouk         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,9 @@ INCLUDES = ./includes/minishell.h \
 
 SRCS = ./srcs/minishell.c \
 	./srcs/get_next_line.c ./srcs/u_prompt.c \
-	./srcs/t_echo.c ./srcs/t_cd.c ./srcs/t_pwd.c ./srcs/t_export.c ./srcs/t_unset.c ./srcs/t_env.c ./srcs/t_exit.c \
+	./srcs/t_echo.c ./srcs/t_cd.c ./srcs/t_pwd.c ./srcs/t_export.c \
+	./srcs/t_unset.c ./srcs/t_env.c ./srcs/t_exit.c \
+	./srcs/m_parsing.c
 
 OBJ = $(SRCS:.c=.o)
 

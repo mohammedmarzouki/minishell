@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tjmari <tjmari@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mmarzouk <mmarzouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/09 16:31:49 by tjmari            #+#    #+#             */
-/*   Updated: 2021/02/18 17:37:39 by tjmari           ###   ########.fr       */
+/*   Updated: 2021/02/22 12:00:04 by mmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,17 +27,18 @@
 
 typedef	struct	s_tool
 {
-	int			cmd_i;
-	char		cwd[1024];
-	char		**envp;
+	int			cmd_i;//command index / count
+	char		cwd[1024];//what is that ?
+	char		**envp;// ????
 }				t_tool;
 
 typedef	struct	s_cmd
 {
 	char		*cmd;
-	char		*flg;
 	char		*args;
 	char		*sep;
+	char		*red;
+	char		*file;
 }				t_cmd;
 
 t_cmd			g_cmd[1];
@@ -51,6 +52,7 @@ void			ps1(void);
 /*
 ** PARSING
 */
+void			parsing(char *s);
 int				get_next_line(int fd, char **line);
 void			init_s_cmd(void);
 
