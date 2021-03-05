@@ -6,7 +6,7 @@
 /*   By: mmarzouk <mmarzouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/09 16:31:49 by tjmari            #+#    #+#             */
-/*   Updated: 2021/02/22 12:00:04 by mmarzouk         ###   ########.fr       */
+/*   Updated: 2021/03/05 15:26:46 by mmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@
 # include <sys/errno.h> // errno(2)
 # include "../libft/libft.h"
 
+#define HI printf("HI\n");
+
 typedef	struct	s_tool
 {
 	int			cmd_i;//command index / count
@@ -35,10 +37,10 @@ typedef	struct	s_tool
 typedef	struct	s_cmd
 {
 	char		*cmd;
-	char		*args;
+	char		**args;
 	char		*sep;
-	char		*red;
-	char		*file;
+	char		**red;
+	char		**file;
 }				t_cmd;
 
 t_cmd			g_cmd[1];
@@ -55,7 +57,15 @@ void			ps1(void);
 void			parsing(char *s);
 int				get_next_line(int fd, char **line);
 void			init_s_cmd(void);
-
+void			ft_crop(char *src ,char **des ,int start ,int end);
+void			nfree(void *s);
+int				same(char *s1, char *s2);
+void			doublefree(char **ptr);
+int				doublecount(char **s);
+int				is_red(char *s);
+char			**append_line(char **s, char *line);
+int				a_word(char *s);
+void			ft_crop(char *src ,char **des ,int start ,int end);
 /*
 ** EXECUTING
 */
