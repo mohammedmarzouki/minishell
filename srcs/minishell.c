@@ -6,20 +6,20 @@
 /*   By: mmarzouk <mmarzouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/09 16:33:25 by tjmari            #+#    #+#             */
-/*   Updated: 2021/03/05 16:55:06 by mmarzouk         ###   ########.fr       */
+/*   Updated: 2021/03/16 12:39:00 by mmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void	tj_cmd(void)
-{
-	g_cmd[0].cmd = "exit";
-	g_cmd[0].args = "15";
-	g_cmd[0].sep = NULL;
-	g_cmd[0].red = NULL;
-	g_cmd[0].file = NULL;
-}
+// void	tj_cmd(void)
+// {
+// 	// g_cmd[0].cmd = "exit";
+// 	// g_cmd[0].args = "15";
+// 	// g_cmd[0].sep = NULL;
+// 	// g_cmd[0].red = NULL;
+// 	// g_cmd[0].file = NULL;
+// }
 
 void	executing(void)
 {
@@ -52,7 +52,7 @@ int		main(int argc, char **argv, char **envp)
 	{
 		ps1();
 		get_next_line(0, &input);
-		// parsing(input);
+		parsing(input);
 		// executing();
 		free(input);
 	}

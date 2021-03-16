@@ -6,7 +6,7 @@
 /*   By: mmarzouk <mmarzouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/09 16:31:49 by tjmari            #+#    #+#             */
-/*   Updated: 2021/03/05 15:26:46 by mmarzouk         ###   ########.fr       */
+/*   Updated: 2021/03/16 12:37:08 by mmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,9 @@
 
 typedef	struct	s_tool
 {
-	int			cmd_i;//command index / count
-	char		cwd[1024];//what is that ?
-	char		**envp;// ????
+	int			cmd_i;
+	char		cwd[1024];
+	char		**envp;
 }				t_tool;
 
 typedef	struct	s_cmd
@@ -66,6 +66,7 @@ int				is_red(char *s);
 char			**append_line(char **s, char *line);
 int				a_word(char *s);
 void			ft_crop(char *src ,char **des ,int start ,int end);
+char			**split_it(char *s);
 /*
 ** EXECUTING
 */

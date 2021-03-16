@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   t_echo.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tjmari <tjmari@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mmarzouk <mmarzouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/18 12:04:33 by tjmari            #+#    #+#             */
-/*   Updated: 2021/02/18 17:34:58 by tjmari           ###   ########.fr       */
+/*   Updated: 2021/03/16 12:39:33 by mmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,5 @@
 
 void	ft_echo(void)
 {
-	ft_putendl_fd(g_cmd[0].args, 1);
+	// ft_putendl_fd(g_cmd[0].args, 1);
 }
