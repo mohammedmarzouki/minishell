@@ -6,20 +6,11 @@
 /*   By: mmarzouk <mmarzouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/09 16:33:25 by tjmari            #+#    #+#             */
-/*   Updated: 2021/03/16 12:39:00 by mmarzouk         ###   ########.fr       */
+/*   Updated: 2021/03/16 16:11:36 by mmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
-
-// void	tj_cmd(void)
-// {
-// 	// g_cmd[0].cmd = "exit";
-// 	// g_cmd[0].args = "15";
-// 	// g_cmd[0].sep = NULL;
-// 	// g_cmd[0].red = NULL;
-// 	// g_cmd[0].file = NULL;
-// }
+#include "../includes/minishell.h" 
 
 void	executing(void)
 {
@@ -47,7 +38,6 @@ int		main(int argc, char **argv, char **envp)
 	(void)argc;
 	(void)argv;
 	g_tool.envp = envp;
-	// tj_cmd();
 	while (1)
 	{
 		ps1();

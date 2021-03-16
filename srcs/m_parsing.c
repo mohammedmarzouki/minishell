@@ -6,7 +6,7 @@
 /*   By: mmarzouk <mmarzouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/18 09:15:36 by mmarzouk          #+#    #+#             */
-/*   Updated: 2021/03/16 12:37:42 by mmarzouk         ###   ########.fr       */
+/*   Updated: 2021/03/16 16:15:28 by mmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,24 +63,24 @@ char    **split_it(char *s)
 
 void parsing(char *s)
 {
-    char **sp;
+    char    **sp;
 
     sp = split_it(s);
     for (int j = 0; sp[j]; j++)
         printf("|%s|\n", sp[j]);
-
+    // assign(sp);
 }
 
-int     redirection(char *s,int i)
-{
-    if (i == 3)
-    {
-        g_cmd->red = append_line(g_cmd->red,ft_substr(s ,0,2));
-        return(2);
-    }
-    g_cmd->red = append_line(g_cmd->red,ft_substr(s ,0,1));
-    return(1);
-}
+// int     redirection(char *s,int i)
+// {
+//     if (i == 3)
+//     {
+//         g_cmd->red = append_line(g_cmd->red,ft_substr(s ,0,2));
+//         return(2);
+//     }
+//     g_cmd->red = append_line(g_cmd->red,ft_substr(s ,0,1));
+//     return(1);
+// }
 // redi
 // cmd
 // space

@@ -6,7 +6,7 @@
 /*   By: mmarzouk <mmarzouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/09 16:31:49 by tjmari            #+#    #+#             */
-/*   Updated: 2021/03/16 12:37:08 by mmarzouk         ###   ########.fr       */
+/*   Updated: 2021/03/16 16:12:57 by mmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ typedef	struct	s_cmd
 	char		**file;
 }				t_cmd;
 
-t_cmd			g_cmd[1];
+t_cmd			*g_cmd;
 t_tool			g_tool;
 
 /*
@@ -62,7 +62,7 @@ void			nfree(void *s);
 int				same(char *s1, char *s2);
 void			doublefree(char **ptr);
 int				doublecount(char **s);
-int				is_red(char *s);
+// int				is_red(char *s);
 char			**append_line(char **s, char *line);
 int				a_word(char *s);
 void			ft_crop(char *src ,char **des ,int start ,int end);

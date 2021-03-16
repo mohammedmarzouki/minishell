@@ -6,28 +6,28 @@
 /*   By: mmarzouk <mmarzouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/05 12:53:53 by mmarzouk          #+#    #+#             */
-/*   Updated: 2021/03/05 16:29:09 by mmarzouk         ###   ########.fr       */
+/*   Updated: 2021/03/16 16:13:22 by mmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int     is_red(char *s)
-{
-    // < 1
-    // > 2
-    // >> 3
-    if(*s == '<')
-        return(1);
-    else if (*s == '>')
-    {
-        if(s[1] != '>')
-            return(2);
-        else 
-            return (3);
-    }
-    return (0);
-}
+// int     is_red(char *s)
+// {
+//     // < 1
+//     // > 2
+//     // >> 3
+//     if(*s == '<')
+//         return(1);
+//     else if (*s == '>')
+//     {
+//         if(s[1] != '>')
+//             return(2);
+//         else 
+//             return (3);
+//     }
+//     return (0);
+// }
 
 char **append_line(char **s, char *line)
 {
