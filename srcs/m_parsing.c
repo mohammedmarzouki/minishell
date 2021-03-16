@@ -6,7 +6,7 @@
 /*   By: mmarzouk <mmarzouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/18 09:15:36 by mmarzouk          #+#    #+#             */
-/*   Updated: 2021/03/16 16:15:28 by mmarzouk         ###   ########.fr       */
+/*   Updated: 2021/03/16 17:13:15 by mmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,11 @@ char    **split_it(char *s)
         else if (s[i] == '"' && flag) {
             flag = 0;
         }
-        else if(s[i] == ' ' && !flag)
+        else if((s[i] == ' ' || s[i] == '|' || s[i] == ';' || s[i] == '>') && !flag)
         {
             sp = append_line(sp,ft_substr(s,start,(i - start)));
             start = i;
-			while (s[i] && s[i + 1] == ' ')
+			while (s[i] && s[i + 1] == ' ' && s[i] == ' ')
 				i++;
 		}
         if(s[i] == '\\' && s[i+1]) {
@@ -66,9 +66,7 @@ void parsing(char *s)
     char    **sp;
 
     sp = split_it(s);
-    for (int j = 0; sp[j]; j++)
-        printf("|%s|\n", sp[j]);
-    // assign(sp);
+    assign(sp);
 }
 
 // int     redirection(char *s,int i)
