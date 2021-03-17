@@ -6,7 +6,7 @@
 /*   By: mmarzouk <mmarzouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/18 09:15:36 by mmarzouk          #+#    #+#             */
-/*   Updated: 2021/03/16 17:13:15 by mmarzouk         ###   ########.fr       */
+/*   Updated: 2021/03/17 11:23:46 by mmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,13 +38,13 @@ char    **split_it(char *s)
         if(s[i] == '"' && !flag) {
             flag = 1;
         }
-        else if (s[i] == '\'' && flag) {
+        else if (s[i] == '\'' && !flag) {
 			single_q(s,&i);
 		}
         else if (s[i] == '"' && flag) {
             flag = 0;
         }
-        else if((s[i] == ' ' || s[i] == '|' || s[i] == ';' || s[i] == '>') && !flag)
+        else if((s[i] == ' ' || s[i] == '|' || s[i] == ';' || s[i] == '>' || s[i] == '<') && !flag)
         {
             sp = append_line(sp,ft_substr(s,start,(i - start)));
             start = i;
