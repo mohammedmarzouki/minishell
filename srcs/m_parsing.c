@@ -6,7 +6,7 @@
 /*   By: mmarzouk <mmarzouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/18 09:15:36 by mmarzouk          #+#    #+#             */
-/*   Updated: 2021/03/27 11:27:14 by mmarzouk         ###   ########.fr       */
+/*   Updated: 2021/04/02 15:40:43 by mmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,8 +95,8 @@ void parsing(char *s)
 
     sp = split_it(s);
     i = cmds(sp);
-    printf("|||%d|||\n",i);
-    assign(sp);
+    // printf("|||%d|||\n",i);
+    // assign(sp);
 }
 
 // int     redirection(char *s,int i)

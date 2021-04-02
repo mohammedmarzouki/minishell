@@ -6,7 +6,7 @@
 /*   By: mmarzouk <mmarzouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 16:48:56 by mmarzouk          #+#    #+#             */
-/*   Updated: 2021/03/30 10:55:59 by mmarzouk         ###   ########.fr       */
+/*   Updated: 2021/04/02 15:36:19 by mmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ void	assign(char **sp)
 			j++;
 		if(sp[i][j] == '<' || sp[i][j] == '>')
 			redis(sp, &i);
+		else if (sp[i][j] == '|' || sp[i][j] == ';')
+			g_tool.cmd_i++;
 		else
 			add_args(sp);
 		printf("|%s|\n", sp[i]);
