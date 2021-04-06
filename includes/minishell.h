@@ -62,7 +62,7 @@ void			nfree(void *s);
 int				same(char *s1, char *s2);
 void			doublefree(char **ptr);
 int				doublecount(char **s);
-// int				is_red(char *s);
+int				itis(char *s);
 char			**append_line(char **s, char *line);
 int				a_word(char *s);
 void			ft_crop(char *src ,char **des ,int start ,int end);

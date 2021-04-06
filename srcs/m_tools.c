@@ -12,6 +12,23 @@
 
 #include "../includes/minishell.h"
 
+int		itis(char *s)
+{
+	int i;
+
+	i = 0;
+	while(s[i] && s[i] == ' ')
+		i++;
+	if (s[i] == '<' || s[i] == '>')
+		return(1);
+	else if (s[i] == ';')
+		return(2);
+	else if (s[i] == '|')
+		return(3);
+	else
+		return(0);
+}
+
 void    ft_crop(char *src ,char **des ,int start ,int len)
 {
     nfree(*des);
