@@ -6,7 +6,7 @@
 /*   By: mmarzouk <mmarzouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/05 12:15:30 by mmarzouk          #+#    #+#             */
-/*   Updated: 2021/03/05 16:27:07 by mmarzouk         ###   ########.fr       */
+/*   Updated: 2021/04/08 14:02:35 by mmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,15 @@ int		itis(char *s)
 	while(s[i] && s[i] == ' ')
 		i++;
 	if (s[i] == '<' || s[i] == '>')
-		return(1);
+		return (1);
 	else if (s[i] == ';')
-		return(2);
+		return (2);
 	else if (s[i] == '|')
-		return(3);
+		return (3);
+	else if(!s[i])
+		return (-1);
 	else
-		return(0);
+		return (0);
 }
 
 void    ft_crop(char *src ,char **des ,int start ,int len)

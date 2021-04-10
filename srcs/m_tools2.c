@@ -6,27 +6,15 @@
 /*   By: mmarzouk <mmarzouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/05 12:53:53 by mmarzouk          #+#    #+#             */
-/*   Updated: 2021/03/16 16:13:22 by mmarzouk         ###   ########.fr       */
+/*   Updated: 2021/04/08 14:20:59 by mmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-// int     is_red(char *s)
+// int chk_err(char **sp)
 // {
-//     // < 1
-//     // > 2
-//     // >> 3
-//     if(*s == '<')
-//         return(1);
-//     else if (*s == '>')
-//     {
-//         if(s[1] != '>')
-//             return(2);
-//         else 
-//             return (3);
-//     }
-//     return (0);
+//     return(1);
 // }
 
 char **append_line(char **s, char *line)
@@ -46,16 +34,4 @@ char **append_line(char **s, char *line)
     doublefree (s);
     nfree (line);
     return (new);
-}
-
-int     a_word(char *s)
-{
-    int i;
-
-    i = 0;
-    while(s[i] && s[i] == ' ')
-        i++;
-    while (s[i] && s[i] != ' ')
-        i++;
-    return(i);
 }

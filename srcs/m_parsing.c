@@ -6,7 +6,7 @@
 /*   By: mmarzouk <mmarzouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/18 09:15:36 by mmarzouk          #+#    #+#             */
-/*   Updated: 2021/04/02 15:40:43 by mmarzouk         ###   ########.fr       */
+/*   Updated: 2021/04/10 16:10:42 by mmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,19 @@
 
 static void single_q(char *s,int *i)
 {
+    int f;
+
+    f = 1;
 	while(s[(*i)++])
 	{
 		if(s[(*i)] == '\'')
+        {
+            f  = 0;
 			break;
+        }
 	}
+    if(f)
+        printf("parse error : close the quotes !!\n");
 }
 
 char    **split_it(char *s)
@@ -67,6 +75,8 @@ char    **split_it(char *s)
 			i++;
     }
 	sp = append_line(sp,ft_substr(s,start,(i - start)));
+    if(flag == 1)
+        printf("parse error : close the quotes !!\n");
     return(sp);
 }
 int cmds(char **s)
@@ -88,15 +98,18 @@ int cmds(char **s)
     }
     return(c);
 }
-void parsing(char *s)
+int parsing(char *s)
 {
     char    **sp;
     int i;
 
     sp = split_it(s);
     i = cmds(sp);
+    // if (!chk_err(sp))
+    //     return(0);
     // printf("|||%d|||\n",i);
-    // assign(sp);
+    assign(sp);
+    return (1);
 }
 
 // int     redirection(char *s,int i)

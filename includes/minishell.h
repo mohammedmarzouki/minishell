@@ -6,7 +6,7 @@
 /*   By: mmarzouk <mmarzouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/09 16:31:49 by tjmari            #+#    #+#             */
-/*   Updated: 2021/04/02 15:37:08 by mmarzouk         ###   ########.fr       */
+/*   Updated: 2021/04/08 12:15:36 by mmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ typedef	struct	s_tool
 	int			cmd_i;
 	char		cwd[1024];
 	char		**envp;
-	t_cmd		*g_cmd;
 }				t_tool;
 
 typedef	struct	s_cmd
@@ -44,6 +43,7 @@ typedef	struct	s_cmd
 	char		**file;
 }				t_cmd;
 
+t_cmd			*g_cmd;
 t_tool			g_tool;
 
 /*
@@ -54,7 +54,7 @@ void			ps1(void);
 /*
 ** PARSING
 */
-void			parsing(char *s);
+int				parsing(char *s);
 int				get_next_line(int fd, char **line);
 void			init_s_cmd(t_cmd *cmd);
 void			ft_crop(char *src ,char **des ,int start ,int end);
