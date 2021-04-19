@@ -6,7 +6,7 @@
 /*   By: mmarzouk <mmarzouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/18 09:15:36 by mmarzouk          #+#    #+#             */
-/*   Updated: 2021/04/10 16:10:42 by mmarzouk         ###   ########.fr       */
+/*   Updated: 2021/04/16 14:20:28 by mmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,10 @@ char    **split_it(char *s)
             flag = 2;
             sp = append_line(sp,ft_substr(s,start,(i - start)));
             start = i;
+            while(s[i] == '>' || s[i] == '<')
+                i++;
+            sp = append_line(sp,ft_substr(s,start,(i - start)));
+            start = i;
 		}
         if(s[i] == '\\' && s[i+1]) {
             i += 2;
@@ -105,8 +109,7 @@ int parsing(char *s)
 
     sp = split_it(s);
     i = cmds(sp);
-    // if (!chk_err(sp))
-    //     return(0);
+    printf("......%d.....\n",chk_err(sp));
     // printf("|||%d|||\n",i);
     assign(sp);
     return (1);

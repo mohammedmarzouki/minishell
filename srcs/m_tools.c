@@ -6,13 +6,13 @@
 /*   By: mmarzouk <mmarzouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/05 12:15:30 by mmarzouk          #+#    #+#             */
-/*   Updated: 2021/04/08 14:02:35 by mmarzouk         ###   ########.fr       */
+/*   Updated: 2021/04/12 12:48:31 by mmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int		itis(char *s)
+int		itis(char *s) 
 {
 	int i;
 
