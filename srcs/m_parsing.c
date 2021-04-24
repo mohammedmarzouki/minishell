@@ -6,7 +6,7 @@
 /*   By: mmarzouk <mmarzouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/18 09:15:36 by mmarzouk          #+#    #+#             */
-/*   Updated: 2021/04/16 14:20:28 by mmarzouk         ###   ########.fr       */
+/*   Updated: 2021/04/23 12:20:10 by mmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ char    **split_it(char *s)
         else if (s[i] == '"' && flag) {
             flag = 0;
         }
-        else if((s[i] == ' ' || s[i] == '|' || s[i] == ';' ) && flag != 1)
+        else if(s[i] == ' '  && flag != 1)
         {
             flag = 0;
             sp = append_line(sp,ft_substr(s,start,(i - start)));
@@ -62,6 +62,17 @@ char    **split_it(char *s)
 				i++;
             start = i;
 		}
+        else if(( s[i] == '|' || s[i] == ';') && flag != 1)
+        {
+            flag = 0;
+            sp = append_line(sp,ft_substr(s,start,(i - start)));
+            start = i;
+			while (s[i ] == ';' || s[i] == '|')
+				i++;
+            sp = append_line(sp,ft_substr(s,start,(i - start)));
+            start = i;
+
+        }
         else if((s[i] == '>' || s[i] == '<' ) && !flag)
         {
             flag = 2;
@@ -80,7 +91,11 @@ char    **split_it(char *s)
     }
 	sp = append_line(sp,ft_substr(s,start,(i - start)));
     if(flag == 1)
+    {
+        doublefree(sp);
         printf("parse error : close the quotes !!\n");
+        return(NULL);
+    }
     return(sp);
 }
 int cmds(char **s)
@@ -108,6 +123,8 @@ int parsing(char *s)
     int i;
 
     sp = split_it(s);
+    if(!sp)
+        return(0);
     i = cmds(sp);
     printf("......%d.....\n",chk_err(sp));
     // printf("|||%d|||\n",i);

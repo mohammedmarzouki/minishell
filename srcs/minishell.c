@@ -6,7 +6,7 @@
 /*   By: mmarzouk <mmarzouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/09 16:33:25 by tjmari            #+#    #+#             */
-/*   Updated: 2021/04/12 11:57:02 by mmarzouk         ###   ########.fr       */
+/*   Updated: 2021/04/23 11:52:38 by mmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,8 @@ int		main(int argc, char **argv, char **envp)
 		ps1();
 		get_next_line(0, &input);
 		if (!parsing(input))
-			break;
+			printf("no exec\n");
+
 			// executing();
 		free(input);
 	}

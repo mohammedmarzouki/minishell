@@ -6,7 +6,7 @@
 /*   By: mmarzouk <mmarzouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/05 12:53:53 by mmarzouk          #+#    #+#             */
-/*   Updated: 2021/04/12 14:47:02 by mmarzouk         ###   ########.fr       */
+/*   Updated: 2021/04/23 12:00:48 by mmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int chk_err(char **sp)
         }
         else if (value == 3)// |
         {
-            if(!flag || !sp[i+1])
+            if(!flag  || ((itis(sp[i+1]) == -1) && !sp[i + 2]))            
                 return (-1);
             else
             {

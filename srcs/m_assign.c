@@ -6,7 +6,7 @@
 /*   By: mmarzouk <mmarzouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 16:48:56 by mmarzouk          #+#    #+#             */
-/*   Updated: 2021/04/08 14:19:21 by mmarzouk         ###   ########.fr       */
+/*   Updated: 2021/04/23 12:12:16 by mmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	assign(char **sp)
 		// 	g_tool.cmd_i++;
 		// else
 		// 	add_args(sp);
-		printf("|%s|\n", sp[i]);
+		printf("[%s]\n", sp[i]);
 		i++;
 	}
 }
