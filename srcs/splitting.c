@@ -6,7 +6,7 @@
 /*   By: mmarzouk <mmarzouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/25 15:40:21 by mmarzouk          #+#    #+#             */
-/*   Updated: 2021/04/25 16:44:24 by mmarzouk         ###   ########.fr       */
+/*   Updated: 2021/04/25 16:50:50 by mmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ char    **split_it(char *s, char **sp, int i, int start)
 		{
 			write_it(&i, &start, &sp, s);
 			i++;
+			start =  i;
 		}
 		else
 			i++;
