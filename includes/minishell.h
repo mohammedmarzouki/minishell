@@ -6,7 +6,7 @@
 /*   By: mmarzouk <mmarzouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/09 16:31:49 by tjmari            #+#    #+#             */
-/*   Updated: 2021/04/12 10:14:57 by mmarzouk         ###   ########.fr       */
+/*   Updated: 2021/04/25 16:46:04 by mmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int				itis(char *s);
 char			**append_line(char **s, char *line);
 int				a_word(char *s);
 void			ft_crop(char *src ,char **des ,int start ,int end);
-char			**split_it(char *s);
+char			**split_it(char *s, char **sp, int i, int start);
 void			assign(char **sp);
 int				chk_err(char **sp);
 

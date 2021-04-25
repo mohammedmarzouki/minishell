@@ -6,7 +6,7 @@
 #    By: mmarzouk <mmarzouk@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/02/09 16:32:57 by tjmari            #+#    #+#              #
-#    Updated: 2021/03/16 16:58:22 by mmarzouk         ###   ########.fr        #
+#    Updated: 2021/04/25 16:47:47 by mmarzouk         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ INCLUDES = ./includes/minishell.h \
 SRCS = ./srcs/minishell.c \
 	./srcs/get_next_line.c ./srcs/u_prompt.c \
 	./srcs/m_parsing.c ./srcs/m_tools.c ./srcs/m_tools2.c \
-	./srcs/m_assign.c \
+	./srcs/m_assign.c ./srcs/splitting.c\
 	\
 	./srcs/t_echo.c ./srcs/t_cd.c ./srcs/t_pwd.c ./srcs/t_export.c \
 	./srcs/t_unset.c ./srcs/t_env.c ./srcs/t_exit.c \
