@@ -6,7 +6,7 @@
 /*   By: mmarzouk <mmarzouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/25 15:40:21 by mmarzouk          #+#    #+#             */
-/*   Updated: 2021/04/25 16:50:50 by mmarzouk         ###   ########.fr       */
+/*   Updated: 2021/04/26 15:39:25 by mmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,19 @@ static  void    write_it(int *i, int *start, char ***sp, char *s)
 		(*start) = (*i);
 	}
 }
-
+static void redir(int *i, int *start, char ***sp, char *s)
+{
+	write_it(i, start, sp, s);
+	while(s[(*i)] == '>' || s[(*i)] == '<')
+		(*i)++;
+	write_it(i, start, sp, s);
+}
+static void shorten(int *i, int *start, char ***sp, char *s)
+{
+	write_it(i, start, sp, s);
+	(*i)++;
+	write_it(i, start, sp, s);
+}
 char    **split_it(char *s, char **sp, int i, int start)
 {
 	while (s[i])
@@ -58,17 +70,15 @@ char    **split_it(char *s, char **sp, int i, int start)
 		else if(s[i] == '\\' && s[i + 1])
 			i += 2;
 		else if(s[i] == ';' || s[i] == '|')
-		{
-			write_it(&i, &start, &sp, s);
-			i++;
-			write_it(&i, &start, &sp, s);
-		}
+			shorten(&i, &start, &sp, s);
 		else if(s[i] == ' ')
 		{
 			write_it(&i, &start, &sp, s);
 			i++;
 			start =  i;
 		}
+		else if(s[i] == '>' || s[i] == '<')
+			redir(&i, &start, &sp, s);
 		else
 			i++;
 	}
