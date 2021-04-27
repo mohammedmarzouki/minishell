@@ -6,7 +6,7 @@
 /*   By: mmarzouk <mmarzouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/25 15:40:21 by mmarzouk          #+#    #+#             */
-/*   Updated: 2021/04/26 15:39:25 by mmarzouk         ###   ########.fr       */
+/*   Updated: 2021/04/27 08:39:17 by mmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,15 @@
 
 static void double_q(char *s, int *i)
 {
-	while(s[++(*i)] && s[(*i)] != '\"')
+	while(s[++(*i)])
 	{
 		if(s[(*i)] == '\\' && s[(*i) + 1])
 			(*i) += 2;
+		else if (s[(*i)] == '\"')
+		{
+			++(*i);
+			break;
+		}
 	}
 }
 
@@ -26,11 +31,12 @@ static void single_q(char *s,int *i)
 	int f;
 
 	f = 1;
-	while(s[(*i)++])
+	while(s[++(*i)])
 	{
 		if(s[(*i)] == '\'')
 		{
 			f  = 0;
+			++(*i);
 			break;
 		}
 	}
