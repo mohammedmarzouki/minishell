@@ -6,27 +6,37 @@
 /*   By: mmarzouk <mmarzouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/25 15:40:21 by mmarzouk          #+#    #+#             */
-/*   Updated: 2021/04/27 08:39:17 by mmarzouk         ###   ########.fr       */
+/*   Updated: 2021/04/27 10:49:33 by mmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-static void double_q(char *s, int *i)
+static int double_q(char *s, int *i)
 {
+	int f;
+
+	f = 1;
 	while(s[++(*i)])
 	{
 		if(s[(*i)] == '\\' && s[(*i) + 1])
 			(*i) += 2;
 		else if (s[(*i)] == '\"')
 		{
+			f = 0;
 			++(*i);
 			break;
 		}
 	}
+	if(f)
+	{
+		printf("parse error : close the quotes !!\n");
+		return (1);
+	}
+	return (0);
 }
 
-static void single_q(char *s,int *i)
+static int single_q(char *s,int *i)
 {
 	int f;
 
@@ -41,7 +51,11 @@ static void single_q(char *s,int *i)
 		}
 	}
 	if(f)
+	{	
 		printf("parse error : close the quotes !!\n");
+		return (1);
+	}
+	return (0);
 }
 
 static  void    write_it(int *i, int *start, char ***sp, char *s)
@@ -69,10 +83,10 @@ char    **split_it(char *s, char **sp, int i, int start)
 {
 	while (s[i])
 	{
-		if(s[i] == '\"')
-			double_q(s,&i);
-		else if(s[i] == '\'')
-			single_q(s, &i);
+		if(s[i] == '\"' && double_q(s,&i))
+			return (doublefree(sp));
+		else if(s[i] == '\'' && single_q(s, &i))
+			return (doublefree(sp));
 		else if(s[i] == '\\' && s[i + 1])
 			i += 2;
 		else if(s[i] == ';' || s[i] == '|')

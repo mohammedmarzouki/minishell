@@ -6,7 +6,7 @@
 /*   By: mmarzouk <mmarzouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/09 16:31:49 by tjmari            #+#    #+#             */
-/*   Updated: 2021/04/25 16:46:04 by mmarzouk         ###   ########.fr       */
+/*   Updated: 2021/04/27 10:48:54 by mmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void			init_s_cmd(t_cmd *cmd);
 void			ft_crop(char *src ,char **des ,int start ,int end);
 void			nfree(void *s);
 int				same(char *s1, char *s2);
-void			doublefree(char **ptr);
+char			**doublefree(char **ptr);
 int				doublecount(char **s);
 int				itis(char *s);
 char			**append_line(char **s, char *line);

@@ -6,7 +6,7 @@
 /*   By: mmarzouk <mmarzouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/05 12:15:30 by mmarzouk          #+#    #+#             */
-/*   Updated: 2021/04/12 12:48:31 by mmarzouk         ###   ########.fr       */
+/*   Updated: 2021/04/27 10:48:41 by mmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int		same(char *s1, char *s2)
 	return (1);
 }
 
-void	doublefree(char **ptr)
+char	**doublefree(char **ptr)
 {
 	int i;
 
@@ -79,6 +79,7 @@ void	doublefree(char **ptr)
 		free(ptr);
 	}
 	ptr = NULL;
+	return (NULL);
 }
 
 int		doublecount(char **s)
