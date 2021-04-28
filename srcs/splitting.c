@@ -6,7 +6,7 @@
 /*   By: mmarzouk <mmarzouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/25 15:40:21 by mmarzouk          #+#    #+#             */
-/*   Updated: 2021/04/27 10:49:33 by mmarzouk         ###   ########.fr       */
+/*   Updated: 2021/04/28 11:53:17 by mmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,9 @@ static int double_q(char *s, int *i)
 	if(f)
 	{
 		printf("parse error : close the quotes !!\n");
-		return (1);
+		return (seterr(1));
 	}
-	return (0);
+	return (1);
 }
 
 static int single_q(char *s,int *i)
@@ -53,9 +53,9 @@ static int single_q(char *s,int *i)
 	if(f)
 	{	
 		printf("parse error : close the quotes !!\n");
-		return (1);
+		return (seterr(1));
 	}
-	return (0);
+	return (1);
 }
 
 static  void    write_it(int *i, int *start, char ***sp, char *s)

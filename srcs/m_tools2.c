@@ -6,13 +6,20 @@
 /*   By: mmarzouk <mmarzouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/05 12:53:53 by mmarzouk          #+#    #+#             */
-/*   Updated: 2021/04/23 12:00:48 by mmarzouk         ###   ########.fr       */
+/*   Updated: 2021/04/28 11:36:12 by mmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int chk_err(char **sp)
+static int ft_red(char *s)
+{
+    if(same(s,"<") || same(s,">") ||same(s,">>"))
+        return(0);
+    return (1);
+}
+
+short chk_err(char **sp)
 {
     int i;
     int value;
@@ -29,22 +36,30 @@ int chk_err(char **sp)
             i++;
             continue;
         }
-        // else if (value == 1)// < >
-        // {
-        //     if (ft_red(sp , &i) < 0)
-        //         return (-1);
-        //     // if (!sp[i + 1] || itis(sp[i + 1]) != 0)
-        //     // {
-        //     //     return(-1);
-        //     // }
-        //     // else
-        //     //     i += 2;
-        //     continue;
-        // }
+        else if (value == 1)// < >
+        {
+            if (!sp[i + 1] || ft_red(sp[i]))
+            {
+                printf("minishell: syntax error near unexpected token\n");
+                return(258);
+            }
+            else if(itis(sp[i + 1]) != 0)
+            {
+                printf("minishell: syntax error near unexpected token\n");
+                return(258);
+                
+            }
+            else
+                i += 2;
+            continue;
+        }
         else if (value == 2)// ;
         {
             if(!flag)
-                return (-1);
+            {
+                printf("minishell: syntax error near unexpected token \n");
+                return (258);
+            }
             else
             {
                 flag = 0;
@@ -54,8 +69,16 @@ int chk_err(char **sp)
         }
         else if (value == 3)// |
         {
-            if(!flag  || ((itis(sp[i+1]) == -1) && !sp[i + 2]))            
-                return (-1);
+            if(!flag)   
+            {
+                printf("minishell: syntax error near unexpected token \n");
+                return (258);
+            }
+            else if(!sp[i + 1])
+            {
+                printf("minishell: pipe what ?\n");
+                return (1);
+            }
             else
             {
                 flag = 0;
@@ -66,14 +89,9 @@ int chk_err(char **sp)
         else // '\0'
             i++;
     }
-    return(1);
+    return(0);
 }
 
-int ft_red()
-{
-    
-    return (1);
-}
 
 char **append_line(char **s, char *line)
 {

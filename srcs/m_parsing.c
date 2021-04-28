@@ -6,98 +6,12 @@
 /*   By: mmarzouk <mmarzouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/18 09:15:36 by mmarzouk          #+#    #+#             */
-/*   Updated: 2021/04/26 15:21:03 by mmarzouk         ###   ########.fr       */
+/*   Updated: 2021/04/28 11:54:01 by mmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-static void single_q(char *s,int *i)
-{
-    int f;
-
-    f = 1;
-	while(s[(*i)++])
-	{
-		if(s[(*i)] == '\'')
-        {
-            f  = 0;
-			break;
-        }
-	}
-    if(f)
-        printf("parse error : close the quotes !!\n");
-}
-
-char    **split_iit(char *s)
-{
-    char **sp;
-    int i;
-    short flag;
-    short 
-    int start;
-
-    flag = 0;
-    sp = 0;
-    start = 0;
-	i = 0;
-    while (s[i] && *s == ' ')
-        s++;
-    while (s[i])
-    {
-        if(s[i] == '"' && !flag) {
-            flag = 1;
-        }
-        else if (s[i] == '\'' && !flag) {
-			single_q(s,&i);
-		}
-        else if (s[i] == '"' && flag) {
-            flag = 0;
-        }
-        else if(s[i] == ' '  && flag != 1)
-        {
-            flag = 0;
-            sp = append_line(sp,ft_substr(s,start,(i - start)));
-			while (s[i] && s[i + 1] == ' ' && s[i] == ' ')
-				i++;
-            start = i;
-		}
-        else if(( s[i] == '|' || s[i] == ';') && flag != 1)
-        {
-            flag = 0;
-            sp = append_line(sp,ft_substr(s,start,(i - start)));
-            start = i;
-			while (s[i ] == ';' || s[i] == '|')
-				i++;
-            sp = append_line(sp,ft_substr(s,start,(i - start)));
-            start = i;
-
-        }
-        else if((s[i] == '>' || s[i] == '<' ) && !flag)
-        {
-            flag = 2;
-            sp = append_line(sp,ft_substr(s,start,(i - start)));
-            start = i;
-            while(s[i] == '>' || s[i] == '<')
-                i++;
-            sp = append_line(sp,ft_substr(s,start,(i - start)));
-            start = i;
-		}
-        if(s[i] == '\\' && s[i+1]) {
-            i += 2;
-		}
-		else
-			i++;
-    }
-	sp = append_line(sp,ft_substr(s,start,(i - start)));
-    if(flag == 1)
-    {
-        doublefree(sp);
-        printf("parse error : close the quotes !!\n");
-        return(NULL);
-    }
-    return(sp);
-}
 int cmds(char **s)
 {
     int c;
@@ -106,16 +20,23 @@ int cmds(char **s)
 
     i = 0;
     c = 0;
+    j = 0;
     while (s && s[i])
     {
-        j = 0;
-        while((s[i][j]) && (s[i][j]) == ' ')
-            j++;
         if(((s[i][j])) == '|' || (s[i][j]) == ';')
             c++;
         i++;        
     }
     return(c);
+}
+int seterr(short err)
+{
+    if (err)
+    {
+        g_tool.exterr = err;
+        return(1);
+    }
+    return (0);
 }
 int parsing(char *s)
 {
@@ -123,26 +44,23 @@ int parsing(char *s)
     int i;
     while(s && *s == ' ')
         s++;
-    sp = split_it(s, NULL, 0, 0);
-    if(!sp)
+    if(!(sp = split_it(s, NULL, 0, 0)))
+    {
+        printf("<%d>\n",g_tool.exterr);
+        return(0);
+    }
         return(0);
     i = cmds(sp);
-    printf("......%d.....\n",chk_err(sp));
-    // printf("|||%d|||\n",i);
+    if (seterr(chk_err(sp)))
+    {
+        printf("<%d>\n",g_tool.exterr);
+        return(0);
+    }
+    printf("<%d>\n",g_tool.exterr);
     assign(sp);
     return (1);
 }
 
-// int     redirection(char *s,int i)
-// {
-//     if (i == 3)
-//     {
-//         g_cmd->red = append_line(g_cmd->red,ft_substr(s ,0,2));
-//         return(2);
-//     }
-//     g_cmd->red = append_line(g_cmd->red,ft_substr(s ,0,1));
-//     return(1);
-// }
 // redi
 // cmd
 // space
