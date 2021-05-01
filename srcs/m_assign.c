@@ -6,7 +6,7 @@
 /*   By: mmarzouk <mmarzouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 16:48:56 by mmarzouk          #+#    #+#             */
-/*   Updated: 2021/04/23 12:12:16 by mmarzouk         ###   ########.fr       */
+/*   Updated: 2021/05/01 14:39:23 by mmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,6 @@ void	assign(char **sp)
 	while (sp[i])
 	{
 		// j = 0;
-		// while (sp[i][j] == ' ')
-		// 	j++;
 		// if(sp[i][j] == '<' || sp[i][j] == '>')
 		// 	redis(sp, &i);
 		// else if (sp[i][j] == '|' || sp[i][j] == ';')

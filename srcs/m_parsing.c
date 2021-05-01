@@ -6,7 +6,7 @@
 /*   By: mmarzouk <mmarzouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/18 09:15:36 by mmarzouk          #+#    #+#             */
-/*   Updated: 2021/04/28 11:54:01 by mmarzouk         ###   ########.fr       */
+/*   Updated: 2021/05/01 14:21:16 by mmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,17 +46,16 @@ int parsing(char *s)
         s++;
     if(!(sp = split_it(s, NULL, 0, 0)))
     {
-        printf("<%d>\n",g_tool.exterr);
+        printf("<%d>SPLIT\n",g_tool.exterr);
         return(0);
     }
-        return(0);
     i = cmds(sp);
     if (seterr(chk_err(sp)))
     {
-        printf("<%d>\n",g_tool.exterr);
+        printf("<%d> sterr\n",g_tool.exterr);
         return(0);
     }
-    printf("<%d>\n",g_tool.exterr);
+    printf("<%d> TRUE\n",g_tool.exterr);
     assign(sp);
     return (1);
 }
