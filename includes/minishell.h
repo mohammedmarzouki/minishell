@@ -27,14 +27,6 @@
 
 #define HI printf("HI\n");
 
-typedef	struct	s_tool
-{
-	int			cmd_c;
-	int			cmd_i;
-	char		cwd[1024];
-	short 		exterr;
-	char		**envp;
-}				t_tool;
 
 typedef	struct	s_cmd
 {
@@ -44,7 +36,17 @@ typedef	struct	s_cmd
 	char		**file;
 }				t_cmd;
 
-t_cmd			*g_cmd;
+typedef	struct	s_tool
+{
+	int			cmd_c;
+	int			cmd_i;
+	char		cwd[1024];
+	short 		exterr;
+	t_cmd		**cmd;
+	char		**envp;
+}				t_tool;
+
+// t_cmd			*g_cmd;
 t_tool			g_tool;
 
 /*
@@ -64,13 +66,14 @@ int				same(char *s1, char *s2);
 char			**doublefree(char **ptr);
 int				doublecount(char **s);
 int				itis(char *s);
-char			**append_line(char **s, char *line);
+char			**append_line(char **s, char *line,int free);
 int				a_word(char *s);
 void			ft_crop(char *src ,char **des ,int start ,int end);
 char			**split_it(char *s, char **sp, int i, int start);
 void			assign(char **sp);
 short			chk_err(char **sp);
 int				seterr(short err);
+int				count_cmds(char **s);
 
 /*
 ** EXECUTING

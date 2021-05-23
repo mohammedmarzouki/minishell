@@ -93,7 +93,7 @@ short chk_err(char **sp)
 }
 
 
-char **append_line(char **s, char *line)
+char **append_line(char **s, char *line, int free)
 {
     char **new;
     int i;
@@ -107,7 +107,10 @@ char **append_line(char **s, char *line)
     }
     new[i] = ft_strdup(line);
     new[i+1] = NULL;
-    doublefree (s);
-    nfree (line);
+    if (free)
+    {
+        doublefree (s);
+        nfree (line);
+    }
     return (new);
 }

@@ -24,7 +24,7 @@ static int double_q(char *s, int *i)
 		else if (s[(*i)] == '\"')
 		{
 			f = 0;
-			++(*i);
+			// ++(*i);
 			break;
 		}
 	}
@@ -46,7 +46,7 @@ static int single_q(char *s,int *i)
 		if(s[(*i)] == '\'')
 		{
 			f  = 0;
-			++(*i);
+			// ++(*i);
 			break;
 		}
 	}
@@ -62,7 +62,7 @@ static  void    write_it(int *i, int *start, char ***sp, char *s)
 {
 	if((*i) - (*start))
 	{
-		(*sp) = append_line((*sp),ft_substr(s,(*start),((*i) - (*start))));
+		(*sp) = append_line((*sp),ft_substr(s,(*start),((*i) - (*start))), 1);
 		(*start) = (*i);
 	}
 }

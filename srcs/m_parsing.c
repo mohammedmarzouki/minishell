@@ -12,7 +12,7 @@
 
 #include "../includes/minishell.h"
 
-int cmds(char **s)
+int count_cmds(char **s)
 {
     int c;
     int i;
@@ -29,6 +29,40 @@ int cmds(char **s)
     }
     return(c);
 }
+static void double_print(char **s)
+{
+    int i = 0;
+    if (!s)
+    {
+        printf("%s\n",NULL);
+        return;
+    }
+    while (s[i])
+    {
+        printf("[%s]\n",s[i]);
+        i++;
+    }
+    
+}
+static void printall(void)
+{
+    int i = 0;
+
+    while (i < g_tool.cmd_c)
+    {
+        printf("______________args[%d]__________________\n",i);
+        double_print(g_tool.cmd[i]->args);
+        printf("______________sep[%d]___________________\n",i);
+        printf("<%s>\n",g_tool.cmd[i]->sep);
+        printf("______________redir[%d]_________________\n",i);
+        double_print(g_tool.cmd[i]->red);
+        printf("______________File[%d]__________________\n",i);
+        double_print(g_tool.cmd[i]->file);
+        printf("\n________________________________________\n");
+        i++;
+    }
+    
+}
 int seterr(short err)
 {
     if (err)
@@ -41,7 +75,6 @@ int seterr(short err)
 int parsing(char *s)
 {
     char    **sp;
-    int i;
     while(s && *s == ' ')
         s++;
     if(!(sp = split_it(s, NULL, 0, 0)))
@@ -49,7 +82,6 @@ int parsing(char *s)
         printf("<%d>SPLIT\n",g_tool.exterr);
         return(0);
     }
-    i = cmds(sp);
     if (seterr(chk_err(sp)))
     {
         printf("<%d> sterr\n",g_tool.exterr);
@@ -57,6 +89,7 @@ int parsing(char *s)
     }
     printf("<%d> TRUE\n",g_tool.exterr);
     assign(sp);
+    printall();
     return (1);
 }
 
