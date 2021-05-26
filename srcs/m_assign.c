@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   m_assign.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmarzouk <mmarzouk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tjmari <tjmari@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/16 16:48:56 by mmarzouk          #+#    #+#             */
-/*   Updated: 2021/05/01 14:39:23 by mmarzouk         ###   ########.fr       */
+/*   Created: 2021/05/23 17:17:26 by tjmari            #+#    #+#             */
+/*   Updated: 2021/05/24 17:08:12 by tjmari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ static	void	next_cmd(char **sp, int i, t_cmd	**cmds, int	*cmd_i)
 	(*cmd_i)++;
 }
 
-
 void	assign(char **sp)
 {
 	int		i;
@@ -53,7 +52,7 @@ void	assign(char **sp)
 	i = 0;
 	j = 0;
 	g_tool.cmd_c = (count_cmds(sp) + 1);
-	cmds = malloc(sizeof(t_cmd *) * (g_tool.cmd_c + 1)); 
+	cmds = malloc(sizeof(t_cmd *) * (g_tool.cmd_c)); 
 	init_cmds(cmds);
 	while (sp[i])
 	{

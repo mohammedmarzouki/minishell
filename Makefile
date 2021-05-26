@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mmarzouk <mmarzouk@student.42.fr>          +#+  +:+       +#+         #
+#    By: tjmari <tjmari@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2021/02/09 16:32:57 by tjmari            #+#    #+#              #
-#    Updated: 2021/05/01 14:28:16 by mmarzouk         ###   ########.fr        #
+#    Created: 2021/05/22 20:07:24 by tjmari            #+#    #+#              #
+#    Updated: 2021/05/26 11:50:37 by tjmari           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,13 +22,15 @@ FLAGS = -Wall -Wextra -Werror
 
 INCLUDES = ./includes/minishell.h \
 
-SRCS = ./srcs/minishell.c \
-	./srcs/get_next_line.c ./srcs/u_prompt.c \
+SRCS = ./srcs/main.c ./srcs/get_next_line.c \
 	./srcs/m_parsing.c ./srcs/m_tools.c ./srcs/m_tools2.c \
-	./srcs/m_assign.c ./srcs/splitting.c\
+	./srcs/m_assign.c ./srcs/m_splitting.c \
 	\
-	./srcs/t_echo.c ./srcs/t_cd.c ./srcs/t_pwd.c ./srcs/t_export.c \
-	./srcs/t_unset.c ./srcs/t_env.c ./srcs/t_exit.c \
+	./srcs/t_executing.c ./srcs/t_redirection.c \
+	./srcs/t_builtin.c ./srcs/t_echo.c ./srcs/t_cd.c \
+	./srcs/t_pwd.c ./srcs/t_export.c ./srcs/t_unset.c \
+	./srcs/t_env.c ./srcs/t_exit.c \
+	./srcs/t_charp.c \
 
 OBJ = $(SRCS:.c=.o)
 
@@ -40,40 +42,25 @@ $(NAME): $(INCLUDES) $(SRCS)
 	@echo "$(GREEN)MINISHELL: ./$(LIBFT) moved to $(NAME)\n---------------------------------------$(NC)"
 	@gcc $(FLAGS) $(SRCS) $(LIBFT) -o $(NAME)
 	@echo "$(GREEN)MINISHELL: ./$(NAME) made\n---------------------------$(NC)"
-	@sleep 1
-	@clear
 
-san:
+debug:
 	@make -C ./libft
 	@mv ./libft/$(LIBFT) ./
 	@echo "$(GREEN)MINISHELL: ./$(LIBFT) moved to $(NAME)\n---------------------------------------$(NC)"
-	@gcc $(FLAGS) $(SRCS) $(LIBFT) -o $(NAME) -fsanitize=address
-	@echo "$(GREEN)MINISHELL: ./$(NAME) compiled with -fsanitize=address made\n------------------------------------------------------------$(NC)"
-	@sleep 1
-	@clear
-
-deb:
-	@make -C ./libft
-	@mv ./libft/$(LIBFT) ./
-	@echo "$(GREEN)MINISHELL: ./$(LIBFT) moved to $(NAME)\n---------------------------------------$(NC)"
-	@gcc $(FLAGS) $(SRCS) $(LIBFT) -o $(NAME) -g
-	@echo "$(GREEN)MINISHELL: ./$(NAME) compiled with -g\n---------------------------------------$(NC)"
-	@sleep 1
-	@clear
+	@gcc $(FLAGS) $(SRCS) $(LIBFT) -o $(NAME) -g -fsanitize=address
+	@echo "$(GREEN)MINISHELL: ./$(NAME) compiled with -g -fsanitize=address made\n---------------------------------------------------------------$(NC)"
 
 clean:
-	@make clean -C ./libft
-	@sleep 1
-	@clear
+	@make clean -C ./LIBFT
 
 fclean: clean
 	@rm -f $(LIBFT)
 	@echo "$(RED)MINISHELL: ./$(LIBFT) deleted\n-----------------------------$(NC)"
 	@rm -f $(NAME)
 	@echo "$(RED)MINISHELL: ./$(NAME) deleted\n------------------------------$(NC)"
-	@sleep 1
-	@clear
+	@rm -rf .vscode $(NAME).dSYM
+	@echo "$(RED)MINISHELL: debugging files deleted\n----------------------------------$(NC)"
 
 re: fclean all
 
-.PHONY: clean fclean re
+.PHONY: all clean fclean re

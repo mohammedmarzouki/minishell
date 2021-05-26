@@ -6,7 +6,7 @@
 /*   By: tjmari <tjmari@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/25 18:47:33 by tjmari            #+#    #+#             */
-/*   Updated: 2020/01/31 15:44:32 by tjmari           ###   ########.fr       */
+/*   Updated: 2021/05/24 16:28:10 by tjmari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@ t_list	*ft_lstnew(void *content)
 {
 	t_list	*elm;
 
-	if (!(elm = (t_list *)malloc(sizeof(t_list))))
+	elm = (t_list *)malloc(sizeof(t_list));
+	if (!elm)
 		return (NULL);
 	elm->content = content;
 	elm->next = NULL;
