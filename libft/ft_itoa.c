@@ -6,7 +6,7 @@
 /*   By: tjmari <tjmari@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/29 14:21:25 by tjmari            #+#    #+#             */
-/*   Updated: 2020/01/31 18:42:53 by tjmari           ###   ########.fr       */
+/*   Updated: 2021/05/24 16:26:40 by tjmari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static int	number_size(long n)
 	return (i);
 }
 
-char		*ft_itoa(int n)
+char	*ft_itoa(int n)
 {
 	long	n2;
 	int		i;

@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: tjmari <tjmari@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/02/10 10:30:36 by tjmari            #+#    #+#             */
-/*   Updated: 2021/02/10 10:30:39 by tjmari           ###   ########.fr       */
+/*   Created: 2021/05/23 16:28:12 by tjmari            #+#    #+#             */
+/*   Updated: 2021/05/24 16:41:09 by tjmari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,50 +37,48 @@ int	gnl_put(char **s, char **line)
 	}
 	else
 	{
-		*line = ft_substr(*s, 0, ft_strlen(*s));
+		*line = ft_substr(*s, 0, i);
 		free(*s);
 		*s = NULL;
 		return (0);
 	}
 }
 
-int	gnl_read(int fd, char **s, char **line, int i)
+int	gnl_read(char **s, char **line, int i)
 {
 	char	*s2;
 	char	*temp;
 
-	if (!(s2 = malloc(sizeof(char) * 100 + 1)))
+	if (!(s2 = malloc(sizeof(char) * 101)))
 		return (-1);
-	while ((i = read(fd, s2, 100)) > 0)
+	while ((i = read(0, s2, 100)) > 0)
 	{
 		s2[i] = '\0';
-		if (!s[fd])
-			s[fd] = ft_substr("", 0, 0);
-		temp = ft_strjoin(s[fd], s2);
-		free(s[fd]);
-		s[fd] = temp;
-		if (ft_strchr(s[fd], '\n'))
-			return (gnl_return(s2, gnl_put(&s[fd], line)));
+		if (!*s)
+			*s = ft_substr("", 0, 0);
+		temp = ft_strjoin(*s, s2);
+		free(*s);
+		*s = temp;
+		if (ft_strchr(*s, '\n'))
+			return (gnl_return(s2, gnl_put(&*s, line)));
 	}
 	if (i == -1)
 		return (gnl_return(s2, i));
-	else if (!s[fd] && i == 0)
+	else if (!*s && i == 0)
 	{
 		*line = ft_substr("", 0, 0);
 		return (gnl_return(s2, i));
 	}
 	else
-		return (gnl_return(s2, gnl_put(&s[fd], line)));
+		return (gnl_return(s2, gnl_put(&*s, line)));
 }
 
-int	get_next_line(int fd, char **line)
+int	get_next_line(char **line)
 {
-	static char	*keep[1];
+	static char	*str;
 
-	if (fd < 0 || fd > 1 || 100 < 1 || !line)
-		return (-1);
-	if (keep[fd] && ft_strchr(keep[fd], '\n'))
-		return (gnl_put(&keep[fd], line));
+	if (str && ft_strchr(str, '\n'))
+		return (gnl_put(&str, line));
 	else
-		return (gnl_read(fd, keep, line, 0));
+		return (gnl_read(&str, line, 0));
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   m_tools.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmarzouk <mmarzouk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tjmari <tjmari@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/05 12:15:30 by mmarzouk          #+#    #+#             */
-/*   Updated: 2021/04/27 10:48:41 by mmarzouk         ###   ########.fr       */
+/*   Created: 2021/05/23 17:18:56 by tjmari            #+#    #+#             */
+/*   Updated: 2021/05/23 17:41:45 by tjmari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,6 @@ int		itis(char *s)
 		return (-1);
 	else
 		return (0);
-}
-
-void    ft_crop(char *src ,char **des ,int start ,int len)
-{
-    nfree(*des);
-    *des = ft_substr(src ,start ,len);
 }
 
 void    nfree(void *s)

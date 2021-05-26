@@ -3,32 +3,33 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmarzouk <mmarzouk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tjmari <tjmari@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/02/09 16:31:49 by tjmari            #+#    #+#             */
-/*   Updated: 2021/04/28 11:37:25 by mmarzouk         ###   ########.fr       */
+/*   Created: 2021/05/22 20:04:07 by tjmari            #+#    #+#             */
+/*   Updated: 2021/05/26 11:35:34 by tjmari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-# include <stdlib.h> // malloc(3), free(3), exit(3)
-# include <unistd.h> // write(2), read(2), close(2), fork(2), getcwd(3), chdir(2), execve(2), dup(2), dup2(2), pipe(2)
-# include <fcntl.h> // open(2)
-# include <sys/wait.h> // wait(2), wait3(2), wait4(2), waitpid(2)
-# include <signal.h> // signal(3), kill(2)
-# include <sys/stat.h> // stat(2), lstat(2), fstat(2)
-# include <dirent.h> // opendir(3), readdir(3), closedir(3)
+# include <stdlib.h>
+# include <unistd.h>
+# include <fcntl.h>
+# include <sys/wait.h>
+# include <signal.h>
+# include <sys/stat.h>
+# include <dirent.h>
 # include <stdio.h>
-# include <string.h> // strerror(3)
-# include <sys/errno.h> // errno(2)
+# include <string.h>
+# include <sys/errno.h>
+# include <sys/ioctl.h>
+# include <termios.h>
+# include <curses.h>
+# include <term.h>
 # include "../libft/libft.h"
 
-#define HI printf("HI\n");
-
-
-typedef	struct	s_cmd
+typedef struct s_cmd
 {
 	char		**args;
 	char		*sep;
@@ -36,39 +37,33 @@ typedef	struct	s_cmd
 	char		**file;
 }				t_cmd;
 
-typedef	struct	s_tool
+typedef struct s_tool
 {
 	int			cmd_c;
 	int			cmd_i;
 	char		cwd[1024];
-	short 		exterr;
+	short		exterr;
 	t_cmd		**cmd;
 	char		**envp;
+	int			original_fd_in;
+	int			original_fd_out;
+	int			fd_in;
+	int			fd_out;
 }				t_tool;
-
-// t_cmd			*g_cmd;
 t_tool			g_tool;
-
-/*
-** GENERAL
-*/
-void			ps1(void);
 
 /*
 ** PARSING
 */
 int				parsing(char *s);
-int				get_next_line(int fd, char **line);
-void			init_s_cmd(t_cmd *cmd);
-void			ft_crop(char *src ,char **des ,int start ,int end);
+int				get_next_line(char **line);
 void			nfree(void *s);
 int				same(char *s1, char *s2);
 char			**doublefree(char **ptr);
 int				doublecount(char **s);
 int				itis(char *s);
-char			**append_line(char **s, char *line,int free);
+char			**append_line(char **s, char *line, int free);
 int				a_word(char *s);
-void			ft_crop(char *src ,char **des ,int start ,int end);
 char			**split_it(char *s, char **sp, int i, int start);
 void			assign(char **sp);
 short			chk_err(char **sp);
@@ -79,12 +74,28 @@ int				count_cmds(char **s);
 ** EXECUTING
 */
 void			executing(void);
-void			ft_echo(void);
-void			ft_cd(void);
+
+_Bool			set_redirections(t_cmd *cmd);
+void			reset_std(void);
+
+void			run_builtin(int i, int which_builtin);
+void			ft_echo(int i);
+_Bool			ft_isflag(char *args);
+void			ft_cd(int i);
 void			ft_pwd(void);
-void			ft_export(void);
-void			ft_unset(void);
+void			ft_export(int i);
+void			ft_putexport(char **argv);
+void			ft_unset(int i);
+_Bool			ft_isin(char *node, char **argv);
 void			ft_env(void);
-void			ft_exit(void);
+void			ft_exit(int i);
+_Bool			ft_isnumeric(char *arg);
+
+int				how_many_element(char **argv);
+char			**ft_dcdup(char **argv, int toadd);
+char			**sortdcp(char **argv);
+char			**add_node_dc(char **argv, char **cmds, int nodes);
+void			change_var(char *var, char *new_value);
+void			change_shlvl(void);
 
 #endif

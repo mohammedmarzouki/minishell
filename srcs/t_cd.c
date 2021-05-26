@@ -1,19 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   t_cd.c                                             :+:      :+:    :+:   */
+/*   ft_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmarzouk <mmarzouk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tjmari <tjmari@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/02/18 12:03:42 by tjmari            #+#    #+#             */
-/*   Updated: 2021/03/16 12:39:41 by mmarzouk         ###   ########.fr       */
+/*   Created: 2021/05/25 20:12:36 by tjmari            #+#    #+#             */
+/*   Updated: 2021/05/26 11:25:08 by tjmari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void	ft_cd(void)
+void	ft_cd(int i)
 {
-	// if (chdir(g_cmd[0].args) != 0)
-	// 	ft_putendl_fd(strerror(errno), 1);
+	if (chdir(g_tool.cmd[i]->args[1]) != 0)
+		ft_putendl_fd(strerror(errno), 1);
+	return ;
 }
