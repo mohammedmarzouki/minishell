@@ -6,15 +6,13 @@
 /*   By: tjmari <tjmari@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/24 16:06:48 by tjmari            #+#    #+#             */
-/*   Updated: 2021/05/26 10:38:55 by tjmari           ###   ########.fr       */
+/*   Updated: 2021/05/26 18:14:54 by tjmari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
 /*
-**  startint here with 0 leaks
-**
 **	the cmd is as g_tools.cmd[i]->elm
 */
 
@@ -47,19 +45,26 @@ void	executing(void)
 	i = 0;
 	while (i < g_tool.cmd_c)
 	{
+		which_builtin = 0;
 		based_pipe_fork = 0;
 		if ((g_tool.cmd[i]->sep && *(g_tool.cmd[i]->sep) == '|')
-			|| (i > 0 && g_tool.cmd[i - 1]->sep && *(g_tool.cmd[i - 1]->sep) == '|'))
+			|| (i > 0 && g_tool.cmd[i - 1]->sep
+			&& *(g_tool.cmd[i - 1]->sep) == '|'))
 			based_pipe_fork = 1;
-		if(g_tool.cmd[i]->args)
+		if (g_tool.cmd[i]->args)
 			which_builtin = is_builtin(g_tool.cmd[i]->args[0]);
-		if (which_builtin && !based_pipe_fork)
+		if (!g_tool.cmd[i]->args && g_tool.cmd[i]->red)		// > file
+		{
+			if (!(set_redirections(g_tool.cmd[i])))
+				return ;
+		}
+		else if (which_builtin && !based_pipe_fork)			// builtin
 		{
 			if (!(set_redirections(g_tool.cmd[i])))
 				return ;
 			run_builtin(i, which_builtin);
 		}
-		else
+		else if (g_tool.cmd[i]->args && !which_builtin)		// others
 			printf("\n%d || TO FORK\n", i);
 		reset_std();
 		i++;

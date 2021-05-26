@@ -6,7 +6,7 @@
 /*   By: tjmari <tjmari@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/22 20:04:07 by tjmari            #+#    #+#             */
-/*   Updated: 2021/05/26 11:35:34 by tjmari           ###   ########.fr       */
+/*   Updated: 2021/05/26 18:05:19 by tjmari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,8 @@ void			ft_pwd(void);
 void			ft_export(int i);
 void			ft_putexport(char **argv);
 void			ft_unset(int i);
-_Bool			ft_isin(char *node, char **argv);
+int				ft_is_empty(char *s);
+int    			ft_envremove(char *var);
 void			ft_env(void);
 void			ft_exit(int i);
 _Bool			ft_isnumeric(char *arg);

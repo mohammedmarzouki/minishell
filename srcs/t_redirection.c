@@ -6,15 +6,15 @@
 /*   By: tjmari <tjmari@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 19:51:06 by tjmari            #+#    #+#             */
-/*   Updated: 2021/05/25 19:56:11 by tjmari           ###   ########.fr       */
+/*   Updated: 2021/05/26 15:22:04 by tjmari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-_Bool   set_redirections(t_cmd *cmd)
+_Bool	set_redirections(t_cmd *cmd)
 {
-    int	i;
+	int	i;
 
 	i = 0;
 	g_tool.fd_in = 0;

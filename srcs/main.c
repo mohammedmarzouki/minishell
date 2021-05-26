@@ -6,7 +6,7 @@
 /*   By: tjmari <tjmari@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/22 20:03:07 by tjmari            #+#    #+#             */
-/*   Updated: 2021/05/26 11:41:08 by tjmari           ###   ########.fr       */
+/*   Updated: 2021/05/26 18:04:18 by tjmari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ int	main(int argc, char *argv[], char *envp[])
 	char	*input;
 
 	g_tool.envp = envp;
+	change_shlvl();
 	g_tool.original_fd_in = dup(STDIN_FILENO);
 	g_tool.original_fd_out = dup(STDOUT_FILENO);
 	(void)argc;

@@ -6,13 +6,13 @@
 /*   By: tjmari <tjmari@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/26 11:20:31 by tjmari            #+#    #+#             */
-/*   Updated: 2021/05/26 11:21:06 by tjmari           ###   ########.fr       */
+/*   Updated: 2021/05/26 15:18:26 by tjmari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int		how_many_element(char **argv)
+int	how_many_element(char **argv)
 {
 	int	i;
 
@@ -24,8 +24,8 @@ int		how_many_element(char **argv)
 
 char	**ft_dcdup(char **argv, int toadd)
 {
-	int	i;
-	int	len;
+	int		i;
+	int		len;
 	char	**temp;
 
 	i = 0;
@@ -42,8 +42,8 @@ char	**ft_dcdup(char **argv, int toadd)
 
 char	**sortdcp(char **argv)
 {
-	int	i;
-	int	j;
+	int		i;
+	int		j;
 	char	*temp;
 
 	i = 0;
@@ -69,7 +69,7 @@ char	**add_node_dc(char **argv, char **cmds, int nodes)
 {
 	int	i;
 	int	i2;
-	int i3;
+	int	i3;
 
 	nodes--;
 	i = how_many_element(argv);
@@ -83,7 +83,7 @@ char	**add_node_dc(char **argv, char **cmds, int nodes)
 
 void	change_var(char *var, char *new_value)
 {
-	int	i;
+	int		i;
 	char	**parts;
 	char	*temp;
 
@@ -105,7 +105,7 @@ void	change_var(char *var, char *new_value)
 
 void	change_shlvl(void)
 {
-	int	i;
+	int		i;
 	char	**parts;
 	char	*temp;
 	int		shlvl;
