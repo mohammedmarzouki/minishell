@@ -6,7 +6,7 @@
 /*   By: tjmari <tjmari@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/22 20:04:07 by tjmari            #+#    #+#             */
-/*   Updated: 2021/05/26 18:05:19 by tjmari           ###   ########.fr       */
+/*   Updated: 2021/05/26 18:50:30 by tjmari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,11 +74,13 @@ int				count_cmds(char **s);
 ** EXECUTING
 */
 void			executing(void);
+void			run_builtin(int i, int which_builtin);
+void			run_execution(int i);
+char			*make_cmd(char **paths, char *cmd);
 
 _Bool			set_redirections(t_cmd *cmd);
 void			reset_std(void);
 
-void			run_builtin(int i, int which_builtin);
 void			ft_echo(int i);
 _Bool			ft_isflag(char *args);
 void			ft_cd(int i);

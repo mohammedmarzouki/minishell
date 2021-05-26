@@ -6,7 +6,7 @@
 /*   By: tjmari <tjmari@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/24 16:06:48 by tjmari            #+#    #+#             */
-/*   Updated: 2021/05/26 18:14:54 by tjmari           ###   ########.fr       */
+/*   Updated: 2021/05/26 18:43:08 by tjmari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,13 +59,9 @@ void	executing(void)
 				return ;
 		}
 		else if (which_builtin && !based_pipe_fork)			// builtin
-		{
-			if (!(set_redirections(g_tool.cmd[i])))
-				return ;
 			run_builtin(i, which_builtin);
-		}
 		else if (g_tool.cmd[i]->args && !which_builtin)		// others
-			printf("\n%d || TO FORK\n", i);
+			run_execution(i);
 		reset_std();
 		i++;
 	}
