@@ -6,7 +6,7 @@
 /*   By: tjmari <tjmari@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 20:12:58 by tjmari            #+#    #+#             */
-/*   Updated: 2021/05/26 18:00:35 by tjmari           ###   ########.fr       */
+/*   Updated: 2021/05/27 11:26:32 by tjmari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int		ft_is_empty(char *s)
 	return 1; 
 }
 
-int    ft_envremove(char *var)
+int		ft_envremove(char *var)
 {
 	int i;
 	int j;

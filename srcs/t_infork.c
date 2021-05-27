@@ -1,71 +1,70 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   t_what_way.c                                       :+:      :+:    :+:   */
+/*   t_infork.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tjmari <tjmari@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/25 20:06:54 by tjmari            #+#    #+#             */
-/*   Updated: 2021/05/26 18:56:18 by tjmari           ###   ########.fr       */
+/*   Created: 2021/05/27 11:17:14 by tjmari            #+#    #+#             */
+/*   Updated: 2021/05/27 14:59:52 by tjmari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void	run_builtin(int i, int which_builtin)
+void	run_infork(int i)
 {
-	if (!(set_redirections(g_tool.cmd[i])))
-		return ;
-	if (which_builtin == 1)
-		ft_echo(i);
-	else if (which_builtin == 2)
-		ft_cd(i);
-	else if (which_builtin == 3)
-		ft_pwd();
-	else if (which_builtin == 4)
-		ft_export(i);
-	else if (which_builtin == 5)
-		ft_unset(i);
-	else if (which_builtin == 6)
-		ft_env();
-	else if (which_builtin == 7)
-		ft_exit(i);
+	pid_t	pid;
+
+	pid = fork();
+	waitpid(pid, NULL, 0);
+	if (pid == 0)
+	{
+		printf("RUN IN FORK\n");
+		if (!g_tool.cmd[i]->args && g_tool.cmd[i]->red)		//	> file
+		{
+			if (!(set_redirections(g_tool.cmd[i])))
+				exit(g_tool.exterr);
+		}
+		else if (g_tool.which_builtin)						//	builtin
+		{
+			run_builtin(i);
+			exit(g_tool.exterr);
+		}
+		else
+		{
+			if (!(set_redirections(g_tool.cmd[i])))
+				exit(g_tool.exterr);
+			single_cmd_infork(i);
+		}
+	}
 }
 
-void	run_execution(int i)
+void	single_cmd_infork(int i)
 {
 	char	*path;
 	char	**paths;
 	char	*cmd;
-	pid_t	pid;
 
 	path = getenv("PATH");
 	paths = ft_split(path, ':');
 	if (ft_strchr(g_tool.cmd[i]->args[0], '/'))
 	{
-		pid = fork();
-		wait(NULL);
-		if (pid == 0)
-		{
-			execve(g_tool.cmd[i]->args[0], g_tool.cmd[i]->args, g_tool.envp);
-			printf("minishell: %s: No such file or directory\n", g_tool.cmd[i]->args[0]);
-			exit(127);
-		}
+		execve(g_tool.cmd[i]->args[0], g_tool.cmd[i]->args, g_tool.envp);
+		printf("minishell: %s: No such file or directory\n", g_tool.cmd[i]->args[0]);
+		exit(127);
 	}
 	else
 	{
 		cmd = make_cmd(paths, g_tool.cmd[i]->args[0]);
 		if (cmd)
-		{
-			pid = fork();
-			wait(NULL);
-			if (pid == 0)
-				execve(cmd, g_tool.cmd[i]->args, g_tool.envp);
-		}
+			execve(cmd, g_tool.cmd[i]->args, g_tool.envp);
 		else
+		{
 			printf("minishell: %s: command not found\n", g_tool.cmd[i]->args[0]);
+			exit(127);
+		}
 	}
-	return ;
 }
 
 char	*make_cmd(char **paths, char *cmd)

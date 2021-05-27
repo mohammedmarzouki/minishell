@@ -6,7 +6,7 @@
 /*   By: tjmari <tjmari@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/23 16:59:17 by tjmari            #+#    #+#             */
-/*   Updated: 2021/05/24 16:09:22 by tjmari           ###   ########.fr       */
+/*   Updated: 2021/05/27 13:48:35 by tjmari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,13 @@ static void double_print(char **s)
 	int i = 0;
 	if (!s)
 	{
-		printf("%s\n", NULL);
-		return;
+		printf("\033[0;31m(null)\033[0m\n");
+		return ;
 	}
 	while (s[i])
 	{
+		if (i != 0)
+			printf("		");
 		printf("%s\n", s[i]);
 		i++;
 	}
@@ -53,18 +55,20 @@ static void printall(void)
 	while (i < g_tool.cmd_c)
 	{
 		printf("_________________________\n");
-		printf("\033[1;32marg[%d]:		\033[0m",i);
+		printf("\033[0;32marg[%d]:		\033[0m",i);
 		double_print(g_tool.cmd[i]->args);
-		printf("\033[1;32msep[%d]:		\033[0m",i);
-		printf("%s\n", g_tool.cmd[i]->sep);
-		printf("\033[1;32mred[%d]:		\033[0m",i);
+		printf("\033[0;32msep[%d]:		\033[0m",i);
+		if (g_tool.cmd[i]->sep)
+			printf("%s\n", g_tool.cmd[i]->sep);
+		else
+			printf("\033[0;31m%s\033[0m\n", g_tool.cmd[i]->sep);
+		printf("\033[0;32mred[%d]:		\033[0m",i);
 		double_print(g_tool.cmd[i]->red);
-		printf("\033[1;32mfil[%d]:		\033[0m",i);
+		printf("\033[0;32mfil[%d]:		\033[0m",i);
 		double_print(g_tool.cmd[i]->file);
 		printf("_________________________\n");
 		i++;
 	}
-	
 }
 
 int seterr(short err)
