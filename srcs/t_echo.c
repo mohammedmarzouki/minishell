@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_echo.c                                          :+:      :+:    :+:   */
+/*   t_echo.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tjmari <tjmari@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 20:12:44 by tjmari            #+#    #+#             */
-/*   Updated: 2021/05/26 11:18:28 by tjmari           ###   ########.fr       */
+/*   Updated: 2021/05/27 11:44:59 by tjmari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,9 @@
 
 _Bool	ft_isflag(char *args)
 {
-	int	i;
-	_Bool	n;
+	int		i;
 
 	i = 0;
-	n = 0;
 	if (!(ft_strncmp(args, "-n", 2)))
 	{
 		i = 2;
@@ -26,8 +24,8 @@ _Bool	ft_isflag(char *args)
 			i++;
 	}
 	if (!args[i])
-		n = 1;
-	return (n);
+		return (1);
+	return (0);
 }
 
 void	ft_echo(int i)
@@ -37,17 +35,21 @@ void	ft_echo(int i)
 
 	j = 1;
 	n = 0;
-	while (ft_isflag(g_tool.cmd[i]->args[j]))
+	while (j < how_many_element(g_tool.cmd[i]->args))	// *2
 	{
-		n = 1;
-		j++;
+		while (ft_isflag(g_tool.cmd[i]->args[j]))
+		{
+			n = 1;
+			j++;
+		}
+		while (g_tool.cmd[i]->args[j])
+		{
+			ft_putstr_fd(g_tool.cmd[i]->args[j], 1);
+			if (j != how_many_element(g_tool.cmd[i]->args) - 1)
+				ft_putstr_fd(" ", 1);
+			j++;
+		}
+		if (!n)
+			ft_putchar_fd('\n', 1);
 	}
-	while (g_tool.cmd[i]->args[j])
-    {
-		ft_putstr_fd(g_tool.cmd[i]->args[j], 1);
-        ft_putstr_fd(" ", 1); // the err of always printing a space at the end even if it is not needed
-        j++;    
-    }
-	if (!n)
-		ft_putchar_fd('\n', 1);
 }

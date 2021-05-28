@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_export.c                                        :+:      :+:    :+:   */
+/*   t_export.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tjmari <tjmari@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 20:12:52 by tjmari            #+#    #+#             */
-/*   Updated: 2021/05/26 11:30:17 by tjmari           ###   ########.fr       */
+/*   Updated: 2021/05/27 11:56:58 by tjmari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,18 +26,20 @@ void	ft_export(int i)
 	}
 	else
 		g_tool.envp = add_node_dc(g_tool.envp, g_tool.cmd[i]->args, nodes);
-	return ;
 }
 
 void	ft_putexport(char **argv)
 {
-	int	i;
-	char **parts;
+	int		i;
+	char	**parts;
 
 	i = 0;
 	while (argv[i])
 	{
 		parts = ft_split(argv[i++], '=');
-		printf("declare -x %s=\"%s\"\n", parts[0], parts[1]);
+		if (parts[1])
+			printf("declare -x %s=\"%s\"\n", parts[0], parts[1]);
+		else
+			printf("declare -x %s=\"\"\n", parts[0]);
 	}
 }

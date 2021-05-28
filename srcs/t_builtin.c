@@ -6,26 +6,48 @@
 /*   By: tjmari <tjmari@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 20:06:54 by tjmari            #+#    #+#             */
-/*   Updated: 2021/05/26 11:35:12 by tjmari           ###   ########.fr       */
+/*   Updated: 2021/05/27 11:13:09 by tjmari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void	run_builtin(int i, int which_builtin)
+void	is_builtin(int i)
 {
-	if (which_builtin == 1)
+	if (!ft_strcmp(g_tool.cmd[i]->args[0], "echo"))
+		g_tool.which_builtin = 1;
+	else if (!ft_strcmp(g_tool.cmd[i]->args[0], "cd"))
+		g_tool.which_builtin = 2;
+	else if (!ft_strcmp(g_tool.cmd[i]->args[0], "pwd"))
+		g_tool.which_builtin = 3;
+	else if (!ft_strcmp(g_tool.cmd[i]->args[0], "export"))
+		g_tool.which_builtin = 4;
+	else if (!ft_strcmp(g_tool.cmd[i]->args[0], "unset"))
+		g_tool.which_builtin = 5;
+	else if (!ft_strcmp(g_tool.cmd[i]->args[0], "env"))
+		g_tool.which_builtin = 6;
+	else if (!ft_strcmp(g_tool.cmd[i]->args[0], "exit"))
+		g_tool.which_builtin = 7;
+	else
+		g_tool.which_builtin = 0;
+}
+
+void	run_builtin(int i)
+{
+	if (!(set_redirections(g_tool.cmd[i])))
+		return ;
+	if (g_tool.which_builtin == 1)
 		ft_echo(i);
-	else if (which_builtin == 2)
+	else if (g_tool.which_builtin == 2)
 		ft_cd(i);
-	else if (which_builtin == 3)
+	else if (g_tool.which_builtin == 3)
 		ft_pwd();
-	else if (which_builtin == 4)
+	else if (g_tool.which_builtin == 4)
 		ft_export(i);
-	else if (which_builtin == 5)
+	else if (g_tool.which_builtin == 5)
 		ft_unset(i);
-	else if (which_builtin == 6)
+	else if (g_tool.which_builtin == 6)
 		ft_env();
-	else if (which_builtin == 7)
+	else if (g_tool.which_builtin == 7)
 		ft_exit(i);
 }

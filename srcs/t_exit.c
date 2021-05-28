@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_exit.c                                          :+:      :+:    :+:   */
+/*   t_exit.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tjmari <tjmari@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 20:12:50 by tjmari            #+#    #+#             */
-/*   Updated: 2021/05/26 11:27:56 by tjmari           ###   ########.fr       */
+/*   Updated: 2021/05/26 12:49:57 by tjmari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,12 @@ _Bool	ft_isnumeric(char *arg)
 
 void	ft_exit(int i)
 {
-	if (ft_isnumeric(g_tool.cmd[i]->args[1]))
+	if (how_many_element(g_tool.cmd[i]->args) > 2)
+	{
+		ft_putendl_fd("exit", 1);
+		ft_putendl_fd("minishell: exit: too many arguments", 1);
+	}
+	else if (ft_isnumeric(g_tool.cmd[i]->args[1]))
 	{
 		ft_putendl_fd("exit", 1);
 		if (g_tool.cmd[i]->args[1])

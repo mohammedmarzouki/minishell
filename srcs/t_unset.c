@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_unset.c                                         :+:      :+:    :+:   */
+/*   t_unset.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tjmari <tjmari@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 20:12:58 by tjmari            #+#    #+#             */
-/*   Updated: 2021/05/26 11:37:40 by tjmari           ###   ########.fr       */
+/*   Updated: 2021/05/27 11:26:32 by tjmari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,41 +14,60 @@
 
 void	ft_unset(int i)
 {
-	int	j;
-	int	j2;
-	int	nodes;
-	int	toalloc;
-	char	**temp;
-
+	int		j;
+	int		ret;
+	
 	j = 0;
-	j2 = 0;
-	nodes = how_many_element(g_tool.cmd[i]->args);
-	toalloc = (how_many_element(g_tool.envp) + 1) - (nodes - 1);
-	temp = (char **)malloc(sizeof(char *) * toalloc);
-	temp[toalloc - 1] = NULL;
-	while (j < how_many_element(g_tool.envp))
+	ret = 0;
+	while (g_tool.cmd[i]->args[j])
 	{
-		if (ft_isin(g_tool.envp[j], g_tool.cmd[j]->args))
-			j++;
-		else
-			temp[j2++] = g_tool.envp[j++];
+		if (ft_strchr(g_tool.cmd[i]->args[j], ' ') || ft_strchr(g_tool.cmd[i]->args[j], '=')
+			|| ft_is_empty(g_tool.cmd[i]->args[j]))
+		{
+			ft_putstr_fd("minishell: unset: `", 1);
+			ft_putstr_fd(g_tool.cmd[i]->args[j], 1);
+			ft_putendl_fd("': not a valid identifier", 1);
+			ret = 1;
+		}
+		ft_envremove(g_tool.cmd[i]->args[j++]);
 	}
-	g_tool.envp = temp;
-	return ;
+	g_tool.exterr = ret;
 }
 
-_Bool	ft_isin(char *node, char **argv)
+int		ft_is_empty(char *s)
 {
-	int	i;
-	char	**parts;
+	int i;
 
 	i = 0;
-	while (argv[i])
+	while (s[i] && (s[i] == ' ' || s[i] == '\t'))
+		i++;
+	if (s[i])
+		return 0;
+	return 1; 
+}
+
+int		ft_envremove(char *var)
+{
+	int i;
+	int j;
+	int l;
+
+	i = 0;
+	l = ft_strlen(var);
+	while (g_tool.envp[i])
 	{
-		parts = ft_split(node, '=');
-		if (!(ft_strcmp(parts[0], argv[i])))
-			return (1);
+		if (!ft_strncmp(g_tool.envp[i], var, l) && g_tool.envp[i][l] == '=')
+		{
+			j = 0;
+			free(g_tool.envp[i]);
+			while (g_tool.envp[i + j])
+			{
+				g_tool.envp[i + j] = g_tool.envp[i + j + 1];
+				j++;
+			}
+			return 1;
+		}
 		i++;
 	}
-	return (0);
+	return 0;
 }
