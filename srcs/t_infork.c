@@ -6,7 +6,7 @@
 /*   By: tjmari <tjmari@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 11:17:14 by tjmari            #+#    #+#             */
-/*   Updated: 2021/05/28 16:17:26 by tjmari           ###   ########.fr       */
+/*   Updated: 2021/05/28 18:13:43 by tjmari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,9 @@ void	cmd_infork(int i)
 	if (ft_strchr(g_tool.cmd[i]->args[0], '/'))
 	{
 		execve(g_tool.cmd[i]->args[0], g_tool.cmd[i]->args, g_tool.envp);
-		printf("minishell: %s: No such file or directory\n", g_tool.cmd[i]->args[0]);
+		ft_putstr_fd("minishell: ", 2);
+		ft_putstr_fd(g_tool.cmd[i]->args[0], 2);
+		ft_putendl_fd(": No such file or directory", 2);
 		exit(127);
 	}
 	else
@@ -68,7 +70,9 @@ void	cmd_infork(int i)
 			execve(cmd, g_tool.cmd[i]->args, g_tool.envp);
 		else
 		{
-			printf("minishell: %s: command not found\n", g_tool.cmd[i]->args[0]);
+			ft_putstr_fd("minishell: ", 2);
+			ft_putstr_fd(g_tool.cmd[i]->args[0], 2);
+			ft_putendl_fd(": command not found", 2);
 			exit(127);
 		}
 	}

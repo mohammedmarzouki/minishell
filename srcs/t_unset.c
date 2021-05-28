@@ -6,7 +6,7 @@
 /*   By: tjmari <tjmari@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 20:12:58 by tjmari            #+#    #+#             */
-/*   Updated: 2021/05/28 16:15:28 by tjmari           ###   ########.fr       */
+/*   Updated: 2021/05/28 18:14:07 by tjmari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@ void	ft_unset(int i)
 			|| ft_strchr(g_tool.cmd[i]->args[j], '=')
 			|| ft_is_empty(g_tool.cmd[i]->args[j]))
 		{
-			ft_putstr_fd("minishell: unset: `", 1);
-			ft_putstr_fd(g_tool.cmd[i]->args[j], 1);
-			ft_putendl_fd("': not a valid identifier", 1);
+			ft_putstr_fd("minishell: unset: `", 2);
+			ft_putstr_fd(g_tool.cmd[i]->args[j], 2);
+			ft_putendl_fd("': not a valid identifier", 2);
 			ret = 1;
 		}
 		ft_envremove(g_tool.cmd[i]->args[j++]);
