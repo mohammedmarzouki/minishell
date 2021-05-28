@@ -6,7 +6,7 @@
 /*   By: tjmari <tjmari@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 11:17:14 by tjmari            #+#    #+#             */
-/*   Updated: 2021/05/28 13:24:34 by tjmari           ###   ########.fr       */
+/*   Updated: 2021/05/28 16:17:26 by tjmari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,12 @@ void	run_infork(int i)
 	pid_t	pid;
 
 	open_pipe(i);
-	set_pipe(i);
 	pid = fork();
 	if (!(g_tool.cmd[i]->sep && *(g_tool.cmd[i]->sep) == '|'))
 		waitpid(pid, NULL, 0);
 	if (pid == 0)
 	{
-		// printf("RUN IN FORK\n");
+		set_pipe(i);
 		if (!g_tool.cmd[i]->args && g_tool.cmd[i]->red)		//	> file
 		{
 			if (!(set_redirections(g_tool.cmd[i])))
@@ -43,6 +42,9 @@ void	run_infork(int i)
 			cmd_infork(i);
 		}
 	}
+	close(g_tool.cmd[i]->pipe[1]);
+	if (i > 0 && g_tool.cmd[i - 1]->sep && *(g_tool.cmd[i - 1]->sep) == '|')
+		close(g_tool.cmd[i - 1]->pipe[0]);
 }
 
 void	cmd_infork(int i)
@@ -76,7 +78,7 @@ char	*make_cmd(char **paths, char *cmd)
 {
 	int		i;
 	char	*temp;
-	
+
 	i = 0;
 	while (paths[i])
 	{
