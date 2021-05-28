@@ -6,7 +6,7 @@
 /*   By: tjmari <tjmari@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 20:12:58 by tjmari            #+#    #+#             */
-/*   Updated: 2021/05/27 11:26:32 by tjmari           ###   ########.fr       */
+/*   Updated: 2021/05/28 11:58:53 by tjmari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,13 +50,13 @@ int		ft_envremove(char *var)
 {
 	int i;
 	int j;
-	int l;
+	int len;
 
 	i = 0;
-	l = ft_strlen(var);
+	len = ft_strlen(var);
 	while (g_tool.envp[i])
 	{
-		if (!ft_strncmp(g_tool.envp[i], var, l) && g_tool.envp[i][l] == '=')
+		if (!ft_strncmp(g_tool.envp[i], var, len) && g_tool.envp[i][len] == '=')
 		{
 			j = 0;
 			free(g_tool.envp[i]);

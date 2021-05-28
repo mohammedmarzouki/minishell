@@ -6,7 +6,7 @@
 /*   By: tjmari <tjmari@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 11:17:14 by tjmari            #+#    #+#             */
-/*   Updated: 2021/05/27 14:59:52 by tjmari           ###   ########.fr       */
+/*   Updated: 2021/05/28 13:24:34 by tjmari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,14 @@ void	run_infork(int i)
 {
 	pid_t	pid;
 
+	open_pipe(i);
+	set_pipe(i);
 	pid = fork();
-	waitpid(pid, NULL, 0);
+	if (!(g_tool.cmd[i]->sep && *(g_tool.cmd[i]->sep) == '|'))
+		waitpid(pid, NULL, 0);
 	if (pid == 0)
 	{
-		printf("RUN IN FORK\n");
+		// printf("RUN IN FORK\n");
 		if (!g_tool.cmd[i]->args && g_tool.cmd[i]->red)		//	> file
 		{
 			if (!(set_redirections(g_tool.cmd[i])))
@@ -28,6 +31,8 @@ void	run_infork(int i)
 		}
 		else if (g_tool.which_builtin)						//	builtin
 		{
+			if (!(set_redirections(g_tool.cmd[i])))
+				exit(g_tool.exterr);
 			run_builtin(i);
 			exit(g_tool.exterr);
 		}
@@ -35,12 +40,12 @@ void	run_infork(int i)
 		{
 			if (!(set_redirections(g_tool.cmd[i])))
 				exit(g_tool.exterr);
-			single_cmd_infork(i);
+			cmd_infork(i);
 		}
 	}
 }
 
-void	single_cmd_infork(int i)
+void	cmd_infork(int i)
 {
 	char	*path;
 	char	**paths;
