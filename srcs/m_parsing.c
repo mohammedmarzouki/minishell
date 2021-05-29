@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   m_parsing.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tjmari <tjmari@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mmarzouk <mmarzouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/23 16:59:17 by tjmari            #+#    #+#             */
-/*   Updated: 2021/05/27 13:48:35 by tjmari           ###   ########.fr       */
+/*   Updated: 2021/05/29 12:29:58 by mmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,5 +99,13 @@ int parsing(char *s)
 	printf("<%d> TRUE\n",g_tool.exterr);
 	assign(sp);
 	printall();
+	printf("BEF %d\n", get_env(g_tool.cmd[0]->args[0]));
+	printf("BE %d\n", get_env(g_tool.cmd[0]->args[0]));
+	printf("B %d\n", get_env(g_tool.cmd[0]->args[0]));
+	if(get_env(g_tool.cmd[0]->args[0]) != -1)
+	{
+		printf("HI %d\n", get_env(g_tool.cmd[0]->args[0]));
+		printf("found it :->%s<-\n",g_tool.envp[get_env(g_tool.cmd[0]->args[0])]);
+	}
 	return (1);
 }
