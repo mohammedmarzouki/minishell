@@ -6,7 +6,7 @@
 /*   By: tjmari <tjmari@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 11:17:14 by tjmari            #+#    #+#             */
-/*   Updated: 2021/05/27 14:59:52 by tjmari           ###   ########.fr       */
+/*   Updated: 2021/05/28 18:13:43 by tjmari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,13 @@ void	run_infork(int i)
 {
 	pid_t	pid;
 
+	open_pipe(i);
 	pid = fork();
-	waitpid(pid, NULL, 0);
+	if (!(g_tool.cmd[i]->sep && *(g_tool.cmd[i]->sep) == '|'))
+		waitpid(pid, NULL, 0);
 	if (pid == 0)
 	{
-		printf("RUN IN FORK\n");
+		set_pipe(i);
 		if (!g_tool.cmd[i]->args && g_tool.cmd[i]->red)		//	> file
 		{
 			if (!(set_redirections(g_tool.cmd[i])))
@@ -28,6 +30,8 @@ void	run_infork(int i)
 		}
 		else if (g_tool.which_builtin)						//	builtin
 		{
+			if (!(set_redirections(g_tool.cmd[i])))
+				exit(g_tool.exterr);
 			run_builtin(i);
 			exit(g_tool.exterr);
 		}
@@ -35,12 +39,15 @@ void	run_infork(int i)
 		{
 			if (!(set_redirections(g_tool.cmd[i])))
 				exit(g_tool.exterr);
-			single_cmd_infork(i);
+			cmd_infork(i);
 		}
 	}
+	close(g_tool.cmd[i]->pipe[1]);
+	if (i > 0 && g_tool.cmd[i - 1]->sep && *(g_tool.cmd[i - 1]->sep) == '|')
+		close(g_tool.cmd[i - 1]->pipe[0]);
 }
 
-void	single_cmd_infork(int i)
+void	cmd_infork(int i)
 {
 	char	*path;
 	char	**paths;
@@ -51,7 +58,9 @@ void	single_cmd_infork(int i)
 	if (ft_strchr(g_tool.cmd[i]->args[0], '/'))
 	{
 		execve(g_tool.cmd[i]->args[0], g_tool.cmd[i]->args, g_tool.envp);
-		printf("minishell: %s: No such file or directory\n", g_tool.cmd[i]->args[0]);
+		ft_putstr_fd("minishell: ", 2);
+		ft_putstr_fd(g_tool.cmd[i]->args[0], 2);
+		ft_putendl_fd(": No such file or directory", 2);
 		exit(127);
 	}
 	else
@@ -61,7 +70,9 @@ void	single_cmd_infork(int i)
 			execve(cmd, g_tool.cmd[i]->args, g_tool.envp);
 		else
 		{
-			printf("minishell: %s: command not found\n", g_tool.cmd[i]->args[0]);
+			ft_putstr_fd("minishell: ", 2);
+			ft_putstr_fd(g_tool.cmd[i]->args[0], 2);
+			ft_putendl_fd(": command not found", 2);
 			exit(127);
 		}
 	}
@@ -71,7 +82,7 @@ char	*make_cmd(char **paths, char *cmd)
 {
 	int		i;
 	char	*temp;
-	
+
 	i = 0;
 	while (paths[i])
 	{

@@ -6,7 +6,7 @@
 /*   By: tjmari <tjmari@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 19:51:06 by tjmari            #+#    #+#             */
-/*   Updated: 2021/05/26 15:22:04 by tjmari           ###   ########.fr       */
+/*   Updated: 2021/05/28 18:07:27 by tjmari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,9 @@ _Bool	set_redirections(t_cmd *cmd)
 			g_tool.fd_in = open(cmd->file[i], O_RDONLY, S_IRWXU);
 		if (g_tool.fd_in < 0 || g_tool.fd_out < 0)
 		{
-			printf("minishell: no such file or directory: %s\n", cmd->file[i]);
+			ft_putstr_fd("minishell: ", 2);
+			ft_putstr_fd(cmd->file[i], 2);
+			ft_putendl_fd(": No such file or directory", 2);
 			return (0);
 		}
 		if (cmd->red[i + 1] && g_tool.fd_out && cmd->red[i + 1][0] == '>')
