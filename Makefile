@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mmarzouk <mmarzouk@student.42.fr>          +#+  +:+       +#+         #
+#    By: tjmari <tjmari@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/22 20:07:24 by tjmari            #+#    #+#              #
-#    Updated: 2021/05/29 11:50:12 by mmarzouk         ###   ########.fr        #
+#    Updated: 2021/05/29 18:26:26 by tjmari           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,8 +27,8 @@ SRCS = ./srcs/main.c ./srcs/get_next_line.c \
 	./srcs/m_assign.c ./srcs/m_splitting.c \
 	./srcs/m_finalize.c \
 	\
-	./srcs/t_executing.c ./srcs/t_redirection.c ./srcs/t_pipe.c \
-	./srcs/t_infork.c \
+	./srcs/t_executing.c ./srcs/t_signals.c \
+	./srcs/t_redirection.c ./srcs/t_pipe.c ./srcs/t_infork.c \
 	./srcs/t_builtin.c ./srcs/t_echo.c ./srcs/t_cd.c \
 	./srcs/t_pwd.c ./srcs/t_export.c ./srcs/t_unset.c \
 	./srcs/t_env.c ./srcs/t_exit.c \

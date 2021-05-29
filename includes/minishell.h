@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmarzouk <mmarzouk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tjmari <tjmari@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/22 20:04:07 by tjmari            #+#    #+#             */
-/*   Updated: 2021/05/29 11:49:19 by mmarzouk         ###   ########.fr       */
+/*   Updated: 2021/05/29 18:26:38 by tjmari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ typedef struct s_cmd
 typedef struct s_tool
 {
 	int			cmd_c;
-	int			cmd_i;
+	int			i;
 	char		cwd[1024];
 	short		exterr;
 	t_cmd		**cmd;
@@ -51,6 +51,7 @@ typedef struct s_tool
 	int			fd_in;
 	int			fd_out;
 	int			which_builtin;
+	_Bool		infork;
 }				t_tool;
 t_tool			g_tool;
 
@@ -80,6 +81,9 @@ void			executing(void);
 void			run_builtin(int i);
 void			run_infork(int i);
 char			*make_cmd(char **paths, char *cmd);
+
+void			signal_int(int sig);
+void			signal_quit(int sig);
 
 _Bool			set_redirections(t_cmd *cmd);
 void			reset_std(void);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmarzouk <mmarzouk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tjmari <tjmari@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/22 20:03:07 by tjmari            #+#    #+#             */
-/*   Updated: 2021/05/29 12:26:37 by mmarzouk         ###   ########.fr       */
+/*   Updated: 2021/05/29 17:34:11 by tjmari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,14 @@ int	main(int argc, char *argv[], char *envp[])
 	(void)argc;
 	(void)argv;
 	g_tool.envp = ft_dcdup(envp, 0);
-	
 	change_shlvl();
 	g_tool.original_fd_in = dup(STDIN_FILENO);
 	g_tool.original_fd_out = dup(STDOUT_FILENO);
+	signal(SIGINT, signal_int);
+	signal(SIGQUIT, signal_quit);
 	while (1)
 	{
+		g_tool.infork = 0;
 		ft_putstr_fd("\033[0;36mminishell$\033[0m ", 1);
 		get_next_line(&input);
 		if (parsing(input))
