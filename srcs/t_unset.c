@@ -6,7 +6,7 @@
 /*   By: tjmari <tjmari@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 20:12:58 by tjmari            #+#    #+#             */
-/*   Updated: 2021/05/28 18:14:07 by tjmari           ###   ########.fr       */
+/*   Updated: 2021/05/30 12:35:37 by tjmari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	ft_unset(int i)
 	{
 		if (ft_strchr(g_tool.cmd[i]->args[j], ' ')
 			|| ft_strchr(g_tool.cmd[i]->args[j], '=')
-			|| ft_is_empty(g_tool.cmd[i]->args[j]))
+			|| ft_isempty(g_tool.cmd[i]->args[j]))
 		{
 			ft_putstr_fd("minishell: unset: `", 2);
 			ft_putstr_fd(g_tool.cmd[i]->args[j], 2);
@@ -35,7 +35,7 @@ void	ft_unset(int i)
 	g_tool.exterr = ret;
 }
 
-int	ft_is_empty(char *s)
+int	ft_isempty(char *s)
 {
 	int	i;
 

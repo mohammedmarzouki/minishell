@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmarzouk <mmarzouk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tjmari <tjmari@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/22 20:04:07 by tjmari            #+#    #+#             */
-/*   Updated: 2021/05/30 16:42:38 by mmarzouk         ###   ########.fr       */
+/*   Updated: 2021/05/30 18:30:41 by tjmari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,11 +111,14 @@ _Bool			ft_isflag(char *args);
 void			ft_cd(int i);
 void			ft_pwd(void);
 void			ft_export(int i);
-void			ft_putexport(char **argv);
+int				how_many_nodes(int i);
+char			**change_envp_var(char **argv, int index, char *arg);
 char			*ft_getkey(char *arg);
 char			*ft_getvalue(char *arg);
+_Bool			ft_export_valid(char *cmd);
+void			ft_putexport(char **argv);
 void			ft_unset(int i);
-int				ft_is_empty(char *s);
+int				ft_isempty(char *s);
 int				ft_envremove(char *var);
 void			ft_env(void);
 void			ft_exit(int i);

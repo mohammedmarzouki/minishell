@@ -6,7 +6,7 @@
 /*   By: tjmari <tjmari@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/26 11:20:31 by tjmari            #+#    #+#             */
-/*   Updated: 2021/05/26 15:18:26 by tjmari           ###   ########.fr       */
+/*   Updated: 2021/05/30 18:20:14 by tjmari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ char	**ft_dcdup(char **argv, int toadd)
 	temp[len + toadd] = NULL;
 	while (i < len)
 	{
-		temp[i] = strdup(argv[i]);
+		temp[i] = ft_strdup(argv[i]);
 		i++;
 	}
 	return (temp);
@@ -65,42 +65,33 @@ char	**sortdcp(char **argv)
 	return (argv);
 }
 
-char	**add_node_dc(char **argv, char **cmds, int nodes)
+char	**add_node_dc(char **argv, char **args, int to_add)
 {
+	int	envp_len;
+	int	envp_len_h;
 	int	i;
-	int	i2;
-	int	i3;
 
-	nodes--;
-	i = how_many_element(argv);
-	i2 = i;
-	i3 = 1;
-	argv = ft_dcdup(argv, nodes);
-	while (i < i2 + nodes)
-		argv[i++] = ft_strdup(cmds[i3++]);
+	envp_len = how_many_element(argv);
+	envp_len_h = envp_len;
+	i = 1;
+	argv = ft_dcdup(argv, to_add);
+	while ((envp_len < envp_len_h + (how_many_element(g_tool.cmd[g_tool.i]->args) - 1)) && args[i])
+	{
+		
+		if (ft_export_valid(args[i]) && get_env(ft_getkey(args[i])) < 0)
+			argv[envp_len++] = ft_strdup(args[i]);
+		else if (ft_export_valid(args[i]) && get_env(ft_getkey(args[i])) >= 0)
+			argv = change_envp_var(argv, get_env(ft_getkey(args[i])), args[i]);
+		i++;
+	}
 	return (argv);
 }
 
-void	change_var(char *var, char *new_value)
+char	**change_envp_var(char **argv, int index, char *arg)
 {
-	int		i;
-	char	**parts;
-	char	*temp;
-
-	i = 0;
-	while (i < how_many_element(g_tool.envp))
-	{
-		parts = ft_split(g_tool.envp[i], '=');
-		if (parts[0] == var)
-		{
-			temp = ft_strjoin("", parts[0]);
-			temp = ft_strjoin(temp, "=");
-			temp = ft_strjoin(temp, new_value);
-			g_tool.envp[i] = temp;
-			return ;
-		}
-		i++;
-	}
+	free(argv[index]);
+	argv[index] = ft_strdup(arg);
+	return (argv);
 }
 
 void	change_shlvl(void)
