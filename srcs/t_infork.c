@@ -6,7 +6,7 @@
 /*   By: tjmari <tjmari@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 11:17:14 by tjmari            #+#    #+#             */
-/*   Updated: 2021/05/28 18:13:43 by tjmari           ###   ########.fr       */
+/*   Updated: 2021/05/29 18:29:42 by tjmari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void	run_infork(int i)
 	pid_t	pid;
 
 	open_pipe(i);
+	g_tool.infork = 1;						// rely maily in pid
 	pid = fork();
 	if (!(g_tool.cmd[i]->sep && *(g_tool.cmd[i]->sep) == '|'))
 		waitpid(pid, NULL, 0);
@@ -56,7 +57,7 @@ void	cmd_infork(int i)
 	path = getenv("PATH");
 	paths = ft_split(path, ':');
 	if (ft_strchr(g_tool.cmd[i]->args[0], '/'))
-	{
+	{		// rely on errno
 		execve(g_tool.cmd[i]->args[0], g_tool.cmd[i]->args, g_tool.envp);
 		ft_putstr_fd("minishell: ", 2);
 		ft_putstr_fd(g_tool.cmd[i]->args[0], 2);
