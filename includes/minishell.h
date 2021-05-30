@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tjmari <tjmari@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mmarzouk <mmarzouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/22 20:04:07 by tjmari            #+#    #+#             */
-/*   Updated: 2021/05/29 18:26:38 by tjmari           ###   ########.fr       */
+/*   Updated: 2021/05/30 09:19:07 by mmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,8 @@ short			chk_err(char **sp);
 int				seterr(short err);
 int				count_cmds(char **s);
 int				get_env(char *s);
+void			finalizem(int	i);
+int 			backslash(char *s);
 
 /*
 ** EXECUTING

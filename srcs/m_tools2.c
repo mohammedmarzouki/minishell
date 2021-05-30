@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   m_tools2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tjmari <tjmari@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mmarzouk <mmarzouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/23 17:19:33 by tjmari            #+#    #+#             */
-/*   Updated: 2021/05/26 10:36:51 by tjmari           ###   ########.fr       */
+/*   Updated: 2021/05/30 09:27:30 by mmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,25 @@ static int ft_red(char *s)
 	return (1);
 }
 
+int backslash(char *s)
+{
+	int i;
+	
+	i = 0;
+	while (s && s[i])
+	{
+		if(s[i] == '\\' && !s[i + 1])
+		{
+			ft_putstr_fd("minishell: multiline commands are not supported \n"
+			, 2);
+			return (1);
+		}
+		if(s[i] == '\\' && s[i + 1])
+			i++;
+		i++;
+	}
+	return (0);
+}
 short chk_err(char **sp)
 {
 	int i;
@@ -30,6 +49,8 @@ short chk_err(char **sp)
 	while(sp && sp[i])
 	{
 		value = itis(sp[i]);
+		if(backslash(sp[i]))
+			return(1);
 		if(value == 0)
 		{
 			flag = 1;
@@ -40,27 +61,26 @@ short chk_err(char **sp)
 		{
 			if (!sp[i + 1] || ft_red(sp[i]))
 			{
-				printf("minishell: syntax error near unexpected token\n");
+				ft_putstr_fd("minishell: syntax error \n", 2);
 				return(258);
 			}
-			else if(itis(sp[i + 1]) != 0)
+			if(itis(sp[i + 1]) != 0)
 			{
-				printf("minishell: syntax error near unexpected token\n");
+				ft_putstr_fd("minishell: syntax error \n",2);
 				return(258);
 				
 			}
-			else
-			{
-				flag = 1;
-				i += 2;
-			}
+			if(backslash(sp[i + 1]))
+				return(1);
+			flag = 1;
+			i += 2;
 			continue;
 		}
 		else if (value == 2)// ;
 		{
 			if(!flag)
 			{
-				printf("minishell: syntax error near unexpected token \n");
+				ft_putstr_fd("minishell: syntax error  \n",2);
 				return (258);
 			}
 			else
@@ -74,12 +94,12 @@ short chk_err(char **sp)
 		{
 			if(!flag)   
 			{
-				printf("minishell: syntax error near unexpected token \n");
+				ft_putstr_fd("minishell: syntax error  \n",2);
 				return (258);
 			}
 			else if(!sp[i + 1])
 			{
-				printf("minishell: pipe what ?\n");
+				ft_putstr_fd("minishell: pipe what ?\n",2);
 				return (1);
 			}
 			else
