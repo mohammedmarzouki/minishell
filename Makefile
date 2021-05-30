@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mmarzouk <mmarzouk@student.42.fr>          +#+  +:+       +#+         #
+#    By: tjmari <tjmari@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/22 20:07:24 by tjmari            #+#    #+#              #
-#    Updated: 2021/05/30 17:42:18 by mmarzouk         ###   ########.fr        #
+#    Updated: 2021/05/30 18:29:37 by tjmari           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,8 +25,8 @@ INCLUDES = ./includes/minishell.h \
 SRCS = ./srcs/main.c ./srcs/get_next_line.c \
 	./srcs/m_parsing.c ./srcs/m_tools.c ./srcs/m_tools2.c \
 	./srcs/m_assign.c ./srcs/m_splitting.c \
-	./srcs/m_finalize.c  ./srcs/m_err_shrtn.c\
-	./srcs/m_fin_tools.c\
+	./srcs/m_finalize.c  ./srcs/m_err_shrtn.c \
+	./srcs/m_fin_tools.c \
 	\
 	./srcs/t_executing.c ./srcs/t_signals.c \
 	./srcs/t_redirection.c ./srcs/t_pipe.c ./srcs/t_infork.c \
