@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   t_export.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tjmari <tjmari@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mmarzouk <mmarzouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 20:12:52 by tjmari            #+#    #+#             */
-/*   Updated: 2021/05/30 16:36:53 by tjmari           ###   ########.fr       */
+/*   Updated: 2021/05/30 16:57:09 by mmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,5 +69,5 @@ char	*ft_getvalue(char *arg)
 			return (ft_substr(arg, i + 1, ft_strlen(arg)));
 		i++;
 	}
-	return (NULL);
+	return (ft_strdup(""));
 }

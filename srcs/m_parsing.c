@@ -6,7 +6,7 @@
 /*   By: mmarzouk <mmarzouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/23 16:59:17 by tjmari            #+#    #+#             */
-/*   Updated: 2021/05/30 12:14:09 by mmarzouk         ###   ########.fr       */
+/*   Updated: 2021/05/30 17:43:42 by mmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,8 @@ int parsing(char *s)
 	}
 	// printf("<%d> TRUE\n",g_tool.exterr);
 	assign(sp);
+	printall();
+	finalizem(0);
 	printall();
 	return (1);
 }

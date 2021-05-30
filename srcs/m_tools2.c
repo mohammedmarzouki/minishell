@@ -6,7 +6,7 @@
 /*   By: mmarzouk <mmarzouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/23 17:19:33 by tjmari            #+#    #+#             */
-/*   Updated: 2021/05/30 12:13:23 by mmarzouk         ###   ########.fr       */
+/*   Updated: 2021/05/30 17:41:42 by mmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,11 +46,11 @@ short chk_err(char **sp,int i,int value,int flag)
 			return(1);
 		if(value == 0)
 			cmd_arg(&flag, &i);
-		else if (value == 1)// < >
+		else if (value == 1)
 			hold = redirct_tkn(&flag,&i,sp);
-		else if (value == 2)// ;
+		else if (value == 2)
 			hold = semicln_tkn(&flag,&i);
-		else if (value == 3)// |
+		else if (value == 3)
 			hold = pipe_tkn(&flag,&i,sp);
 		else
 			i++;

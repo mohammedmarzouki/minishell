@@ -6,7 +6,7 @@
 /*   By: mmarzouk <mmarzouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/22 20:04:07 by tjmari            #+#    #+#             */
-/*   Updated: 2021/05/30 12:12:39 by mmarzouk         ###   ########.fr       */
+/*   Updated: 2021/05/30 16:42:38 by mmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,26 +60,31 @@ t_tool			g_tool;
 */
 int				parsing(char *s);
 int				get_next_line(char **line);
-void			nfree(void *s);
 int				same(char *s1, char *s2);
-char			**doublefree(char **ptr);
 int				doublecount(char **s);
 int				itis(char *s);
-char			**append_line(char **s, char *line, int free);
+int				pipe_tkn(int *f,int *i,char **sp);
+int				semicln_tkn(int *f,int *i);
 int				a_word(char *s);
-char			**split_it(char *s, char **sp, int i, int start);
-void			assign(char **sp);
-short			chk_err(char **sp,int i,int value,int flag);
 int				seterr(short err);
 int				err_quit(char *s,int err);
 int				count_cmds(char **s);
 int				get_env(char *s);
-void			finalizem(int	i);
-int 			backslash(char *s);
-void			cmd_arg(int *f,int *i);
 int				redirct_tkn(int *f,int *i,char **sp);
-int				semicln_tkn(int *f,int *i);
-int				pipe_tkn(int *f,int *i,char **sp);
+int 			backslash(char *s);
+char			**doublefree(char **ptr);
+char			**append_line(char **s, char *line, int free);
+char			**split_it(char *s, char **sp, int i, int start);
+void			cmd_arg(int *f,int *i);
+void			finalizem(int	i);
+void			assign(char **sp);
+void			nfree(void *s);
+void			fin_slash(char **fin,char *s, int *i);
+void			fin_quote(char **fin,char *s, int *i);
+void			fin_sngl_q(char **fin,char *s, int *i);
+void			fin_vars(char **fin,char *s, int *i);
+void			fin_nrml(char **fin,char *s, int *i);
+short			chk_err(char **sp,int i,int value,int flag);
 
 /*
 ** EXECUTING
@@ -107,6 +112,8 @@ void			ft_cd(int i);
 void			ft_pwd(void);
 void			ft_export(int i);
 void			ft_putexport(char **argv);
+char			*ft_getkey(char *arg);
+char			*ft_getvalue(char *arg);
 void			ft_unset(int i);
 int				ft_is_empty(char *s);
 int				ft_envremove(char *var);
