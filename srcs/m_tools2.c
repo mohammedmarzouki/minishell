@@ -3,20 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   m_tools2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tjmari <tjmari@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mmarzouk <mmarzouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/23 17:19:33 by tjmari            #+#    #+#             */
-/*   Updated: 2021/05/30 10:40:30 by tjmari           ###   ########.fr       */
+/*   Updated: 2021/05/30 12:13:23 by mmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-static int ft_red(char *s)
+int			err_quit(char *s,int err)
 {
-	if(same(s,"<") || same(s,">") ||same(s,">>"))
-		return(0);
-	return (1);
+	ft_putstr_fd(s, 2);
+	return (err);
 }
 
 int backslash(char *s)
@@ -27,94 +26,39 @@ int backslash(char *s)
 	while (s && s[i])
 	{
 		if(s[i] == '\\' && !s[i + 1])
-		{
-			ft_putstr_fd("minishell: multiline commands are not supported \n"
-			, 2);
-			return (1);
-		}
+			return(err_quit\
+				("minishell: multiline commands are not supported \n",1));
 		if(s[i] == '\\' && s[i + 1])
 			i++;
 		i++;
 	}
 	return (0);
 }
-short chk_err(char **sp)
+short chk_err(char **sp,int i,int value,int flag)
 {
-	int i;
-	int value;
-	int flag;
+	int hold;
 
-	i = 0;
-	flag = 0;
+	hold = 0;
 	while(sp && sp[i])
 	{
 		value = itis(sp[i]);
 		if(backslash(sp[i]))
 			return(1);
 		if(value == 0)
-		{
-			flag = 1;
-			i++;
-			continue;
-		}
+			cmd_arg(&flag, &i);
 		else if (value == 1)// < >
-		{
-			if (!sp[i + 1] || ft_red(sp[i]))
-			{
-				ft_putstr_fd("minishell: syntax error \n", 2);
-				return(258);
-			}
-			if(itis(sp[i + 1]) != 0)
-			{
-				ft_putstr_fd("minishell: syntax error \n",2);
-				return(258);
-				
-			}
-			if(backslash(sp[i + 1]))
-				return(1);
-				flag = 1;
-				i += 2;
-			continue;
-		}
+			hold = redirct_tkn(&flag,&i,sp);
 		else if (value == 2)// ;
-		{
-			if(!flag)
-			{
-				ft_putstr_fd("minishell: syntax error  \n",2);
-				return (258);
-			}
-			else
-			{
-				flag = 0;
-				i++;
-				continue;
-			}
-		}
+			hold = semicln_tkn(&flag,&i);
 		else if (value == 3)// |
-		{
-			if(!flag)   
-			{
-				ft_putstr_fd("minishell: syntax error  \n",2);
-				return (258);
-			}
-			else if(!sp[i + 1])
-			{
-				ft_putstr_fd("minishell: pipe what ?\n",2);
-				return (1);
-			}
-			else
-			{
-				flag = 0;
-				i++;
-				continue;
-			}
-		}
-		else // '\0'
+			hold = pipe_tkn(&flag,&i,sp);
+		else
 			i++;
+		if(hold)
+			return(hold);
 	}
 	return(0);
 }
-
 
 char **append_line(char **s, char *line, int free)
 {

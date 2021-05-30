@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   m_parsing.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tjmari <tjmari@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mmarzouk <mmarzouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/23 16:59:17 by tjmari            #+#    #+#             */
-/*   Updated: 2021/05/27 13:48:35 by tjmari           ###   ########.fr       */
+/*   Updated: 2021/05/30 12:14:09 by mmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static void double_print(char **s)
 	
 }
 
-static void printall(void)
+ void printall(void)
 {
 	int i = 0;
 
@@ -88,15 +88,15 @@ int parsing(char *s)
 		s++;
 	if(!(sp = split_it(s, NULL, 0, 0)))
 	{
-		printf("<%d>SPLIT\n",g_tool.exterr);
+		// printf("<%d>SPLIT\n",g_tool.exterr);
 		return(0);
 	}
-	if (seterr(chk_err(sp)))
+	if (seterr(chk_err(sp, 0, 0, 0)))
 	{
-		printf("<%d> sterr\n",g_tool.exterr);
+		// printf("<%d> sterr\n",g_tool.exterr);
 		return(0);
 	}
-	printf("<%d> TRUE\n",g_tool.exterr);
+	// printf("<%d> TRUE\n",g_tool.exterr);
 	assign(sp);
 	printall();
 	return (1);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tjmari <tjmari@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mmarzouk <mmarzouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/22 20:04:07 by tjmari            #+#    #+#             */
-/*   Updated: 2021/05/30 10:37:58 by tjmari           ###   ########.fr       */
+/*   Updated: 2021/05/30 12:12:39 by mmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,12 +69,17 @@ char			**append_line(char **s, char *line, int free);
 int				a_word(char *s);
 char			**split_it(char *s, char **sp, int i, int start);
 void			assign(char **sp);
-short			chk_err(char **sp);
+short			chk_err(char **sp,int i,int value,int flag);
 int				seterr(short err);
+int				err_quit(char *s,int err);
 int				count_cmds(char **s);
 int				get_env(char *s);
 void			finalizem(int	i);
 int 			backslash(char *s);
+void			cmd_arg(int *f,int *i);
+int				redirct_tkn(int *f,int *i,char **sp);
+int				semicln_tkn(int *f,int *i);
+int				pipe_tkn(int *f,int *i,char **sp);
 
 /*
 ** EXECUTING
