@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmarzouk <mmarzouk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tjmari <tjmari@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/22 20:04:07 by tjmari            #+#    #+#             */
-/*   Updated: 2021/05/30 09:19:07 by mmarzouk         ###   ########.fr       */
+/*   Updated: 2021/05/30 10:37:58 by tjmari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ typedef struct s_tool
 	int			fd_in;
 	int			fd_out;
 	int			which_builtin;
-	_Bool		infork;
+	pid_t		pid;
 }				t_tool;
 t_tool			g_tool;
 

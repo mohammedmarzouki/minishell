@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   m_splitting.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmarzouk <mmarzouk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tjmari <tjmari@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/23 17:20:37 by tjmari            #+#    #+#             */
-/*   Updated: 2021/05/30 09:17:47 by mmarzouk         ###   ########.fr       */
+/*   Updated: 2021/05/30 10:38:45 by tjmari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static int double_q(char *s, int *i)
 	}
 	if(f)
 	{
-		ft_putstr_fd("parse error : close the quotes !!\n",2);
+			ft_putstr_fd("parse error : close the quotes !!\n",2);
 		return (seterr(1));
 	}
 	return (0);
