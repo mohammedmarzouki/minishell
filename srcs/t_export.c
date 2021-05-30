@@ -6,7 +6,7 @@
 /*   By: tjmari <tjmari@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 20:12:52 by tjmari            #+#    #+#             */
-/*   Updated: 2021/05/27 11:56:58 by tjmari           ###   ########.fr       */
+/*   Updated: 2021/05/30 16:36:53 by tjmari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,4 +42,32 @@ void	ft_putexport(char **argv)
 		else
 			printf("declare -x %s=\"\"\n", parts[0]);
 	}
+}
+
+char	*ft_getkey(char *arg)
+{
+	int	i;
+
+	i = 0;
+	while (arg[i])
+	{
+		if (arg[i] == '=')
+			return (ft_substr(arg, 0, i));
+		i++;
+	}
+	return (arg);
+}
+
+char	*ft_getvalue(char *arg)
+{
+	int	i;
+
+	i = 0;
+	while (arg[i])
+	{
+		if (arg[i] == '=')
+			return (ft_substr(arg, i + 1, ft_strlen(arg)));
+		i++;
+	}
+	return (NULL);
 }
