@@ -6,7 +6,7 @@
 /*   By: tjmari <tjmari@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 11:17:14 by tjmari            #+#    #+#             */
-/*   Updated: 2021/05/29 18:29:42 by tjmari           ###   ########.fr       */
+/*   Updated: 2021/05/30 09:27:18 by tjmari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,18 @@
 
 void	run_infork(int i)
 {
-	pid_t	pid;
-
 	open_pipe(i);
-	g_tool.infork = 1;						// rely maily in pid
-	pid = fork();
+	g_tool.pid = fork();
 	if (!(g_tool.cmd[i]->sep && *(g_tool.cmd[i]->sep) == '|'))
-		waitpid(pid, NULL, 0);
-	if (pid == 0)
+		waitpid(g_tool.pid, NULL, 0);
+	if (g_tool.pid == 0)
 	{
 		set_pipe(i);
 		if (!g_tool.cmd[i]->args && g_tool.cmd[i]->red)		//	> file
 		{
 			if (!(set_redirections(g_tool.cmd[i])))
 				exit(g_tool.exterr);
+			exit(g_tool.exterr);
 		}
 		else if (g_tool.which_builtin)						//	builtin
 		{
@@ -54,7 +52,7 @@ void	cmd_infork(int i)
 	char	**paths;
 	char	*cmd;
 
-	path = getenv("PATH");
+	path = g_tool.envp[get_env("PATH")];		// needs to print the error 'bash: ls: No such file or directory'
 	paths = ft_split(path, ':');
 	if (ft_strchr(g_tool.cmd[i]->args[0], '/'))
 	{		// rely on errno
@@ -62,6 +60,7 @@ void	cmd_infork(int i)
 		ft_putstr_fd("minishell: ", 2);
 		ft_putstr_fd(g_tool.cmd[i]->args[0], 2);
 		ft_putendl_fd(": No such file or directory", 2);
+		// ft_putendl_fd(strerror(errno), 2);
 		exit(127);
 	}
 	else
@@ -74,6 +73,7 @@ void	cmd_infork(int i)
 			ft_putstr_fd("minishell: ", 2);
 			ft_putstr_fd(g_tool.cmd[i]->args[0], 2);
 			ft_putendl_fd(": command not found", 2);
+			// ft_putendl_fd(strerror(errno), 2);
 			exit(127);
 		}
 	}

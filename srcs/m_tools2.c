@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   m_tools2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmarzouk <mmarzouk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tjmari <tjmari@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/23 17:19:33 by tjmari            #+#    #+#             */
-/*   Updated: 2021/05/30 09:27:30 by mmarzouk         ###   ########.fr       */
+/*   Updated: 2021/05/30 10:40:30 by tjmari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,8 +72,8 @@ short chk_err(char **sp)
 			}
 			if(backslash(sp[i + 1]))
 				return(1);
-			flag = 1;
-			i += 2;
+				flag = 1;
+				i += 2;
 			continue;
 		}
 		else if (value == 2)// ;
