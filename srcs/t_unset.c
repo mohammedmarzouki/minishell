@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   t_unset.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tjmari <tjmari@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mmarzouk <mmarzouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 20:12:58 by tjmari            #+#    #+#             */
-/*   Updated: 2021/05/30 12:35:37 by tjmari           ###   ########.fr       */
+/*   Updated: 2021/05/31 11:24:07 by mmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	ft_unset(int i)
 		}
 		ft_envremove(g_tool.cmd[i]->args[j++]);
 	}
-	g_tool.exterr = ret;
+	g_tool.exit_status = ret;
 }
 
 int	ft_isempty(char *s)

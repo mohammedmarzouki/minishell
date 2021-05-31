@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   t_export.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tjmari <tjmari@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mmarzouk <mmarzouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 20:12:52 by tjmari            #+#    #+#             */
-/*   Updated: 2021/05/30 18:03:13 by tjmari           ###   ########.fr       */
+/*   Updated: 2021/05/31 10:26:40 by mmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,8 @@ char	*ft_getvalue(char *arg)
 	int	i;
 
 	i = 0;
+	if(same(arg,"?"))
+		return (ft_itoa(g_tool.exit_status));
 	while (arg[i])
 	{
 		if (arg[i] == '=')

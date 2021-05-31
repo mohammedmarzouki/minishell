@@ -6,7 +6,7 @@
 /*   By: mmarzouk <mmarzouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/30 14:56:54 by mmarzouk          #+#    #+#             */
-/*   Updated: 2021/05/30 17:45:34 by mmarzouk         ###   ########.fr       */
+/*   Updated: 2021/05/31 11:25:38 by mmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,20 @@ void    fin_sngl_q(char **fin,char *s, int *i)
 		fin_nrml(fin, s, i);
 	(*i)++;
 }
+
+void    fin_err(char **fin, int *i)
+{
+	char *hld;
+	char *tmp;
+	
+	(*i)++;
+	hld = ft_getvalue("?");
+	tmp = *fin;
+	*fin = ft_strjoin(tmp,hld);
+	free(tmp);
+	free(hld);
+}
+
 void    fin_vars(char **fin,char *s, int *i)
 {
 	int j;
@@ -52,37 +66,21 @@ void    fin_vars(char **fin,char *s, int *i)
 	
 	var = ft_strdup("");
 	(*i)++;
-	while(ft_isalnum(s[(*i)]))
-		fin_nrml(&var, s, i);
-	j = get_env(var);
-	if(j != -1)
+	if (s[(*i)] == '?')
+		fin_err(fin, i);		
+	else
 	{
-		free(var);
-		var = *fin;
-		hld = ft_getvalue(g_tool.envp[j]);
-		*fin = ft_strjoin(var, hld);
-		free(hld);
+		while(ft_isalnum(s[(*i)])||s[(*i)] == '_')
+			fin_nrml(&var, s, i);		
+		j = get_env(var);
+		if(j != -1)
+		{
+			free(var);
+			var = *fin;
+			hld = ft_getvalue(g_tool.envp[j]);
+			*fin = ft_strjoin(var, hld);
+			free(hld);
+		}
 	}
 	free(var);
-}
-
-void    fin_quote(char **fin,char *s, int *i)
-{
-
-	(*i)++;
-	while(s[(*i)] != '\"')
-	{
-		if(s[(*i)] == '\\' && ft_strchr("\\\"$", s[(*i) + 1]))
-			fin_slash(fin, s, i);
-		else if(s[(*i)] == '\\' && !ft_strchr("\\\"$", s[(*i) + 1]))
-		{
-			fin_nrml(fin, s, i);
-			fin_nrml(fin, s, i);
-		}
-		else if(s[(*i)] == '$')
-			fin_vars(fin, s, i);
-		else
-			fin_nrml(fin, s, i);
-	}
-	(*i)++;
 }

@@ -6,7 +6,7 @@
 /*   By: mmarzouk <mmarzouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/29 09:46:38 by mmarzouk          #+#    #+#             */
-/*   Updated: 2021/05/30 17:44:24 by mmarzouk         ###   ########.fr       */
+/*   Updated: 2021/05/31 11:21:52 by mmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,27 @@ int    get_env(char *s)
 		doublefree(splt);
 	}
 	return(-1);
+}
+
+void    fin_quote(char **fin,char *s, int *i)
+{
+
+	(*i)++;
+	while(s[(*i)] != '\"')
+	{
+		if(s[(*i)] == '\\' && ft_strchr("\\\"$", s[(*i) + 1]))
+			fin_slash(fin, s, i);
+		else if(s[(*i)] == '\\' && !ft_strchr("\\\"$", s[(*i) + 1]))
+		{
+			fin_nrml(fin, s, i);
+			fin_nrml(fin, s, i);
+		}
+		else if(s[(*i)] == '$')
+			fin_vars(fin, s, i);
+		else
+			fin_nrml(fin, s, i);
+	}
+	(*i)++;
 }
 
 char	*fin_line(char	*s)

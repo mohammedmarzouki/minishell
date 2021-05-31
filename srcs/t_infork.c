@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   t_infork.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tjmari <tjmari@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mmarzouk <mmarzouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 11:17:14 by tjmari            #+#    #+#             */
-/*   Updated: 2021/05/30 09:27:18 by tjmari           ###   ########.fr       */
+/*   Updated: 2021/05/31 11:24:07 by mmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,20 +24,20 @@ void	run_infork(int i)
 		if (!g_tool.cmd[i]->args && g_tool.cmd[i]->red)		//	> file
 		{
 			if (!(set_redirections(g_tool.cmd[i])))
-				exit(g_tool.exterr);
-			exit(g_tool.exterr);
+				exit(g_tool.exit_status);
+			exit(g_tool.exit_status);
 		}
 		else if (g_tool.which_builtin)						//	builtin
 		{
 			if (!(set_redirections(g_tool.cmd[i])))
-				exit(g_tool.exterr);
+				exit(g_tool.exit_status);
 			run_builtin(i);
-			exit(g_tool.exterr);
+			exit(g_tool.exit_status);
 		}
 		else
 		{
 			if (!(set_redirections(g_tool.cmd[i])))
-				exit(g_tool.exterr);
+				exit(g_tool.exit_status);
 			cmd_infork(i);
 		}
 	}

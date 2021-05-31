@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tjmari <tjmari@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mmarzouk <mmarzouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/22 20:04:07 by tjmari            #+#    #+#             */
-/*   Updated: 2021/05/30 18:30:41 by tjmari           ###   ########.fr       */
+/*   Updated: 2021/05/31 11:25:31 by mmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ typedef struct s_tool
 	int			cmd_c;
 	int			i;
 	char		cwd[1024];
-	short		exterr;
+	short		exit_status;
 	t_cmd		**cmd;
 	char		**envp;
 	int			original_fd_in;
@@ -84,6 +84,7 @@ void			fin_quote(char **fin,char *s, int *i);
 void			fin_sngl_q(char **fin,char *s, int *i);
 void			fin_vars(char **fin,char *s, int *i);
 void			fin_nrml(char **fin,char *s, int *i);
+void			fin_err(char **fin, int *i);
 short			chk_err(char **sp,int i,int value,int flag);
 
 /*
