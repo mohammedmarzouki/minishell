@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmarzouk <mmarzouk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tjmari <tjmari@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/22 20:04:07 by tjmari            #+#    #+#             */
-/*   Updated: 2021/05/31 11:25:31 by mmarzouk         ###   ########.fr       */
+/*   Updated: 2021/05/31 12:16:09 by tjmari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,7 +129,6 @@ int				how_many_element(char **argv);
 char			**ft_dcdup(char **argv, int toadd);
 char			**sortdcp(char **argv);
 char			**add_node_dc(char **argv, char **cmds, int nodes);
-void			change_var(char *var, char *new_value);
 void			change_shlvl(void);
 
 #endif
