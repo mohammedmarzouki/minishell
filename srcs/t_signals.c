@@ -6,7 +6,7 @@
 /*   By: tjmari <tjmari@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/29 17:33:52 by tjmari            #+#    #+#             */
-/*   Updated: 2021/05/30 09:18:37 by tjmari           ###   ########.fr       */
+/*   Updated: 2021/05/31 10:21:16 by tjmari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,12 @@ void	signal_int(int sig)
 void	signal_quit(int sig)
 {
 	(void)sig;
-	if (g_tool.pid && ft_strcmp(g_tool.cmd[g_tool.i]->args[0], "read"))
+	if (g_tool.pid)
 	{
-		ft_putstr_fd("Quit: 3\n", STDOUT_FILENO);
-		return ;
+		if (g_tool.i < g_tool.cmd_c && ft_strcmp(g_tool.cmd[g_tool.i]->args[0], "read"))
+		{
+			ft_putstr_fd("Quit: 3\n", STDOUT_FILENO);
+			return ;
+		}
 	}
 }

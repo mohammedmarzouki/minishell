@@ -3,7 +3,6 @@
 
 *2: This loop is here to avoid seg fault in empty echo, looping while args exist
 
-*3: cat | echo + Cntr^D
-    echo sth; exit 12 34; echo sth
+*3: echo sth; exit 12 34; echo sth
 
 *4: what is printed in env and in export

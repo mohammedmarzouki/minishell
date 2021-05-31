@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   t_export.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmarzouk <mmarzouk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tjmari <tjmari@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 20:12:52 by tjmari            #+#    #+#             */
-/*   Updated: 2021/05/31 10:26:40 by mmarzouk         ###   ########.fr       */
+/*   Updated: 2021/05/31 12:17:55 by tjmari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ char	*ft_getvalue(char *arg)
 	int	i;
 
 	i = 0;
-	if(same(arg,"?"))
+		if(same(arg,"?"))
 		return (ft_itoa(g_tool.exit_status));
 	while (arg[i])
 	{
@@ -111,15 +111,20 @@ _Bool	ft_export_valid(char *arg)
 void	ft_putexport(char **argv)
 {
 	int		i;
-	char	**parts;
+	char	*key;
+	char	*value;
 
 	i = 0;
 	while (argv[i])
 	{
-		parts = ft_split(argv[i++], '=');
-		if (parts[1])
-			printf("declare -x %s=\"%s\"\n", parts[0], parts[1]);
+		key = ft_getkey(argv[i]);
+		value = ft_getvalue(argv[i]);
+		if (!ft_strchr(argv[i], '='))
+			printf("declare -x %s\n", key);
+		else if (ft_strcmp(ft_getvalue(argv[i]), ""))
+			printf("declare -x %s=\"%s\"\n", key, value);
 		else
-			printf("declare -x %s=\"\"\n", parts[0]);
+			printf("declare -x %s=\"\"\n", key);
+		i++;
 	}
 }
