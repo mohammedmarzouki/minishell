@@ -1,8 +1,10 @@
 *1: Maybe needs a better logic, I need to set to 0 for the case 'cmd;',
-    usually the builtin still has the old value and the 'cmd' get executed twice
+	usually the builtin still has the old value and the 'cmd' get executed twice
 
 *2: This loop is here to avoid seg fault in empty echo, looping while args exist
 
-*3: echo sth; exit 12 34; echo sth
+*3: cd .. ; unset OLDPWD ; cd $OLDPWD ; pwd		(difference between "" and NULL)
+	export what ; env | grep "what"				(lags here!! / grep doesn't find what because it has no value)
+	unset e$									(has to do with parser)
 
 *4: what is printed in env and in export

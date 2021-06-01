@@ -6,7 +6,7 @@
 /*   By: tjmari <tjmari@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 20:06:54 by tjmari            #+#    #+#             */
-/*   Updated: 2021/05/30 09:25:07 by tjmari           ###   ########.fr       */
+/*   Updated: 2021/05/31 15:29:19 by tjmari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ void	is_builtin(int i)
 
 void	run_builtin(int i)
 {
+	if (!(set_redirections(g_tool.cmd[i])))
+		return ;
 	if (g_tool.which_builtin == 1)
 		ft_echo(i);
 	else if (g_tool.which_builtin == 2)

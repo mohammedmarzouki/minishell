@@ -6,7 +6,7 @@
 /*   By: tjmari <tjmari@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 11:17:14 by tjmari            #+#    #+#             */
-/*   Updated: 2021/05/31 12:18:30 by tjmari           ###   ########.fr       */
+/*   Updated: 2021/06/01 17:06:59 by tjmari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,11 @@ void	run_infork(int i)
 	open_pipe(i);
 	g_tool.pid = fork();
 	if (!(g_tool.cmd[i]->sep && *(g_tool.cmd[i]->sep) == '|'))
-		waitpid(g_tool.pid, NULL, 0);
+		waitpid(g_tool.pid, &g_tool.exit_status, 0);
+	if (WIFSIGNALED(g_tool.exit_status))
+		g_tool.exit_status = 128 + WTERMSIG(g_tool.exit_status);
+	else
+		g_tool.exit_status = WEXITSTATUS(g_tool.exit_status);
 	if (g_tool.pid == 0)
 	{
 		set_pipe(i);
