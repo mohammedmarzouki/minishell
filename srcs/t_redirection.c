@@ -6,7 +6,7 @@
 /*   By: tjmari <tjmari@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 19:51:06 by tjmari            #+#    #+#             */
-/*   Updated: 2021/05/28 18:07:27 by tjmari           ###   ########.fr       */
+/*   Updated: 2021/06/02 13:14:23 by tjmari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ _Bool	set_redirections(t_cmd *cmd)
 	while (cmd->red && cmd->red[i])
 	{
 		if (!(ft_strcmp(cmd->red[i], ">")))
-			g_tool.fd_out = open(cmd->file[i], O_CREAT | O_TRUNC | O_WRONLY, S_IRWXU);
+			g_tool.fd_out = open(cmd->file[i], O_WRONLY | O_CREAT | O_TRUNC, 0644);
 		else if (!(ft_strcmp(cmd->red[i], ">>")))
-			g_tool.fd_out = open(cmd->file[i], O_CREAT | O_APPEND | O_WRONLY, S_IRWXU);
+			g_tool.fd_out = open(cmd->file[i], O_WRONLY | O_CREAT | O_APPEND, 0644);
 		else
 			g_tool.fd_in = open(cmd->file[i], O_RDONLY, S_IRWXU);
 		if (g_tool.fd_in < 0 || g_tool.fd_out < 0)

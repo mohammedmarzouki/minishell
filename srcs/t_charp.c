@@ -6,7 +6,7 @@
 /*   By: tjmari <tjmari@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/26 11:20:31 by tjmari            #+#    #+#             */
-/*   Updated: 2021/06/02 11:04:12 by tjmari           ###   ########.fr       */
+/*   Updated: 2021/06/02 15:04:17 by tjmari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,14 @@ char	**add_node_dc(char **argv, char **args, int to_add)
 		if (ft_export_valid(args[i]) && get_env(ft_getkey(args[i])) < 0)
 			argv[envp_len++] = ft_strdup(args[i]);
 		else if (ft_export_valid(args[i]) && get_env(ft_getkey(args[i])) >= 0)
+		{
+			if (!ft_strcmp(ft_getvalue(args[i]), "") && !ft_strchr(args[i], '='))
+			{
+				i++;
+				continue ;
+			}
 			argv = change_envp_var(argv, get_env(ft_getkey(args[i])), args[i]);
+		}
 		i++;
 	}
 	return (argv);

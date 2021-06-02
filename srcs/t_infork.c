@@ -6,7 +6,7 @@
 /*   By: tjmari <tjmari@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 11:17:14 by tjmari            #+#    #+#             */
-/*   Updated: 2021/06/02 10:59:09 by tjmari           ###   ########.fr       */
+/*   Updated: 2021/06/02 16:56:57 by tjmari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,26 +61,33 @@ void	cmd_infork(int i)
 	if (path_exist > 0)
 		path = g_tool.envp[path_exist];
 	paths = ft_split(path, ':');
-	if (ft_strchr(g_tool.cmd[i]->args[0], '/'))
+	if (ft_strchr(g_tool.cmd[i]->args[0], '/') || (path_exist < 0))
 	{
 		execve(g_tool.cmd[i]->args[0], g_tool.cmd[i]->args, g_tool.envp);
-		ft_putstr_fd("minishell: ", 2);
-		ft_putstr_fd(g_tool.cmd[i]->args[0], 2);
-		ft_putendl_fd(": No such file or directory", 2);
-		// ft_putendl_fd(strerror(errno), 2);
-		exit(127);
+		if (!ft_strcmp(g_tool.cmd[i]->args[0], "."))
+		{
+			ft_putendl_fd("minishell: .: filename argument required", 2);
+			ft_putendl_fd(".: usage: . filename [arguments]", 2);
+			exit(2);
+		}
+		execve_failure(i);
 	}
 	else
 	{
 		cmd = make_cmd(paths, g_tool.cmd[i]->args[0]);
-		if (cmd)
+		if (!ft_strcmp(g_tool.cmd[i]->args[0], "."))
+		{
+			ft_putendl_fd("minishell: .: filename argument required", 2);
+			ft_putendl_fd(".: usage: . filename [arguments]", 2);
+			exit(2);
+		}
+		else if (cmd && ft_strcmp(g_tool.cmd[i]->args[0], ".."))
 			execve(cmd, g_tool.cmd[i]->args, g_tool.envp);
 		else
 		{
 			ft_putstr_fd("minishell: ", 2);
 			ft_putstr_fd(g_tool.cmd[i]->args[0], 2);
 			ft_putendl_fd(": command not found", 2);
-			// ft_putendl_fd(strerror(errno), 2);
 			exit(127);
 		}
 	}

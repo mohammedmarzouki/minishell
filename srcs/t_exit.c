@@ -6,7 +6,7 @@
 /*   By: tjmari <tjmari@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 20:12:50 by tjmari            #+#    #+#             */
-/*   Updated: 2021/06/01 19:05:28 by tjmari           ###   ########.fr       */
+/*   Updated: 2021/06/02 16:56:28 by tjmari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	ft_exit(int i)
 		ft_printexit(i);
 		if (g_tool.cmd[i]->args[1])
 			exit(ft_atoi(g_tool.cmd[i]->args[1]));
-		exit(0);
+		exit(g_tool.exit_status);
 	}
 	else
 	{
