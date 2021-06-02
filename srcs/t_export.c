@@ -6,7 +6,7 @@
 /*   By: tjmari <tjmari@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 20:12:52 by tjmari            #+#    #+#             */
-/*   Updated: 2021/06/01 18:22:40 by tjmari           ###   ########.fr       */
+/*   Updated: 2021/06/02 18:27:49 by tjmari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ char	*ft_getvalue(char *arg)
 	int	i;
 
 	i = 0;
-		if(same(arg,"?"))
+	if(same(arg,"?"))
 		return (ft_itoa(g_tool.exit_status));
 	while (arg[i])
 	{
