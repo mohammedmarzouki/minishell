@@ -6,7 +6,7 @@
 /*   By: tjmari <tjmari@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 20:12:36 by tjmari            #+#    #+#             */
-/*   Updated: 2021/06/02 17:54:56 by tjmari           ###   ########.fr       */
+/*   Updated: 2021/06/02 19:42:30 by tjmari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,15 +46,13 @@ void	ft_cd(int i)
 		if (pwd >= 0)
 		{
 			if (getcwd(g_tool.cwd, sizeof(g_tool.cwd)))
-			{
 				change_pwd(pwd, ft_strjoin("PWD=", g_tool.cwd));
-			}
 			else
 			{	
 				ft_putstr_fd("cd: error retrieving current directory: ", 2);
 				ft_putstr_fd("getcwd: cannot access parent directories:", 2);
 				ft_putendl_fd(" No such file or directory", 2);
-				// change_pwd(pwd, ft_strjoin("PWD=", ft_strjoin(g_tool.envp[pwd], g_tool.cwd)));
+				change_pwd(pwd, ft_strjoin(g_tool.envp[pwd], ft_strjoin("/", g_tool.cmd[i]->args[1])));
 			}
 		}
 	}
