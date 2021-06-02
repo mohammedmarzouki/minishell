@@ -6,7 +6,7 @@
 /*   By: tjmari <tjmari@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/24 16:06:48 by tjmari            #+#    #+#             */
-/*   Updated: 2021/05/31 12:08:56 by tjmari           ###   ########.fr       */
+/*   Updated: 2021/05/31 16:29:55 by tjmari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	executing(void)
 {
 	g_tool.i = 0;
-	while (g_tool.i < g_tool.cmd_c)
+	while (g_tool.i < g_tool.cmd_c && !g_tool.exit_flag)
 	{
 		if (g_tool.i > 0 && *(g_tool.cmd[g_tool.i - 1]->sep) == ';')
 			finalizem(g_tool.i);

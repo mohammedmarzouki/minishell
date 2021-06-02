@@ -6,7 +6,7 @@
 /*   By: tjmari <tjmari@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 11:17:14 by tjmari            #+#    #+#             */
-/*   Updated: 2021/05/31 12:18:30 by tjmari           ###   ########.fr       */
+/*   Updated: 2021/06/02 10:59:09 by tjmari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,11 @@ void	run_infork(int i)
 	open_pipe(i);
 	g_tool.pid = fork();
 	if (!(g_tool.cmd[i]->sep && *(g_tool.cmd[i]->sep) == '|'))
-		waitpid(g_tool.pid, NULL, 0);
+		waitpid(g_tool.pid, &g_tool.exit_status, 0);
+	if (WIFSIGNALED(g_tool.exit_status))
+		g_tool.exit_status = 128 + WTERMSIG(g_tool.exit_status);
+	else
+		g_tool.exit_status = WEXITSTATUS(g_tool.exit_status);
 	if (g_tool.pid == 0)
 	{
 		set_pipe(i);
@@ -51,11 +55,14 @@ void	cmd_infork(int i)
 	char	*path;
 	char	**paths;
 	char	*cmd;
+	int		path_exist;
 
-	path = g_tool.envp[get_env("PATH")];		// needs to print the error 'bash: ls: No such file or directory'
+	path_exist = get_env("PATH");
+	if (path_exist > 0)
+		path = g_tool.envp[path_exist];
 	paths = ft_split(path, ':');
 	if (ft_strchr(g_tool.cmd[i]->args[0], '/'))
-	{		// rely on errno
+	{
 		execve(g_tool.cmd[i]->args[0], g_tool.cmd[i]->args, g_tool.envp);
 		ft_putstr_fd("minishell: ", 2);
 		ft_putstr_fd(g_tool.cmd[i]->args[0], 2);

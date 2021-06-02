@@ -6,7 +6,7 @@
 /*   By: tjmari <tjmari@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 20:12:44 by tjmari            #+#    #+#             */
-/*   Updated: 2021/05/28 12:06:28 by tjmari           ###   ########.fr       */
+/*   Updated: 2021/06/01 18:48:18 by tjmari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ void	ft_echo(int i)
 
 	j = 1;
 	n = 0;
+	g_tool.exit_status = 0;
 	while (j < how_many_element(g_tool.cmd[i]->args))	// *2
 	{
 		while (ft_isflag(g_tool.cmd[i]->args[j]))

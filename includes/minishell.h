@@ -6,7 +6,7 @@
 /*   By: tjmari <tjmari@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/22 20:04:07 by tjmari            #+#    #+#             */
-/*   Updated: 2021/05/31 12:16:09 by tjmari           ###   ########.fr       */
+/*   Updated: 2021/06/02 11:08:10 by tjmari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ typedef struct s_tool
 	int			cmd_c;
 	int			i;
 	char		cwd[1024];
-	short		exit_status;
+	int			exit_status;
 	t_cmd		**cmd;
 	char		**envp;
 	int			original_fd_in;
@@ -52,6 +52,7 @@ typedef struct s_tool
 	int			fd_out;
 	int			which_builtin;
 	pid_t		pid;
+	_Bool		exit_flag;
 }				t_tool;
 t_tool			g_tool;
 
@@ -124,11 +125,13 @@ int				ft_envremove(char *var);
 void			ft_env(void);
 void			ft_exit(int i);
 _Bool			ft_isnumeric(char *arg);
+void			ft_printexit(int i);
 
 int				how_many_element(char **argv);
 char			**ft_dcdup(char **argv, int toadd);
 char			**sortdcp(char **argv);
 char			**add_node_dc(char **argv, char **cmds, int nodes);
 void			change_shlvl(void);
+void			unset_oldpwd(void);
 
 #endif
