@@ -6,7 +6,7 @@
 /*   By: tjmari <tjmari@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/02 11:03:51 by tjmari            #+#    #+#             */
-/*   Updated: 2021/06/02 11:07:11 by tjmari           ###   ########.fr       */
+/*   Updated: 2021/06/02 20:52:19 by tjmari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,40 +15,30 @@
 void	change_shlvl(void)
 {
 	int		i;
-	char	**parts;
-	char	*temp;
 	int		shlvl;
+	char	*temp;
+	char	**parts;
 
-	i = 0;
-	while (i < how_many_element(g_tool.envp))
+	i = ft_getenv("SHLVL");
+	if (i < 0)
 	{
-		parts = ft_split(g_tool.envp[i], '=');
-		if (!(ft_strcmp(parts[0], "SHLVL")))
-		{
-			shlvl = ft_atoi(parts[1]);
-			shlvl++;
-			parts[1] = ft_itoa(shlvl);
-			temp = ft_strjoin("", parts[0]);
-			temp = ft_strjoin(temp, "=");
-			temp = ft_strjoin(temp, parts[1]);
-			g_tool.envp[i] = temp;
-			return ;
-		}
-		i++;
-		if (!g_tool.envp[i])
-		{
-			parts = ft_split("export SHLVL=1", ' ');
-			g_tool.envp = add_node_dc(g_tool.envp, parts, 2);
-			return ;
-		}
+		parts = ft_dcdup(g_tool.envp, 1);
+		parts[how_many_element(g_tool.envp)] = "SHLVL=1";
+		doublefree(g_tool.envp);
+		g_tool.envp = parts;
+		return ;
 	}
+	shlvl = ft_atoi(ft_getvalue(g_tool.envp[i]));
+	free(g_tool.envp[i]);
+	temp = ft_strjoin("SHLVL=", ft_itoa(++shlvl));
+	g_tool.envp[i] = temp;
 }
 
-void    unset_oldpwd(void)
+void	unset_oldpwd(void)
 {
 	int	oldpwd;
 
-	oldpwd = get_env("OLDPWD");
+	oldpwd = ft_getenv("OLDPWD");
 	free(g_tool.envp[oldpwd]);
 	g_tool.envp[oldpwd] = ft_strdup("OLDPWD");
 }

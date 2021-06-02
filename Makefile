@@ -6,7 +6,7 @@
 #    By: tjmari <tjmari@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/22 20:07:24 by tjmari            #+#    #+#              #
-#    Updated: 2021/06/02 13:00:37 by tjmari           ###   ########.fr        #
+#    Updated: 2021/06/02 20:56:05 by tjmari           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,7 +33,7 @@ SRCS = ./srcs/main.c ./srcs/get_next_line.c \
 	./srcs/t_builtin.c ./srcs/t_echo.c ./srcs/t_cd.c \
 	./srcs/t_pwd.c ./srcs/t_export.c ./srcs/t_unset.c \
 	./srcs/t_env.c ./srcs/t_exit.c ./srcs/t_execve_failure.c \
-	./srcs/t_charp.c \
+	./srcs/t_charp.c ./srcs/t_dict.c \
 
 OBJ = $(SRCS:.c=.o)
 

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   m_finalize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmarzouk <mmarzouk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tjmari <tjmari@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/29 09:46:38 by mmarzouk          #+#    #+#             */
-/*   Updated: 2021/05/31 11:21:52 by mmarzouk         ###   ########.fr       */
+/*   Updated: 2021/06/02 20:36:02 by tjmari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int    get_env(char *s)
+int    ft_getenv(char *s)
 {
 	int i;
 	char **env;

@@ -6,7 +6,7 @@
 /*   By: tjmari <tjmari@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/22 20:04:07 by tjmari            #+#    #+#             */
-/*   Updated: 2021/06/02 14:16:04 by tjmari           ###   ########.fr       */
+/*   Updated: 2021/06/02 20:36:02 by tjmari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int				a_word(char *s);
 int				seterr(short err);
 int				err_quit(char *s,int err);
 int				count_cmds(char **s);
-int				get_env(char *s);
+int				ft_getenv(char *s);
 int				redirct_tkn(int *f,int *i,char **sp);
 int 			backslash(char *s);
 char			**doublefree(char **ptr);

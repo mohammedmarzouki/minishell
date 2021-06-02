@@ -6,7 +6,7 @@
 /*   By: tjmari <tjmari@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 20:12:36 by tjmari            #+#    #+#             */
-/*   Updated: 2021/06/02 19:42:30 by tjmari           ###   ########.fr       */
+/*   Updated: 2021/06/02 20:36:02 by tjmari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ void	change_pwd(int index, char *arg)
 void	ft_cd(int i)
 {
 	g_tool.exit_status = 0;
-	int pwd = get_env("PWD");
-	int oldpwd = get_env("OLDPWD");
+	int pwd = ft_getenv("PWD");
+	int oldpwd = ft_getenv("OLDPWD");
 	if (how_many_element(g_tool.cmd[i]->args) == 1)
 	{
 		ft_putendl_fd("cd with only a relative or absolute path", 2);

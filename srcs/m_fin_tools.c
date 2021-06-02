@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   m_fin_tools.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmarzouk <mmarzouk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tjmari <tjmari@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/30 14:56:54 by mmarzouk          #+#    #+#             */
-/*   Updated: 2021/05/31 11:25:38 by mmarzouk         ###   ########.fr       */
+/*   Updated: 2021/06/02 20:36:02 by tjmari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void    fin_vars(char **fin,char *s, int *i)
 	{
 		while(ft_isalnum(s[(*i)])||s[(*i)] == '_')
 			fin_nrml(&var, s, i);		
-		j = get_env(var);
+		j = ft_getenv(var);
 		if(j != -1)
 		{
 			free(var);

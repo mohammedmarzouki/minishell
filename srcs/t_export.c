@@ -6,7 +6,7 @@
 /*   By: tjmari <tjmari@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 20:12:52 by tjmari            #+#    #+#             */
-/*   Updated: 2021/06/02 18:27:49 by tjmari           ###   ########.fr       */
+/*   Updated: 2021/06/02 20:55:45 by tjmari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int		how_many_nodes(int i)
 		if (ft_export_valid(g_tool.cmd[i]->args[j]))
 		{
 			temp = ft_getkey(g_tool.cmd[i]->args[j]);
-			if (get_env(temp) < 0)
+			if (ft_getenv(temp) < 0)
 				count++;
 		}
 		else
@@ -55,36 +55,6 @@ int		how_many_nodes(int i)
 		j++;
 	}
 	return (count);
-}
-
-char	*ft_getkey(char *arg)
-{
-	int	i;
-
-	i = 0;
-	while (arg[i])
-	{
-		if (arg[i] == '=')
-			return (ft_substr(arg, 0, i));
-		i++;
-	}
-	return (arg);
-}
-
-char	*ft_getvalue(char *arg)
-{
-	int	i;
-
-	i = 0;
-	if(same(arg,"?"))
-		return (ft_itoa(g_tool.exit_status));
-	while (arg[i])
-	{
-		if (arg[i] == '=')
-			return (ft_substr(arg, i + 1, ft_strlen(arg)));
-		i++;
-	}
-	return (ft_strdup(""));
 }
 
 _Bool	ft_export_valid(char *arg)

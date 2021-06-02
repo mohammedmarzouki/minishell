@@ -6,7 +6,7 @@
 /*   By: tjmari <tjmari@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 11:17:14 by tjmari            #+#    #+#             */
-/*   Updated: 2021/06/02 16:56:57 by tjmari           ###   ########.fr       */
+/*   Updated: 2021/06/02 20:36:02 by tjmari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	cmd_infork(int i)
 	char	*cmd;
 	int		path_exist;
 
-	path_exist = get_env("PATH");
+	path_exist = ft_getenv("PATH");
 	if (path_exist > 0)
 		path = g_tool.envp[path_exist];
 	paths = ft_split(path, ':');
