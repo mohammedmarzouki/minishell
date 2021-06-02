@@ -6,7 +6,7 @@
 /*   By: tjmari <tjmari@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/22 20:04:07 by tjmari            #+#    #+#             */
-/*   Updated: 2021/06/02 11:08:10 by tjmari           ###   ########.fr       */
+/*   Updated: 2021/06/02 14:16:04 by tjmari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ void			executing(void);
 void			run_builtin(int i);
 void			run_infork(int i);
 char			*make_cmd(char **paths, char *cmd);
+void			execve_failure(int i);
 
 void			signal_int(int sig);
 void			signal_quit(int sig);
