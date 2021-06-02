@@ -4,7 +4,9 @@
 *2: This loop is here to avoid seg fault in empty echo, looping while args exist
 
 *3: cd .. ; unset OLDPWD ; cd $OLDPWD ; pwd		(difference between "" and NULL)
-	export what ; env | grep "what"				(lags here!! / grep doesn't find what because it has no value)
+	export what ; env | grep "what"				(lags here!! / grep doesn't find what because it has no value)		SOLVED
 	unset e$									(has to do with parser)
+	unset PATH + ls /bin/ls																							SOLVED
+	OLDPWD at beginning of program				(its usually set from parent shell)									SOLVED
 
 *4: what is printed in env and in export

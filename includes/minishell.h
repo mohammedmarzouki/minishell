@@ -6,7 +6,7 @@
 /*   By: tjmari <tjmari@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/22 20:04:07 by tjmari            #+#    #+#             */
-/*   Updated: 2021/06/01 18:53:54 by tjmari           ###   ########.fr       */
+/*   Updated: 2021/06/02 11:08:10 by tjmari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,5 +132,6 @@ char			**ft_dcdup(char **argv, int toadd);
 char			**sortdcp(char **argv);
 char			**add_node_dc(char **argv, char **cmds, int nodes);
 void			change_shlvl(void);
+void			unset_oldpwd(void);
 
 #endif

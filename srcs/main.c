@@ -6,7 +6,7 @@
 /*   By: tjmari <tjmari@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/22 20:03:07 by tjmari            #+#    #+#             */
-/*   Updated: 2021/05/31 16:29:38 by tjmari           ###   ########.fr       */
+/*   Updated: 2021/06/02 11:02:15 by tjmari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ int	main(int argc, char *argv[], char *envp[])
 	(void)argv;
 	g_tool.envp = ft_dcdup(envp, 0);
 	change_shlvl();
+	unset_oldpwd();
 	g_tool.original_fd_in = dup(STDIN_FILENO);
 	g_tool.original_fd_out = dup(STDOUT_FILENO);
 	signal(SIGINT, signal_int);
