@@ -6,7 +6,7 @@
 /*   By: tjmari <tjmari@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 20:12:44 by tjmari            #+#    #+#             */
-/*   Updated: 2021/06/01 18:48:18 by tjmari           ###   ########.fr       */
+/*   Updated: 2021/06/02 18:25:44 by tjmari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ _Bool	ft_isflag(char *args)
 {
 	int		i;
 
-	if (!args)
+	if (!args || ft_isempty(args))
 		return (0);
 	i = 0;
 	if (!(ft_strncmp(args, "-n", 2)))

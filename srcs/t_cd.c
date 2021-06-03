@@ -6,7 +6,7 @@
 /*   By: tjmari <tjmari@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 20:12:36 by tjmari            #+#    #+#             */
-/*   Updated: 2021/06/02 17:54:56 by tjmari           ###   ########.fr       */
+/*   Updated: 2021/06/02 20:36:02 by tjmari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ void	change_pwd(int index, char *arg)
 void	ft_cd(int i)
 {
 	g_tool.exit_status = 0;
-	int pwd = get_env("PWD");
-	int oldpwd = get_env("OLDPWD");
+	int pwd = ft_getenv("PWD");
+	int oldpwd = ft_getenv("OLDPWD");
 	if (how_many_element(g_tool.cmd[i]->args) == 1)
 	{
 		ft_putendl_fd("cd with only a relative or absolute path", 2);
@@ -46,15 +46,13 @@ void	ft_cd(int i)
 		if (pwd >= 0)
 		{
 			if (getcwd(g_tool.cwd, sizeof(g_tool.cwd)))
-			{
 				change_pwd(pwd, ft_strjoin("PWD=", g_tool.cwd));
-			}
 			else
 			{	
 				ft_putstr_fd("cd: error retrieving current directory: ", 2);
 				ft_putstr_fd("getcwd: cannot access parent directories:", 2);
 				ft_putendl_fd(" No such file or directory", 2);
-				// change_pwd(pwd, ft_strjoin("PWD=", ft_strjoin(g_tool.envp[pwd], g_tool.cwd)));
+				change_pwd(pwd, ft_strjoin(g_tool.envp[pwd], ft_strjoin("/", g_tool.cmd[i]->args[1])));
 			}
 		}
 	}

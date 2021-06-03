@@ -9,13 +9,13 @@
 	OLDPWD at beginning of program				(its usually set from parent shell)									SOLVED
 	what is printed in env and in export																			SOLVED	
 	difference export PATH AND export PATH= AND unset PATH															SOLVED
+	./file ./dir handling																							SOLVED
 	unset e$									(has to do with parser)
 
 	mkdir testdir
 	cd testdir
-	rm -rf ../testdir ; echo $OLDPWD; echo $PWD; cd . ; echo $PWD; cd .; echo $PWD
-	(the path added at the pwd)
+	rm -rf ../testdir ; echo $OLDPWD; echo $PWD; cd . ; echo $PWD; cd .; echo $PWD									SOLVED
 
 	export A='    aa   ' B='    bb   ' C='    ccc   '
-	echo "$A$B$C"		//	aa       bb       ccc   
-	echo $A$B$C			//	aa bb ccc
+	echo "$A$B$C"										//	aa       bb       ccc   
+	echo $A$B$C											//	aa bb ccc
