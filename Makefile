@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mmarzouk <mmarzouk@student.42.fr>          +#+  +:+       +#+         #
+#    By: tjmari <tjmari@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/22 20:07:24 by tjmari            #+#    #+#              #
-#    Updated: 2021/06/04 13:01:05 by mmarzouk         ###   ########.fr        #
+#    Updated: 2021/06/05 12:28:59 by tjmari           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,11 +29,11 @@ SRCS = ./srcs/main.c ./srcs/get_next_line.c \
 	./srcs/m_fin_tools.c ./srcs/m_termline.c \
 	\
 	./srcs/t_init.c ./srcs/t_executing.c ./srcs/t_signals.c \
-	./srcs/t_redirection.c ./srcs/t_pipe.c ./srcs/t_infork.c \
+	./srcs/t_redirection.c ./srcs/t_pipe.c ./srcs/t_infork.c ./srcs/t_cmd_path.c \
 	./srcs/t_builtin.c ./srcs/t_echo.c ./srcs/t_cd.c \
 	./srcs/t_pwd.c ./srcs/t_export.c ./srcs/t_unset.c \
 	./srcs/t_env.c ./srcs/t_exit.c ./srcs/t_execve_failure.c \
-	./srcs/t_charp.c ./srcs/t_dict.c \
+	./srcs/t_export_utils.c ./srcs/t_dict.c ./srcs/t_utils.c \
 
 OBJ = $(SRCS:.c=.o)
 
@@ -43,7 +43,7 @@ $(NAME): $(INCLUDES) $(SRCS)
 	@make -C ./libft
 	@mv ./libft/$(LIBFT) ./
 	@echo "$(GREEN)MINISHELL: ./$(LIBFT) moved to $(NAME)\n---------------------------------------$(NC)"
-	@gcc $(FLAGS) $(SRCS) $(LIBFT) -o $(NAME)  
+	@gcc $(FLAGS) $(SRCS) $(LIBFT) -o $(NAME)
 	@echo "$(GREEN)MINISHELL: ./$(NAME) made\n---------------------------$(NC)"
 
 debug:

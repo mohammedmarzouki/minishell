@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   m_fin_tools.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmarzouk <mmarzouk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tjmari <tjmari@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/30 14:56:54 by mmarzouk          #+#    #+#             */
-/*   Updated: 2021/06/03 11:52:12 by mmarzouk         ###   ########.fr       */
+/*   Updated: 2021/06/05 12:31:50 by tjmari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void    fin_vars(char **fin,char *s, int *i)
 	if (s[(*i)] == '?')
 		fin_err(fin, i);
 	else if (!(ft_isalnum(s[(*i)])||s[(*i)] == '_') && (*i)--)		
-		fin_nrml(fin, s, i);		
+		fin_nrml(fin, s, i);
 	else
 	{
 		while(ft_isalnum(s[(*i)])||s[(*i)] == '_')

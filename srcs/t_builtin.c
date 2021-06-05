@@ -6,13 +6,13 @@
 /*   By: tjmari <tjmari@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 20:06:54 by tjmari            #+#    #+#             */
-/*   Updated: 2021/05/31 15:29:19 by tjmari           ###   ########.fr       */
+/*   Updated: 2021/06/02 21:25:42 by tjmari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void	is_builtin(int i)
+void	which_builtin(int i)
 {
 	if (!ft_strcmp(g_tool.cmd[i]->args[0], "echo"))
 		g_tool.which_builtin = 1;

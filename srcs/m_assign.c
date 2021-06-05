@@ -6,7 +6,7 @@
 /*   By: tjmari <tjmari@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/23 17:17:26 by tjmari            #+#    #+#             */
-/*   Updated: 2021/05/24 17:08:12 by tjmari           ###   ########.fr       */
+/*   Updated: 2021/06/04 15:44:46 by tjmari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,15 @@
 
 static	void	redis(char **sp, int *i, t_cmd	**cmds, int	cmd_i)
 {
+	char **tmp;
+	
+	tmp = cmds[cmd_i]->red;
 	cmds[cmd_i]->red = append_line(cmds[cmd_i]->red, sp[(*i)], 0);
+	doublefree(tmp);
 	(*i)++;
+	tmp = cmds[cmd_i]->file;
 	cmds[cmd_i]->file = append_line(cmds[cmd_i]->file, sp[(*i)], 0);
+	doublefree(tmp);
 }
 
 static void init_cmds(t_cmd	**cmds)
@@ -41,16 +47,11 @@ static	void	next_cmd(char **sp, int i, t_cmd	**cmds, int	*cmd_i)
 	(*cmd_i)++;
 }
 
-void	assign(char **sp)
+void	assign(char **sp, int i, int j, int cmd_i)
 {
-	int		i;
-	int		j;
-	int		cmd_i;
 	t_cmd	**cmds;
+	char **tmp;
 
-	cmd_i = 0;
-	i = 0;
-	j = 0;
 	g_tool.cmd_c = (count_cmds(sp) + 1);
 	cmds = malloc(sizeof(t_cmd *) * (g_tool.cmd_c)); 
 	init_cmds(cmds);
@@ -61,7 +62,11 @@ void	assign(char **sp)
 		else if (sp[i][j] == '|' || sp[i][j] == ';')
 			next_cmd(sp, i, cmds, &cmd_i);
 		else
+		{
+			tmp = cmds[cmd_i]->args;
 			cmds[cmd_i]->args = append_line(cmds[cmd_i]->args, sp[i], 0);
+			doublefree(tmp);
+		}
 		i++;
 	}
 	g_tool.cmd = cmds;

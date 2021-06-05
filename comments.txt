@@ -1,21 +1,16 @@
-*1: Maybe needs a better logic, I need to set to 0 for the case 'cmd;',
-	usually the builtin still has the old value and the 'cmd' get executed twice
+cd .. ; unset OLDPWD ; cd $OLDPWD ; pwd		(difference between "" and NULL)
+export what ; env | grep "what"				(lags here!! / grep doesn't find what because it has no value)		SOLVED
+unset PATH + ls /bin/ls																							SOLVED
+OLDPWD at beginning of program				(its usually set from parent shell)									SOLVED
+what is printed in env and in export																			SOLVED	
+difference export PATH AND export PATH= AND unset PATH															SOLVED
+./file ./dir handling																							SOLVED
+unset e$									(has to do with parser)
 
-*2: This loop is here to avoid seg fault in empty echo, looping while args exist
+mkdir testdir
+cd testdir
+rm -rf ../testdir ; echo $OLDPWD; echo $PWD; cd . ; echo $PWD; cd .; echo $PWD									SOLVED
 
-*3: cd .. ; unset OLDPWD ; cd $OLDPWD ; pwd		(difference between "" and NULL)
-	export what ; env | grep "what"				(lags here!! / grep doesn't find what because it has no value)		SOLVED
-	unset PATH + ls /bin/ls																							SOLVED
-	OLDPWD at beginning of program				(its usually set from parent shell)									SOLVED
-	what is printed in env and in export																			SOLVED	
-	difference export PATH AND export PATH= AND unset PATH															SOLVED
-	./file ./dir handling																							SOLVED
-	unset e$									(has to do with parser)
-
-	mkdir testdir
-	cd testdir
-	rm -rf ../testdir ; echo $OLDPWD; echo $PWD; cd . ; echo $PWD; cd .; echo $PWD									SOLVED
-
-	export A='    aa   ' B='    bb   ' C='    ccc   '
-	echo "$A$B$C"										//	aa       bb       ccc   
-	echo $A$B$C											//	aa bb ccc
+export A='    aa   ' B='    bb   ' C='    ccc   '
+echo "$A$B$C"										//	aa       bb       ccc   
+echo $A$B$C											//	aa bb ccc

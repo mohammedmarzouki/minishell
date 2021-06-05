@@ -6,50 +6,66 @@
 /*   By: tjmari <tjmari@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 20:12:52 by tjmari            #+#    #+#             */
-/*   Updated: 2021/06/02 20:55:45 by tjmari           ###   ########.fr       */
+/*   Updated: 2021/06/04 21:51:22 by tjmari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void	ft_export(int i)
-{
-	char	**temp;
-	int		nodes;
+/*
+**	ft_export() func either print the envp of export has no args \
+**	or add that arg to the envp.
+**	ft_putexport() func sort and print the envp according to its rules.
+**	how_many_nodes() func counts the num of args to add based on \
+**	whether they are valid and if they already exist.
+*/
 
-	g_tool.exit_status = 0;
-	temp = ft_dcdup(g_tool.envp, 0);
-	nodes = how_many_nodes(i);
-	if (how_many_element(g_tool.cmd[i]->args) == 1)
+_Bool	ft_export_valid(char *arg)
+{
+	char	*key;
+	int		i;
+
+	i = 0;
+	key = ft_getkey(arg);
+	if (ft_isdigit(key[0]) || ft_isempty(key))
 	{
-		sortdcp(temp);
-		ft_putexport(temp);
+		free(key);
+		return (0);
 	}
-	else
-		g_tool.envp = add_node_dc(g_tool.envp, g_tool.cmd[i]->args, nodes);
+	while (key[i])
+	{
+		if (!ft_isalnum(key[i]) && key[i] != '_')
+		{
+			free(key);
+			return (0);
+		}
+		i++;
+	}
+	free(key);
+	return (1);
 }
 
-int		how_many_nodes(int i)
+static int	how_many_nodes(int i)
 {
 	int		j;
 	int		count;
-	char	*temp;
+	char	*tmp;
 
 	j = 1;
 	count = 0;
-	while (j < how_many_element(g_tool.cmd[i]->args))
+	while (j < doublecount(g_tool.cmd[i]->args))
 	{
 		if (ft_export_valid(g_tool.cmd[i]->args[j]))
 		{
-			temp = ft_getkey(g_tool.cmd[i]->args[j]);
-			if (ft_getenv(temp) < 0)
+			tmp = ft_getkey(g_tool.cmd[i]->args[j]);
+			if (ft_getenv(tmp) < 0)
 				count++;
+			free(tmp);
 		}
 		else
 		{
-			ft_putstr_fd("minishell: export: `", 2);
-			ft_putstr_fd(g_tool.cmd[i]->args[j], 2);
-			ft_putendl_fd("': not a valid identifier", 2);
+			ft_puterror("minishell: export: `", g_tool.cmd[i]->args[j],
+				"': not a valid identifier");
 			g_tool.exit_status = 1;
 		}
 		j++;
@@ -57,37 +73,76 @@ int		how_many_nodes(int i)
 	return (count);
 }
 
-_Bool	ft_export_valid(char *arg)
-{
-	arg = ft_getkey(arg);			// may cause a leak
-	if (ft_isdigit(arg[0]) || ft_isempty(arg))
-		return (0);
-	while (*arg)
-	{
-		if (!ft_isalnum(*arg) && *arg != '_')
-			return (0);
-		arg++;
-	}
-	return (1);
-}
-
-void	ft_putexport(char **argv)
+static void	sortdcp(char **argv)
 {
 	int		i;
-	char	*key;
-	char	*value;
+	int		j;
+	char	*temp;
 
 	i = 0;
 	while (argv[i])
 	{
+		j = 0;
+		while (argv[j])
+		{
+			if (ft_strcmp(argv[i], argv[j]) < 0)
+			{
+				temp = argv[i];
+				argv[i] = argv[j];
+				argv[j] = temp;
+			}
+			j++;
+		}
+		i++;
+	}
+}
+
+static void	ft_putexport(char **argv, int i)
+{
+	char	*key;
+	char	*value;
+	char	*tmp;
+
+	key = ft_strdup("");
+	value = ft_strdup("");
+	sortdcp(argv);
+	while (argv[i])
+	{
+		tmp = key;
 		key = ft_getkey(argv[i]);
+		free(tmp);
+		tmp = value;
 		value = ft_getvalue(argv[i]);
+		free(tmp);
 		if (!ft_strchr(argv[i], '='))
 			printf("declare -x %s\n", key);
-		else if (ft_strcmp(ft_getvalue(argv[i]), ""))
+		else if (ft_strcmp(value, ""))
 			printf("declare -x %s=\"%s\"\n", key, value);
 		else
 			printf("declare -x %s=\"\"\n", key);
 		i++;
 	}
+	free(key);
+	free(value);
+}
+
+void	ft_export(int i)
+{
+	int		nodes;
+	char	**temp;
+	int		envp_len;
+	int		args_len;
+
+	g_tool.exit_status = 0;
+	temp = ft_dcdup(g_tool.envp, 0);
+	nodes = how_many_nodes(i);
+	if (doublecount(g_tool.cmd[i]->args) == 1)
+		ft_putexport(temp, 0);
+	else
+	{
+		envp_len = doublecount(g_tool.envp);
+		args_len = doublecount(g_tool.cmd[g_tool.i]->args) - 1;
+		add_node_dc(g_tool.cmd[i]->args, nodes, envp_len, args_len);
+	}
+	doublefree(temp);
 }

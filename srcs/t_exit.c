@@ -6,13 +6,18 @@
 /*   By: tjmari <tjmari@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 20:12:50 by tjmari            #+#    #+#             */
-/*   Updated: 2021/06/02 16:56:28 by tjmari           ###   ########.fr       */
+/*   Updated: 2021/06/04 18:43:25 by tjmari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-_Bool	ft_isnumeric(char *arg)
+/*
+**	ft_printexit() func is there because the 'exit' word is printed \
+**	before the err msg only if exit is not in fork.
+*/
+
+static _Bool	ft_isnumeric(char *arg)
 {
 	if (arg)
 	{
@@ -33,20 +38,20 @@ _Bool	ft_isnumeric(char *arg)
 	return (1);
 }
 
-void	ft_printexit(int i)
+static void	ft_printexit(int i)
 {
 	if (!((g_tool.cmd[i]->sep && *(g_tool.cmd[i]->sep) == '|')
-		|| (i > 0 && g_tool.cmd[i - 1]->sep 
-		&& *(g_tool.cmd[i - 1]->sep) == '|')))
-		ft_putendl_fd("exit", 2);
+			|| (i > 0 && g_tool.cmd[i - 1]->sep
+				&& *(g_tool.cmd[i - 1]->sep) == '|')))
+		ft_putendl_fd("exit", STDERR_FILENO);
 }
 
 void	ft_exit(int i)
 {
-	if (how_many_element(g_tool.cmd[i]->args) > 2)
+	if (doublecount(g_tool.cmd[i]->args) > 2)
 	{
 		ft_printexit(i);
-		ft_putendl_fd("minishell: exit: too many arguments", 2);
+		ft_puterror("minishell:", " exit:", " too many arguments");
 		g_tool.exit_flag = 1;
 		g_tool.exit_status = 1;
 	}
@@ -60,9 +65,8 @@ void	ft_exit(int i)
 	else
 	{
 		ft_printexit(i);
-		ft_putstr_fd("minishell: exit: ", 2);
-		ft_putstr_fd(g_tool.cmd[i]->args[1], 2);
-		ft_putendl_fd(": numeric argument required", 2);
+		ft_puterror("minishell: exit: ", g_tool.cmd[i]->args[1],
+			": numeric argument required");
 		exit(255);
 	}
 }
