@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   m_parsing.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmarzouk <mmarzouk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tjmari <tjmari@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/23 16:59:17 by tjmari            #+#    #+#             */
-/*   Updated: 2021/06/03 11:52:32 by mmarzouk         ###   ########.fr       */
+/*   Updated: 2021/06/04 15:54:09 by tjmari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,9 +97,9 @@ int parsing(char *s)
 		return(0);
 	}
 	// printf("<%d> TRUE\n",g_tool.exit_status);
-	assign(sp);
-	printall();
+	assign(sp, 0, 0, 0);
+	// printall();
 	finalizem(0);
-	printall();
+	// printall();
 	return (1);
 }

@@ -3,14 +3,31 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmarzouk <mmarzouk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tjmari <tjmari@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/22 20:03:07 by tjmari            #+#    #+#             */
-/*   Updated: 2021/06/04 17:00:17 by mmarzouk         ###   ########.fr       */
+/*   Updated: 2021/06/05 12:32:58 by tjmari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+static void	freeall(void)
+{
+	int	i;
+
+	i = 0;
+	while (i < g_tool.cmd_c)
+	{
+		doublefree(g_tool.cmd[i]->args);
+		free(g_tool.cmd[i]->sep);
+		doublefree(g_tool.cmd[i]->red);
+		doublefree(g_tool.cmd[i]->file);
+		free(g_tool.cmd[i]);
+		i++;
+	}
+	free(g_tool.cmd);
+}
 
 static	void	initials(void)
 {
@@ -34,7 +51,7 @@ static	void	initials(void)
 int	main(int argc, char *argv[], char *envp[])
 {
 	char	*input;
-	
+
 	(void)argc;
 	(void)argv;
 	g_tool.envp = ft_dcdup(envp, 0);
@@ -45,10 +62,10 @@ int	main(int argc, char *argv[], char *envp[])
 		g_tool.exit_flag = 0;
 		ft_putstr_fd("\033[0;36mminishell$\033[0m ", 1);
 		term_line(&input, 0);
-		// get_next_line(&input);
 		if (parsing(input))
 			executing();
 		free(input);
+		freeall();
 	}
 	return (0);
 }

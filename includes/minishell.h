@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmarzouk <mmarzouk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tjmari <tjmari@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/22 20:04:07 by tjmari            #+#    #+#             */
-/*   Updated: 2021/06/05 12:08:31 by mmarzouk         ###   ########.fr       */
+/*   Updated: 2021/06/05 12:30:16 by tjmari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,6 @@ typedef struct s_tool
 	pid_t		pid;
 	_Bool		exit_flag;
 }				t_tool;
-
 t_tool			g_tool;
 
 /*
@@ -96,7 +95,7 @@ char			**append_line(char **s, char *line, int free);
 char			**split_it(char *s, char **sp, int i, int start);
 void			cmd_arg(int *f,int *i);
 void			finalizem(int	i);
-void			assign(char **sp);
+void			assign(char **sp, int i, int j, int cmd_i);
 void			nfree(void *s);
 void			fin_slash(char **fin,char *s, int *i);
 void			fin_quote(char **fin,char *s, int *i);
@@ -112,47 +111,40 @@ int				printchr(int c);
 ** EXECUTING
 */
 void			executing(void);
-void			run_builtin(int i);
-void			run_infork(int i);
-char			*make_cmd(char **paths, char *cmd);
-void			execve_failure(int i);
+void			change_shlvl(void);
+void			unset_oldpwd(void);
 
 void			signal_int(int sig);
 void			signal_quit(int sig);
 
-_Bool			set_redirections(t_cmd *cmd);
-void			reset_std(void);
-
-void			cmd_infork(int i);
 _Bool			based_pipe_fork(int i);
 void			open_pipe(int i);
 void			set_pipe(int i);
 
-void			is_builtin(int i);
+_Bool			set_redirections(t_cmd *cmd);
+void			reset_std(void);
+
+void			run_infork(int i);
+void			run_cmd_path(int i);
+void			execve_failure(int i);
+
+void			which_builtin(int i);
+void			run_builtin(int i);
 void			ft_echo(int i);
-_Bool			ft_isflag(char *args);
 void			ft_cd(int i);
 void			ft_pwd(void);
 void			ft_export(int i);
-int				how_many_nodes(int i);
-char			**change_envp_var(char **argv, int index, char *arg);
-char			*ft_getkey(char *arg);
-char			*ft_getvalue(char *arg);
-_Bool			ft_export_valid(char *cmd);
-void			ft_putexport(char **argv);
 void			ft_unset(int i);
-int				ft_isempty(char *s);
-int				ft_envremove(char *var);
 void			ft_env(void);
 void			ft_exit(int i);
-_Bool			ft_isnumeric(char *arg);
-void			ft_printexit(int i);
 
-int				how_many_element(char **argv);
+void			ft_puterror(char *s1, char *s2, char *s3);
+char			*ft_getkey(char *arg);
+char			*ft_getvalue(char *arg);
+int				ft_isempty(char *s);
 char			**ft_dcdup(char **argv, int toadd);
-char			**sortdcp(char **argv);
-char			**add_node_dc(char **argv, char **cmds, int nodes);
-void			change_shlvl(void);
-void			unset_oldpwd(void);
+void			add_node_dc(char **args, int toadd, int envp_len, int args_len);
+_Bool			ft_export_valid(char *cmd);
+char			*charp_ternary(char *condition, char *arg1, char *arg2);
 
 #endif

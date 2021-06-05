@@ -6,13 +6,18 @@
 /*   By: tjmari <tjmari@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 20:12:44 by tjmari            #+#    #+#             */
-/*   Updated: 2021/06/02 18:25:44 by tjmari           ###   ########.fr       */
+/*   Updated: 2021/06/04 18:43:25 by tjmari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-_Bool	ft_isflag(char *args)
+/*
+**	line 46: This loop is here to avoid SEGV in empty echo \
+**	looping while args exist.
+*/
+
+static _Bool	ft_isflag(char *args)
 {
 	int		i;
 
@@ -38,7 +43,7 @@ void	ft_echo(int i)
 	j = 1;
 	n = 0;
 	g_tool.exit_status = 0;
-	while (j < how_many_element(g_tool.cmd[i]->args))	// *2
+	while (j < doublecount(g_tool.cmd[i]->args))
 	{
 		while (ft_isflag(g_tool.cmd[i]->args[j]))
 		{
@@ -48,7 +53,7 @@ void	ft_echo(int i)
 		while (g_tool.cmd[i]->args[j])
 		{
 			ft_putstr_fd(g_tool.cmd[i]->args[j], 1);
-			if (j != how_many_element(g_tool.cmd[i]->args) - 1)
+			if (j != doublecount(g_tool.cmd[i]->args) - 1)
 				ft_putstr_fd(" ", 1);
 			j++;
 		}

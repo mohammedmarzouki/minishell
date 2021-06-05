@@ -6,7 +6,7 @@
 /*   By: tjmari <tjmari@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/29 14:21:25 by tjmari            #+#    #+#             */
-/*   Updated: 2021/05/24 16:26:40 by tjmari           ###   ########.fr       */
+/*   Updated: 2021/06/03 18:47:49 by tjmari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,15 @@ static int	number_of_digits(long n)
 static int	number_size(long n)
 {
 	int	i;
+	int	m;
 
 	i = 1;
-	while ((n /= 10) > 0)
+	m = n / 10;
+	while (m > 0)
+	{
+		m /= 10;
 		i *= 10;
+	}
 	return (i);
 }
 
@@ -54,7 +59,8 @@ char	*ft_itoa(int n)
 
 	n2 = n;
 	i = 0;
-	if (!(str = (char *)malloc(sizeof(char) * (number_of_digits(n2) + 1))))
+	str = (char *)malloc(sizeof(char) * (number_of_digits(n2) + 1));
+	if (!str)
 		return (NULL);
 	s = n2;
 	if (s < 0)
