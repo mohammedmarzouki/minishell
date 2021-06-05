@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tjmari <tjmari@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mmarzouk <mmarzouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/22 20:04:07 by tjmari            #+#    #+#             */
-/*   Updated: 2021/06/02 20:36:02 by tjmari           ###   ########.fr       */
+/*   Updated: 2021/06/05 12:08:31 by mmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,12 @@
 # include <term.h>
 # include "../libft/libft.h"
 
+#define UP 4283163
+#define DOWN 4348699
+#define CTRL_D 4
+#define DEL 127
+#define NL 10
+
 typedef struct s_cmd
 {
 	char		**args;
@@ -38,11 +44,22 @@ typedef struct s_cmd
 	int			pipe[2];
 }				t_cmd;
 
+typedef struct s_trm
+{
+	char		**line;
+	int			lni;
+	char		*last;
+	char		*curr;
+	char		*h_cur;
+	// char		*cursor;
+}				t_trm;
+
 typedef struct s_tool
 {
 	int			cmd_c;
 	int			i;
 	char		cwd[1024];
+	t_trm		*trm;
 	int			exit_status;
 	t_cmd		**cmd;
 	char		**envp;
@@ -54,6 +71,7 @@ typedef struct s_tool
 	pid_t		pid;
 	_Bool		exit_flag;
 }				t_tool;
+
 t_tool			g_tool;
 
 /*
@@ -87,6 +105,8 @@ void			fin_vars(char **fin,char *s, int *i);
 void			fin_nrml(char **fin,char *s, int *i);
 void			fin_err(char **fin, int *i);
 short			chk_err(char **sp,int i,int value,int flag);
+void			term_line(char **line, int chr);
+int				printchr(int c);
 
 /*
 ** EXECUTING

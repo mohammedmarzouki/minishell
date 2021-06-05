@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tjmari <tjmari@student.42.fr>              +#+  +:+       +#+         #
+#    By: mmarzouk <mmarzouk@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/22 20:07:24 by tjmari            #+#    #+#              #
-#    Updated: 2021/06/02 20:56:05 by tjmari           ###   ########.fr        #
+#    Updated: 2021/06/04 13:01:05 by mmarzouk         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ ORANGE = \033[1;33m
 NAME = minishell
 LIBFT = libft.a
 
-FLAGS = -Wall -Wextra -Werror
+FLAGS = -Wall -Wextra -Werror -ltermcap
 
 INCLUDES = ./includes/minishell.h \
 
@@ -26,7 +26,7 @@ SRCS = ./srcs/main.c ./srcs/get_next_line.c \
 	./srcs/m_parsing.c ./srcs/m_tools.c ./srcs/m_tools2.c \
 	./srcs/m_assign.c ./srcs/m_splitting.c \
 	./srcs/m_finalize.c  ./srcs/m_err_shrtn.c \
-	./srcs/m_fin_tools.c \
+	./srcs/m_fin_tools.c ./srcs/m_termline.c \
 	\
 	./srcs/t_init.c ./srcs/t_executing.c ./srcs/t_signals.c \
 	./srcs/t_redirection.c ./srcs/t_pipe.c ./srcs/t_infork.c \
@@ -43,7 +43,7 @@ $(NAME): $(INCLUDES) $(SRCS)
 	@make -C ./libft
 	@mv ./libft/$(LIBFT) ./
 	@echo "$(GREEN)MINISHELL: ./$(LIBFT) moved to $(NAME)\n---------------------------------------$(NC)"
-	@gcc $(FLAGS) $(SRCS) $(LIBFT) -o $(NAME)
+	@gcc $(FLAGS) $(SRCS) $(LIBFT) -o $(NAME)  
 	@echo "$(GREEN)MINISHELL: ./$(NAME) made\n---------------------------$(NC)"
 
 debug:
