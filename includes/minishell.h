@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tjmari <tjmari@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mmarzouk <mmarzouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/22 20:04:07 by tjmari            #+#    #+#             */
-/*   Updated: 2021/06/05 12:30:16 by tjmari           ###   ########.fr       */
+/*   Updated: 2021/06/05 13:50:20 by mmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,11 @@
 # include <term.h>
 # include "../libft/libft.h"
 
-#define UP 4283163
-#define DOWN 4348699
-#define CTRL_D 4
-#define DEL 127
-#define NL 10
+# define UP 4283163
+# define DOWN 4348699
+# define CTRL_D 4
+# define DEL 127
+# define NL 10
 
 typedef struct s_cmd
 {
@@ -51,7 +51,6 @@ typedef struct s_trm
 	char		*last;
 	char		*curr;
 	char		*h_cur;
-	// char		*cursor;
 }				t_trm;
 
 typedef struct s_tool
@@ -77,35 +76,38 @@ t_tool			g_tool;
 ** PARSING
 */
 int				parsing(char *s);
-int				get_next_line(char **line);
 int				same(char *s1, char *s2);
 int				doublecount(char **s);
 int				itis(char *s);
-int				pipe_tkn(int *f,int *i,char **sp);
-int				semicln_tkn(int *f,int *i);
+int				pipe_tkn(int *f, int *i, char **sp);
+int				semicln_tkn(int *f, int *i);
 int				a_word(char *s);
 int				seterr(short err);
-int				err_quit(char *s,int err);
+int				err_quit(char *s, int err);
 int				count_cmds(char **s);
 int				ft_getenv(char *s);
-int				redirct_tkn(int *f,int *i,char **sp);
-int 			backslash(char *s);
+int				redirct_tkn(int *f, int *i, char **sp);
+int				backslash(char *s);
 char			**doublefree(char **ptr);
 char			**append_line(char **s, char *line, int free);
 char			**split_it(char *s, char **sp, int i, int start);
-void			cmd_arg(int *f,int *i);
+void			cmd_arg(int *f, int *i);
 void			finalizem(int	i);
 void			assign(char **sp, int i, int j, int cmd_i);
 void			nfree(void *s);
-void			fin_slash(char **fin,char *s, int *i);
-void			fin_quote(char **fin,char *s, int *i);
-void			fin_sngl_q(char **fin,char *s, int *i);
-void			fin_vars(char **fin,char *s, int *i);
-void			fin_nrml(char **fin,char *s, int *i);
+void			fin_slash(char **fin, char *s, int *i);
+void			fin_quote(char **fin, char *s, int *i);
+void			fin_sngl_q(char **fin, char *s, int *i);
+void			fin_vars(char **fin, char *s, int *i);
+void			fin_nrml(char **fin, char *s, int *i);
 void			fin_err(char **fin, int *i);
-short			chk_err(char **sp,int i,int value,int flag);
+short			chk_err(char **sp, int i, int value, int flag);
 void			term_line(char **line, int chr);
 int				printchr(int c);
+void			del(void);
+void			up(int *i);
+void			down(int *i);
+int				single_q(char *s, int *i);
 
 /*
 ** EXECUTING

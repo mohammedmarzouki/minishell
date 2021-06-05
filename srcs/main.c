@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tjmari <tjmari@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mmarzouk <mmarzouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/22 20:03:07 by tjmari            #+#    #+#             */
-/*   Updated: 2021/06/05 12:32:58 by tjmari           ###   ########.fr       */
+/*   Updated: 2021/06/05 13:46:23 by mmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static	void	initials(void)
 	g_tool.original_fd_out = dup(STDOUT_FILENO);
 	signal(SIGINT, signal_int);
 	signal(SIGQUIT, signal_quit);
-	tgetent(NULL,getenv("TERM"));
+	tgetent(NULL, getenv("TERM"));
 	trm = malloc(sizeof(t_trm));
 	trm->curr = ft_strdup("");
 	trm->last = NULL;
@@ -63,9 +63,11 @@ int	main(int argc, char *argv[], char *envp[])
 		ft_putstr_fd("\033[0;36mminishell$\033[0m ", 1);
 		term_line(&input, 0);
 		if (parsing(input))
+		{
 			executing();
+			freeall();
+		}
 		free(input);
-		freeall();
 	}
 	return (0);
 }

@@ -3,21 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   m_tools.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tjmari <tjmari@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mmarzouk <mmarzouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/23 17:18:56 by tjmari            #+#    #+#             */
-/*   Updated: 2021/05/23 17:41:45 by tjmari           ###   ########.fr       */
+/*   Updated: 2021/06/05 13:22:38 by mmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int		itis(char *s) 
+int	itis(char *s)
 {
-	int i;
+	int	i;
 
 	i = 0;
-	while(s[i] && s[i] == ' ')
+	while (s[i] && s[i] == ' ')
 		i++;
 	if (s[i] == '<' || s[i] == '>')
 		return (1);
@@ -25,22 +25,22 @@ int		itis(char *s)
 		return (2);
 	else if (s[i] == '|')
 		return (3);
-	else if(!s[i])
+	else if (!s[i])
 		return (-1);
 	else
 		return (0);
 }
 
-void    nfree(void *s)
+void	nfree(void *s)
 {
-    if(s)
-    {
-        free (s);
-        s = NULL;
-    }
+	if (s)
+	{
+		free (s);
+		s = NULL;
+	}
 }
 
-int		same(char *s1, char *s2)
+int	same(char *s1, char *s2)
 {
 	if (!s1 && !s2)
 		return (1);
@@ -60,7 +60,7 @@ int		same(char *s1, char *s2)
 
 char	**doublefree(char **ptr)
 {
-	int i;
+	int	i;
 
 	if (ptr != NULL)
 	{
@@ -76,9 +76,9 @@ char	**doublefree(char **ptr)
 	return (NULL);
 }
 
-int		doublecount(char **s)
+int	doublecount(char **s)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (s)
