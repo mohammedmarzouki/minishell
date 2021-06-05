@@ -6,7 +6,7 @@
 /*   By: tjmari <tjmari@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 11:17:14 by tjmari            #+#    #+#             */
-/*   Updated: 2021/06/03 11:57:56 by tjmari           ###   ########.fr       */
+/*   Updated: 2021/06/05 16:29:56 by tjmari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,15 @@ static void	ft_waiting(int i)
 	if (!(g_tool.cmd[i]->sep && *(g_tool.cmd[i]->sep) == '|'))
 		waitpid(g_tool.pid, &g_tool.exit_status, 0);
 	if (WIFSIGNALED(g_tool.exit_status))
+	{
+		if (!ft_strcmp(g_tool.cmd[g_tool.i]->args[0], "read")
+			&& !based_pipe_fork(g_tool.i))
+		{
+			g_tool.exit_status = 1;
+			return ;
+		}
 		g_tool.exit_status = 128 + WTERMSIG(g_tool.exit_status);
+	}
 	else
 		g_tool.exit_status = WEXITSTATUS(g_tool.exit_status);
 }

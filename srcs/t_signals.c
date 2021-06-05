@@ -6,7 +6,7 @@
 /*   By: tjmari <tjmari@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/29 17:33:52 by tjmari            #+#    #+#             */
-/*   Updated: 2021/06/05 12:18:22 by tjmari           ###   ########.fr       */
+/*   Updated: 2021/06/05 16:25:57 by tjmari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void	signal_int(int sig)
 		return ;
 	}
 	ft_putstr_fd("\n\033[0;36mminishell$\033[0m ", STDOUT_FILENO);
+	g_tool.exit_status = 1;
 }
 
 void	signal_quit(int sig)
