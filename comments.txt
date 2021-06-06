@@ -1,4 +1,4 @@
-cd .. ; unset OLDPWD ; cd $OLDPWD ; pwd		(difference between "" and NULL)
+cd .. ; unset OLDPWD ; cd $OLDPWD ; pwd		(difference between "" and NULL)                                    SOLVED
 export what ; env | grep "what"				(lags here!! / grep doesn't find what because it has no value)		SOLVED
 unset PATH + ls /bin/ls																							SOLVED
 OLDPWD at beginning of program				(its usually set from parent shell)									SOLVED
@@ -14,3 +14,13 @@ rm -rf ../testdir ; echo $OLDPWD; echo $PWD; cd . ; echo $PWD; cd .; echo $PWD		
 export A='    aa   ' B='    bb   ' C='    ccc   '
 echo "$A$B$C"										//	aa       bb       ccc   
 echo $A$B$C											//	aa bb ccc
+
+exit --1234 qwe                                                                                                 SOLVED
+
+ctrl-C + echo $?																								SOLVED
+cat + ctrl-C + echo $?
+cat + ctrl-D + echo $?
+read + ctrl-C + echo $?
+read + ctrl-D + echo $?
+cat | read + ctrl-C + echo $?
+cat | read + ctrl-D + echo $?																					UNSOLVED

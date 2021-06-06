@@ -6,7 +6,7 @@
 /*   By: tjmari <tjmari@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 20:12:50 by tjmari            #+#    #+#             */
-/*   Updated: 2021/06/04 18:43:25 by tjmari           ###   ########.fr       */
+/*   Updated: 2021/06/05 17:30:17 by tjmari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,25 @@
 **	before the err msg only if exit is not in fork.
 */
 
+static void	ft_printexit(int i)
+{
+	if (!((g_tool.cmd[i]->sep && *(g_tool.cmd[i]->sep) == '|')
+			|| (i > 0 && g_tool.cmd[i - 1]->sep
+				&& *(g_tool.cmd[i - 1]->sep) == '|')))
+		ft_putendl_fd("exit", STDERR_FILENO);
+}
+
 static _Bool	ft_isnumeric(char *arg)
 {
 	if (arg)
 	{
-		if (ft_strlen(arg) > 1 && (*arg == '+' || *arg == '-'))
-			arg++;
-		else if (ft_strlen(arg) == 1)
-			return (0);
+		if (*arg == '+' || *arg == '-')
+		{
+			if (ft_strlen(arg) > 1)
+				arg++;
+			else
+				return (0);
+		}
 		while (*arg)
 		{
 			if (*arg >= '0' && *arg <= '9')
@@ -38,16 +49,21 @@ static _Bool	ft_isnumeric(char *arg)
 	return (1);
 }
 
-static void	ft_printexit(int i)
+static void	check_first_arg(int i)
 {
-	if (!((g_tool.cmd[i]->sep && *(g_tool.cmd[i]->sep) == '|')
-			|| (i > 0 && g_tool.cmd[i - 1]->sep
-				&& *(g_tool.cmd[i - 1]->sep) == '|')))
-		ft_putendl_fd("exit", STDERR_FILENO);
+	if (g_tool.cmd[i]->args[1]
+		&& !ft_isnumeric(g_tool.cmd[i]->args[1]))
+	{
+		ft_printexit(i);
+		ft_puterror("minishell: exit: ", g_tool.cmd[i]->args[1],
+			": numeric argument required");
+		exit(255);
+	}
 }
 
 void	ft_exit(int i)
 {
+	check_first_arg(i);
 	if (doublecount(g_tool.cmd[i]->args) > 2)
 	{
 		ft_printexit(i);
