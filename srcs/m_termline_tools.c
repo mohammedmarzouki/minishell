@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   m_termline_tools.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmarzouk <mmarzouk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tjmari <tjmari@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/05 13:23:02 by mmarzouk          #+#    #+#             */
-/*   Updated: 2021/06/05 13:35:37 by mmarzouk         ###   ########.fr       */
+/*   Updated: 2021/06/06 20:59:33 by tjmari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,12 @@ void	down(int *i)
 	(*i)++;
 	free(g_tool.trm->curr);
 	g_tool.trm->curr = ft_strdup(g_tool.trm->line[(*i)]);
+}
+
+void	print_exit_quit(void)
+{
+	ft_putstr_fd("exit\n", 1);
+	exit(1);
 }
 
 int	single_q(char *s, int *i)

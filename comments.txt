@@ -23,4 +23,4 @@ cat + ctrl-D + echo $?
 read + ctrl-C + echo $?
 read + ctrl-D + echo $?
 cat | read + ctrl-C + echo $?
-cat | read + ctrl-D + echo $?																					UNSOLVED
+cat | read + ctrl-D + echo $?																					SOLVED

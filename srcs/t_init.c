@@ -6,7 +6,7 @@
 /*   By: tjmari <tjmari@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/02 11:03:51 by tjmari            #+#    #+#             */
-/*   Updated: 2021/06/04 18:43:25 by tjmari           ###   ########.fr       */
+/*   Updated: 2021/06/06 20:52:49 by tjmari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,9 @@ void	unset_oldpwd(void)
 	int	oldpwd;
 
 	oldpwd = ft_getenv("OLDPWD");
-	free(g_tool.envp[oldpwd]);
-	g_tool.envp[oldpwd] = ft_strdup("OLDPWD");
+	if (oldpwd > -1)
+	{
+		free(g_tool.envp[oldpwd]);
+		g_tool.envp[oldpwd] = ft_strdup("OLDPWD");
+	}
 }

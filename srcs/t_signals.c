@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   t_signals.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmarzouk <mmarzouk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tjmari <tjmari@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/29 17:33:52 by tjmari            #+#    #+#             */
-/*   Updated: 2021/06/06 10:16:39 by mmarzouk         ###   ########.fr       */
+/*   Updated: 2021/06/06 21:02:15 by tjmari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	signal_int(int sig)
 	g_tool.exit_status = 1;
 	g_tool.trm->h_cur = tgetstr("sc", NULL);
 	ft_putstr_fd(g_tool.trm->h_cur, 1);
-	if(g_tool.trm->curr)
+	if (g_tool.trm->curr)
 		free(g_tool.trm->curr);
 	g_tool.trm->curr = ft_strdup("");
 }
