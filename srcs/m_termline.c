@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   m_termline.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmarzouk <mmarzouk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tjmari <tjmari@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/03 14:21:30 by mmarzouk          #+#    #+#             */
-/*   Updated: 2021/06/05 13:29:38 by mmarzouk         ###   ########.fr       */
+/*   Updated: 2021/06/06 21:00:28 by tjmari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ void	term_line(char **line, int chr)
 		else if (chr == DOWN)
 			down(&g_tool.trm->lni);
 		else if (chr == CTRL_D && !(g_tool.trm->curr && g_tool.trm->curr[0]))
-			exit(0);
+			print_exit_quit();
 		else if (chr == DEL)
 			del();
 		else if (chr == NL)
