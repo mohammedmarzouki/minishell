@@ -6,7 +6,7 @@
 /*   By: tjmari <tjmari@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/03 11:48:54 by tjmari            #+#    #+#             */
-/*   Updated: 2021/06/07 18:49:04 by tjmari           ###   ########.fr       */
+/*   Updated: 2021/06/08 15:42:35 by tjmari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static char	*make_cmd(char **paths, char *cmd)
 	char	*temp;
 
 	i = 0;
-	while (paths[i])
+	while (paths[i] && (cmd && cmd[0]))
 	{
 		tmp = ft_strjoin(paths[i], "/");
 		temp = tmp;
