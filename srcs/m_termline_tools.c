@@ -6,7 +6,7 @@
 /*   By: tjmari <tjmari@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/05 13:23:02 by mmarzouk          #+#    #+#             */
-/*   Updated: 2021/06/06 20:59:33 by tjmari           ###   ########.fr       */
+/*   Updated: 2021/06/08 15:07:54 by tjmari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	down(int *i)
 void	print_exit_quit(void)
 {
 	ft_putstr_fd("exit\n", 1);
-	exit(1);
+	exit(0);
 }
 
 int	single_q(char *s, int *i)

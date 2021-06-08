@@ -24,5 +24,3 @@ read + ctrl-C + echo $?
 read + ctrl-D + echo $?
 cat | read + ctrl-C + echo $?
 cat | read + ctrl-D + echo $?
-
-exit 1
