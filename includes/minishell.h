@@ -6,7 +6,7 @@
 /*   By: tjmari <tjmari@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/22 20:04:07 by tjmari            #+#    #+#             */
-/*   Updated: 2021/06/06 21:00:00 by tjmari           ###   ########.fr       */
+/*   Updated: 2021/06/16 15:06:28 by tjmari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,6 +145,7 @@ void			ft_puterror(char *s1, char *s2, char *s3);
 char			*ft_getkey(char *arg);
 char			*ft_getvalue(char *arg);
 int				ft_isempty(char *s);
+void			ft_putexport_cases(char *arg, char *key, char *value);
 char			**ft_dcdup(char **argv, int toadd);
 void			add_node_dc(char **args, int toadd, int envp_len, int args_len);
 _Bool			ft_export_valid(char *cmd);

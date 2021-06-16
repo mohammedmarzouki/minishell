@@ -6,7 +6,7 @@
 /*   By: tjmari <tjmari@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/03 11:48:54 by tjmari            #+#    #+#             */
-/*   Updated: 2021/06/05 12:11:06 by tjmari           ###   ########.fr       */
+/*   Updated: 2021/06/08 15:42:35 by tjmari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static char	*make_cmd(char **paths, char *cmd)
 	char	*temp;
 
 	i = 0;
-	while (paths[i])
+	while (paths[i] && (cmd && cmd[0]))
 	{
 		tmp = ft_strjoin(paths[i], "/");
 		temp = tmp;
@@ -66,7 +66,7 @@ void	run_cmd_path(int i)
 	char	**paths;
 
 	path_exist = ft_getenv("PATH");
-	if (path_exist > 0)
+	if (path_exist > -1)
 		paths = ft_split(ft_getvalue(g_tool.envp[path_exist]), ':');
 	if (ft_strchr(g_tool.cmd[i]->args[0], '/') || path_exist < 0)
 	{

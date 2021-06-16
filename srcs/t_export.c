@@ -6,7 +6,7 @@
 /*   By: tjmari <tjmari@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 20:12:52 by tjmari            #+#    #+#             */
-/*   Updated: 2021/06/04 21:51:22 by tjmari           ###   ########.fr       */
+/*   Updated: 2021/06/16 15:04:15 by tjmari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,12 +114,7 @@ static void	ft_putexport(char **argv, int i)
 		tmp = value;
 		value = ft_getvalue(argv[i]);
 		free(tmp);
-		if (!ft_strchr(argv[i], '='))
-			printf("declare -x %s\n", key);
-		else if (ft_strcmp(value, ""))
-			printf("declare -x %s=\"%s\"\n", key, value);
-		else
-			printf("declare -x %s=\"\"\n", key);
+		ft_putexport_cases(argv[i], key, value);
 		i++;
 	}
 	free(key);

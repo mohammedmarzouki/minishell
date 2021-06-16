@@ -6,7 +6,7 @@
 /*   By: tjmari <tjmari@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/26 11:20:31 by tjmari            #+#    #+#             */
-/*   Updated: 2021/06/04 21:44:34 by tjmari           ###   ########.fr       */
+/*   Updated: 2021/06/16 15:03:54 by tjmari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,30 @@
 **	The add_node_dc() func adds elements (char *) to (char **).
 **	the ft_dcdup() func adds toadd places (char *) to (char **).
 */
+
+void	ft_putexport_cases(char *arg, char *key, char *value)
+{	
+	if (!ft_strchr(arg, '='))
+	{
+		ft_putstr_fd("declare -x ", 1);
+		ft_putendl_fd(key, 1);
+	}
+	else if (ft_strcmp(value, ""))
+	{
+		ft_putstr_fd("declare -x ", 1);
+		ft_putstr_fd(key, 1);
+		ft_putstr_fd("=\"", 1);
+		ft_putstr_fd(value, 1);
+		ft_putendl_fd("\"", 1);
+	}
+	else
+	{
+		ft_putstr_fd("declare -x ", 1);
+		ft_putstr_fd(key, 1);
+		ft_putstr_fd("=\"", 1);
+		ft_putendl_fd("\"", 1);
+	}
+}
 
 char	**ft_dcdup(char **argv, int toadd)
 {
