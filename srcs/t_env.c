@@ -6,7 +6,7 @@
 /*   By: tjmari <tjmari@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 20:12:47 by tjmari            #+#    #+#             */
-/*   Updated: 2021/06/05 11:57:27 by tjmari           ###   ########.fr       */
+/*   Updated: 2021/06/16 15:06:07 by tjmari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,16 @@ static void	printing_cases(int i, char *key, char *value)
 	if (!ft_strchr(g_tool.envp[i], '='))
 		return ;
 	else if (ft_strcmp(value, ""))
-		printf("%s=%s\n", key, value);
+	{	
+		ft_putstr_fd(key, 1);
+		ft_putchar_fd('=', 1);
+		ft_putendl_fd(value, 1);
+	}
 	else
-		printf("%s=\n", key);
+	{
+		ft_putstr_fd(key, 1);
+		ft_putendl_fd("=", 1);
+	}
 }
 
 void	ft_env(void)
